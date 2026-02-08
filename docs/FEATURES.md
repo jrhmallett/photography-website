@@ -73,40 +73,58 @@ This document tracks all features implemented in the Photography Website project
 ---
 
 ### Story 1.3: Documentation Structure & Git Initialization
-**Status:** 🟡 In Progress  
-**Started:** February 8, 2026
+**Status:** ✅ Complete  
+**Completed:** February 8, 2026
 
 **Implemented:**
 - ✅ `/docs` folder created
 - ✅ `docs/ARCHITECTURE.md` created with tech stack decisions
 - ✅ `docs/SETUP.md` created with setup instructions
 - ✅ `docs/FEATURES.md` created (this file)
-- ⬜ README.md updated with project overview
-- ⬜ Git repository initialized
-- ⬜ GitHub repository created
-- ⬜ Initial commit pushed to GitHub
-- ⬜ .gitignore verified
+- ✅ README.md updated with project overview
+- ✅ Git repository initialized
+- ✅ GitHub repository created: https://github.com/jrhmallett/photography-website
+- ✅ Initial commits pushed to GitHub
+- ✅ .gitignore verified
 
 **Documentation Created:**
 - **ARCHITECTURE.md:** Technology choices, architecture decisions, project structure, deployment strategy
 - **SETUP.md:** Complete setup guide with installation, running, testing, and troubleshooting
 - **FEATURES.md:** Living document tracking all implemented features
 
+**Test Coverage:**
+- `tests/documentation.test.ts`: 14 tests validating documentation completeness
+
 ---
 
 ## Epic 2: Minimal Viable Product (Gallery Core)
-**Status:** ⬜ Not Started  
+**Status:** 🟡 In Progress  
 **Goal:** Create a working photo gallery that can display images
 
 ### Story 2.1: Basic Home Page with Hero Image
-**Status:** ⬜ Not Started
+**Status:** ✅ Complete  
+**Completed:** February 8, 2026
 
-**Planned:**
-- Home page with site title
-- Tagline/subtitle
-- Hero photography image
-- Responsive layout
-- Next.js Image component for optimization
+**Implemented:**
+- ✅ Home page (`app/page.tsx`) with modern design
+- ✅ Site title "Jonathan's Photography" displayed
+- ✅ Tagline: "Capturing moments, telling stories through the lens"
+- ✅ Full-screen hero image section using Next.js Image component
+- ✅ Priority loading enabled for hero image
+- ✅ Responsive layout (mobile, tablet, desktop)
+- ✅ Call-to-action buttons (View Gallery, About Me)
+- ✅ Animated scroll indicator
+- ✅ Welcome section with portfolio description
+- ✅ Proper semantic HTML and accessibility
+- ✅ All images have descriptive alt text
+- ✅ No TypeScript errors
+
+**Test Coverage:**
+- `tests/pages/home.test.tsx`: 15 comprehensive tests
+- All 36 tests passing (21 foundation + 15 home page)
+
+**User Action Required:**
+- Add actual hero photograph to `/public/photos/hero.jpg` (1920x1080+, < 500KB)
 
 ---
 
@@ -316,23 +334,23 @@ This document tracks all features implemented in the Photography Website project
 
 ## Feature Summary
 
-### Current Sprint: Sprint 0
-**Duration:** 2-3 days  
-**Goal:** Foundation ready, docs structure  
-**Status:** 🟡 In Progress (Story 1.3)
+### Current Sprint: Sprint 1
+**Duration:** 1 week  
+**Goal:** MVP - Working gallery live  
+**Status:** 🟡 In Progress (Story 2.1 Complete, moving to 2.2)
 
 ### Progress Overview
 
 | Epic | Stories | Completed | In Progress | Not Started |
 |------|---------|-----------|-------------|-------------|
-| Epic 1 | 3 | 2 | 1 | 0 |
-| Epic 2 | 3 | 0 | 0 | 3 |
+| Epic 1 | 3 | 3 | 0 | 0 |
+| Epic 2 | 3 | 1 | 0 | 2 |
 | Epic 3 | 3 | 0 | 0 | 3 |
 | Epic 4 | 3 | 0 | 0 | 3 |
 | Epic 5 | 3 | 0 | 0 | 3 |
 | Epic 6 | 3 | 0 | 0 | 3 |
 | Epic 7 | 3 | 0 | 0 | 3 |
-| **Total** | **21** | **2** | **1** | **18** |
+| **Total** | **21** | **4** | **0** | **17** |
 
 ---
 
@@ -341,13 +359,16 @@ This document tracks all features implemented in the Photography Website project
 ### Unit Tests
 **Current Coverage:**
 - `tests/setup.test.ts`: 7/7 passing ✅
+- `tests/documentation.test.ts`: 14/14 passing ✅
+- `tests/pages/home.test.tsx`: 15/15 passing ✅
+- **Total: 36/36 tests passing** ✅
 
 **Upcoming Tests:**
-- Component tests for PhotoCard
-- Page tests for Home, Gallery, About, Contact
+- Page tests for Gallery, About, Contact
+- Component tests for PhotoCard, Header, Footer
 - Integration tests for navigation
-- Accessibility tests
 - Performance tests
+- E2E tests
 
 ---
 
@@ -360,9 +381,10 @@ This document tracks all features implemented in the Photography Website project
 ## Next Up
 
 **Immediate Next Tasks:**
-1. Complete Story 1.3: Finish Git initialization and GitHub push
-2. Write unit tests for Story 1.3
-3. Begin Epic 2, Story 2.1: Build home page
+1. Story 2.2: Build gallery page with 6 sample images
+2. Story 2.3: Create reusable PhotoCard component
+3. Complete Epic 2: MVP Gallery Live
+4. Deploy MVP to Netlify
 
 ---
 
@@ -371,4 +393,10 @@ This document tracks all features implemented in the Photography Website project
 ### February 8, 2026
 - ✅ Story 1.1 complete: Development environment setup
 - ✅ Story 1.2 complete: Next.js project initialized with TypeScript, Tailwind, Jest
-- 🟡 Story 1.3 started: Documentation structure created (ARCHITECTURE.md, SETUP.md, FEATURES.md)
+- ✅ Story 1.3 complete: Documentation structure and Git/GitHub setup
+- ✅ **Epic 1 complete**: Foundation ready
+- ✅ Story 2.1 complete: Home page with hero image built
+  - Full-screen responsive hero section
+  - 15 comprehensive unit tests
+  - All accessibility requirements met
+  - Pushed to GitHub: https://github.com/jrhmallett/photography-website
