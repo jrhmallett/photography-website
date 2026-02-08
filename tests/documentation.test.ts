@@ -100,7 +100,7 @@ describe('Git Repository', () => {
       const output = execSync('git log --oneline', { encoding: 'utf-8' });
       expect(output.length).toBeGreaterThan(0);
       expect(output).toContain('Initial commit');
-    } catch (error) {
+    } catch {
       fail('Git log command should succeed if commits exist');
     }
   });
@@ -113,7 +113,7 @@ describe('Git Repository', () => {
       expect(name.length).toBeGreaterThan(0);
       expect(email.length).toBeGreaterThan(0);
       expect(email).toContain('@');
-    } catch (error) {
+    } catch {
       fail('Git should be configured with user name and email');
     }
   });
@@ -142,7 +142,7 @@ describe('Git Repository', () => {
     try {
       const trackedFiles = execSync('git ls-files node_modules', { encoding: 'utf-8' });
       expect(trackedFiles.trim()).toBe('');
-    } catch (error) {
+    } catch {
       // If command fails, that's also fine - means nothing is tracked
       expect(true).toBe(true);
     }
@@ -156,7 +156,7 @@ describe('Git Repository', () => {
       try {
         const trackedFiles = execSync('git ls-files .next', { encoding: 'utf-8' });
         expect(trackedFiles.trim()).toBe('');
-      } catch (error) {
+      } catch {
         expect(true).toBe(true);
       }
     } else {

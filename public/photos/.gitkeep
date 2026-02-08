@@ -1,0 +1,15 @@
+# Photos Directory
+
+Place your hero image here as `hero.jpg`
+
+Recommended specifications:
+- Format: JPG or WebP
+- Dimensions: 1920x1080 or larger (16:9 aspect ratio)
+- File size: < 500KB (optimized)
+- Subject: Your best photography work for the homepage
+
+For now, you can use a temporary placeholder image from:
+- Unsplash: https://unsplash.com/
+- Your own photography
+
+Once you have the image, save it as `/public/photos/hero.jpg`
