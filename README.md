@@ -11,10 +11,10 @@
 
 ## Overview
 
-This is a photography portfolio website for showcasing photography work without relying on social media platforms. The project also serves as a hands-on learning experience in modern software development practices, AI-assisted coding, and DevOps methodologies.
+This is a photography portfolio website for showcasing my photography work. The project also serves as a learning experience in vibe coding a website.
 
 **Project Goals:**
-1. Create a professional photography portfolio with image optimization and responsive design
+1. Create a photography portfolio with image optimiaation and responsive design
 2. Learn prompt engineering and AI-assisted development workflows
 3. Practice modern software development: TypeScript, React, testing, and CI/CD
 4. Document the entire build process for learning and reference
