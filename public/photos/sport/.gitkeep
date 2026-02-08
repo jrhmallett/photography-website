@@ -1,0 +1,26 @@
+# Sport Photography Gallery
+
+This directory should contain your sport photography collection.
+
+## Required Images:
+Add 6 or more images named:
+- sport-1.jpg
+- sport-2.jpg
+- sport-3.jpg
+- sport-4.jpg
+- sport-5.jpg
+- sport-6.jpg
+- (continue numbering as needed)
+
+## Specifications:
+- Dimensions: 1200x1600px or higher (3:4 aspect ratio / portrait)
+- Format: JPG (optimized for web, under 300KB each recommended)
+- Content: Your best sport photography - action shots, athletes, competitions, training moments
+
+## How to Add:
+1. Select your best sport photographs
+2. Rename them following the numbering pattern (sport-1.jpg, sport-2.jpg, etc.)
+3. Place them in `/public/photos/sport/`
+4. If adding more than 6, also update `/app/portfolio/[category]/page.tsx` to include additional photo entries
+
+The gallery will display these in a responsive 3-column grid on desktop, 2 columns on tablet, and 1 column on mobile.

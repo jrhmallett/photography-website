@@ -1,0 +1,31 @@
+# Category Images
+
+This directory should contain hero images for each photography category.
+
+## Required Images:
+
+### sport.jpg
+- Dimensions: 1200x800px or higher (3:2 aspect ratio)
+- Format: JPG (optimized for web)
+- Description: Representative image for your Sport photography category
+- Used on: Portfolio landing page
+
+### wildlife.jpg
+- Dimensions: 1200x800px or higher (3:2 aspect ratio)
+- Format: JPG (optimized for web)
+- Description: Representative image for your Wildlife photography category
+- Used on: Portfolio landing page
+
+### travel.jpg
+- Dimensions: 1200x800px or higher (3:2 aspect ratio)
+- Format: JPG (optimized for web)
+- Description: Representative image for your Travel photography category
+- Used on: Portfolio landing page
+
+## How to Add:
+1. Select one representative photo from each category
+2. Rename them to the exact filenames above
+3. Place them in `/public/photos/categories/`
+4. Refresh the portfolio page to see them
+
+These images serve as category "covers" on the Portfolio landing page.

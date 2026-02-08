@@ -1,8 +1,36 @@
 # Photos Directory
 
-Place your hero image here as `hero.jpg`
+This is the main directory for all website images.
 
-Recommended specifications:
+## Directory Structure:
+```
+/public/photos/
+  ├── hero.jpg              # Home page hero image
+  ├── about/
+  │   └── profile.jpg       # Your profile photo
+  ├── categories/
+  │   ├── sport.jpg         # Sport category cover
+  │   ├── wildlife.jpg      # Wildlife category cover
+  │   └── travel.jpg        # Travel category cover
+  ├── sport/
+  │   ├── sport-1.jpg       # Sport gallery photos
+  │   ├── sport-2.jpg
+  │   └── ...
+  ├── wildlife/
+  │   ├── wildlife-1.jpg    # Wildlife gallery photos
+  │   ├── wildlife-2.jpg
+  │   └── ...
+  └── travel/
+      ├── travel-1.jpg      # Travel gallery photos
+      ├── travel-2.jpg
+      └── ...
+```
+
+## Required Image: hero.jpg
+
+Place your main hero image in this directory.
+
+### Specifications:
 - Format: JPG or WebP
 - Dimensions: 1920x1080 or larger (16:9 aspect ratio)
 - File size: < 500KB (optimized)

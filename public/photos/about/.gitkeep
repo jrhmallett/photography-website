@@ -1,0 +1,18 @@
+# Profile Image
+
+This directory should contain your profile/about page photo.
+
+## Required Image:
+- **profile.jpg** - Your photographer portrait
+  - Recommended dimensions: 800x800px or higher (1:1 square aspect ratio)
+  - Format: JPG (optimized for web, under 200KB recommended)
+  - Description: Professional headshot or portrait of yourself
+  - Style: Will be displayed with grayscale filter on the About page
+
+## How to Add:
+1. Select a professional photo of yourself
+2. Rename it to `profile.jpg`
+3. Place it in `/public/photos/about/profile.jpg`
+4. The About page will automatically display it in grayscale
+
+This image appears on the left side of the About page in a two-column layout.

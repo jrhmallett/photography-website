@@ -1,8 +1,8 @@
 /**
- * Story 2.1: Basic Home Page with Hero Image - Unit Tests
+ * Home Page - Unit Tests
  * 
- * These tests validate that the home page renders correctly with
- * proper accessibility and responsive design.
+ * Tests for the minimalist landing page inspired by Alan Schaller's design.
+ * Validates navigation, hero image, and accessibility.
  */
 
 import { render, screen } from '@testing-library/react';
@@ -18,30 +18,39 @@ jest.mock('next/image', () => ({
 }));
 
 describe('Home Page', () => {
-  test('renders site title', () => {
-    render(<Home />);
-    
-    const title = screen.getByRole('heading', { 
-      name: /jonathan's photography/i,
-      level: 1 
-    });
-    
-    expect(title).toBeInTheDocument();
+  test('renders without crashing', () => {
+    const { container } = render(<Home />);
+    expect(container).toBeInTheDocument();
   });
 
-  test('renders tagline/subtitle', () => {
+ test('renders site name in header', () => {
     render(<Home />);
     
-    const tagline = screen.getByText(/capturing moments, telling stories through the lens/i);
+    const siteNameLinks = screen.getAllByRole('link', { name: /jonathan mallett photography/i });
+    expect(siteNameLinks[0]).toBeInTheDocument();
+    expect(siteNameLinks[0]).toHaveAttribute('href', '/');
+  });
+
+  test('renders About navigation link', () => {
+    render(<Home />);
     
-    expect(tagline).toBeInTheDocument();
+    const aboutLinks = screen.getAllByRole('link', { name: /about/i });
+    expect(aboutLinks.length).toBeGreaterThan(0);
+    expect(aboutLinks[0]).toHaveAttribute('href', '/about');
+  });
+
+  test('renders Portfolio navigation link', () => {
+    render(<Home />);
+    
+    const portfolioLinks = screen.getAllByRole('link', { name: /portfolio/i });
+    expect(portfolioLinks.length).toBeGreaterThan(0);
+    expect(portfolioLinks[0]).toHaveAttribute('href', '/portfolio');
   });
 
   test('renders hero image with alt text', () => {
     render(<Home />);
     
-    const heroImage = screen.getByAltText(/featured photography showcasing jonathan's work/i);
-    
+    const heroImage = screen.getByAltText(/featured photograph by jonathan mallett/i);
     expect(heroImage).toBeInTheDocument();
     expect(heroImage).toHaveAttribute('src');
   });
@@ -49,80 +58,29 @@ describe('Home Page', () => {
   test('hero image has priority loading', () => {
     render(<Home />);
     
-    // Next.js Image component with priority should be present
-    const heroImage = screen.getByAltText(/featured photography showcasing jonathan's work/i);
+    const heroImage = screen.getByAltText(/featured photograph by jonathan mallett/i);
     expect(heroImage).toBeInTheDocument();
   });
 
-  test('renders call-to-action buttons', () => {
-    render(<Home />);
-    
-    const galleryButton = screen.getByRole('link', { name: /view gallery/i });
-    const aboutButton = screen.getByRole('link', { name: /about me/i });
-    
-    expect(galleryButton).toBeInTheDocument();
-    expect(aboutButton).toBeInTheDocument();
-  });
-
-  test('gallery button links to /gallery', () => {
-    render(<Home />);
-    
-    const galleryButton = screen.getByRole('link', { name: /view gallery/i });
-    
-    expect(galleryButton).toHaveAttribute('href', '/gallery');
-  });
-
-  test('about button links to /about', () => {
-    render(<Home />);
-    
-    const aboutButton = screen.getByRole('link', { name: /about me/i });
-    
-    expect(aboutButton).toHaveAttribute('href', '/about');
-  });
-
-  test('renders welcome section', () => {
-    render(<Home />);
-    
-    const welcomeHeading = screen.getByRole('heading', { 
-      name: /welcome to my portfolio/i,
-      level: 2
-    });
-    
-    expect(welcomeHeading).toBeInTheDocument();
-  });
-
-  test('home page renders without crashing', () => {
-    const { container } = render(<Home />);
-    
-    expect(container).toBeInTheDocument();
-  });
-
-  test('main element has proper semantic HTML', () => {
+  test('has main element with proper semantic HTML', () => {
     render(<Home />);
     
     const mainElement = screen.getByRole('main');
-    
     expect(mainElement).toBeInTheDocument();
   });
 
-  test('page has proper heading hierarchy', () => {
-    render(<Home />);
-    
-    // Should have h1 (site title)
-    const h1 = screen.getByRole('heading', { level: 1 });
-    expect(h1).toBeInTheDocument();
-    
-    // Should have h2 (welcome section)
-    const h2 = screen.getByRole('heading', { level: 2 });
-    expect(h2).toBeInTheDocument();
-  });
-
-  test('scroll indicator is present', () => {
+  test('header is present', () => {
     const { container } = render(<Home />);
     
-    // Check for SVG arrow (scroll indicator)
-    const svg = container.querySelector('svg');
-    expect(svg).toBeInTheDocument();
+    const header = container.querySelector('header');
+    expect(header).toBeInTheDocument();
+  });
+
+  test('navigation is present', () => {
+    const { container } = render(<Home />);
+    
+    const nav = container.querySelector('nav');
+    expect(nav).toBeInTheDocument();
   });
 });
 
@@ -138,21 +96,25 @@ describe('Home Page Accessibility', () => {
     });
   });
 
-  test('links are keyboard accessible', () => {
+  test('navigation links are keyboard accessible', () => {
     render(<Home />);
     
-    const galleryLink = screen.getByRole('link', { name: /view gallery/i });
-    const aboutLink = screen.getByRole('link', { name: /about me/i });
+    const links = screen.getAllByRole('link');
     
-    // Links should be focusable
-    expect(galleryLink).toBeVisible();
-    expect(aboutLink).toBeVisible();
+    links.forEach((link) => {
+      expect(link).toBeVisible();
+      expect(link).toHaveAttribute('href');
+    });
   });
 
-  test('decorative SVG has aria-hidden', () => {
-    const { container } = render(<Home />);
+  test('all links have proper href attributes', () => {
+    render(<Home />);
     
-    const svg = container.querySelector('svg');
-    expect(svg).toHaveAttribute('aria-hidden', 'true');
+    const links = screen.getAllByRole('link');
+    
+    links.forEach((link) => {
+      expect(link).toHaveAttribute('href');
+      expect(link.getAttribute('href')).not.toBe('');
+    });
   });
 });
