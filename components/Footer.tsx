@@ -19,7 +19,7 @@ export default function Footer() {
               Jonathan Mallett Photography
             </Link>
             <p className="mt-2 text-sm font-light text-gray-400">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              A curated collection of travel, wildlife, sport, and people photography.
             </p>
           </div>
 

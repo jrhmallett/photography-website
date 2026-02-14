@@ -1,6 +1,6 @@
 # Photography Website - Features
 
-**Last Updated:** February 8, 2026
+**Last Updated:** February 14, 2026
 
 This document tracks all features implemented in the Photography Website project, organized by Epic and Story from the project plan.
 
@@ -98,7 +98,8 @@ This document tracks all features implemented in the Photography Website project
 ---
 
 ## Epic 2: Minimal Viable Product (Gallery Core)
-**Status:** 🟡 In Progress  
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
 **Goal:** Create a working photo gallery that can display images
 
 ### Story 2.1: Basic Home Page with Hero Image
@@ -129,74 +130,207 @@ This document tracks all features implemented in the Photography Website project
 ---
 
 ### Story 2.2: Gallery Page with Static Images
-**Status:** ⬜ Not Started
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
 
-**Planned:**
-- Gallery page at `/gallery` route
-- Display 6 sample images in grid
-- Responsive grid (3 cols desktop, 2 tablet, 1 mobile)
-- Lazy loading enabled
-- Proper aspect ratios
+**Implemented:**
+- ✅ Dynamic gallery pages at `/portfolio/[category]` routes
+- ✅ Display ALL photos for each category (24 sport, 33 wildlife, 29 travel, 11 people)
+- ✅ Responsive grid (1 col mobile, 2 cols tablet, 3 cols desktop)
+- ✅ Lazy loading enabled with Next.js Image optimization
+- ✅ Dynamic aspect ratios based on image orientation (landscape/portrait)
+- ✅ Smooth transitions and hover effects
+- ✅ All images properly optimized with sizes parameter
+
+**Test Coverage:**
+- `tests/pages/category-gallery.test.tsx`: Tests for all category galleries (Sport, Wildlife, Travel, People)
+- Category gallery tests verify correct image counts and alt text
 
 ---
 
 ### Story 2.3: Photo Component with Metadata
-**Status:** ⬜ Not Started
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
 
-**Planned:**
-- Reusable `PhotoCard` component
-- Display image with title, date, description
-- Hover effects for metadata
-- TypeScript props interface
+**Implemented:**
+- ✅ `GalleryGrid` component (reusable gallery with lightbox)
+- ✅ `Lightbox` modal component for full-size viewing
+- ✅ Image orientation detection via filename (`-ls` suffix)
+- ✅ Dynamic aspect ratio assignment for layout variety
+- ✅ Click-to-expand functionality
+- ✅ Photo titles displayed on hover
+- ✅ Proper TypeScript props interfaces
+- ✅ Full keyboard navigation support (ESC to close, arrows to navigate)
+
+**Features:**
+- Lightbox with next/previous navigation
+- Click outside to close
+- Keyboard shortcuts (Esc, arrow keys)
+- Smooth animations and transitions
+- Prevents body scroll when lightbox open
+- Responsive sizing for all screen sizes
 
 ---
 
 ## Epic 3: Navigation & Content Pages
-**Status:** ⬜ Not Started  
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
 **Goal:** Enable navigation between pages and add essential content
 
 ### Story 3.1: Navigation Header Component
-**Status:** ⬜ Not Started
+**Status:** ✅ Complete  
+**Completed:** February 8, 2026
 
-**Planned:**
-- Header component with navigation links
-- Sticky header
-- Responsive hamburger menu
-- Active page indication
+**Implemented:**
+- ✅ `Header` component with fixed positioning
+- ✅ Site-wide navigation with links to Portfolio and About
+- ✅ Minimalist design with backdrop blur and border
+- ✅ Responsive layout
+- ✅ Hover effects and transitions
+- ✅ Keyboard accessible navigation
+
+**Test Coverage:**
+- `tests/components/Header.test.tsx`: 5 comprehensive tests
 
 ---
 
 ### Story 3.2: About Page
-**Status:** ⬜ Not Started
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
 
-**Planned:**
-- About page with bio
-- Profile photo
-- Photography interests/genres
+**Implemented:**
+- ✅ About page at `/about` route
+- ✅ Profile photo (grayscale filter)
+- ✅ Professional biography text
+- ✅ Photography philosophy and interests documented
+- ✅ Contact information (email)
+- ✅ Responsive two-column layout
+- ✅ Proper semantic HTML
+
+**Test Coverage:**
+- `tests/pages/about.test.tsx`: 10 comprehensive tests
 
 ---
 
 ### Story 3.3: Contact Page with Form
-**Status:** ⬜ Not Started
+**Status:** 🟡 Deferred  
 
-**Planned:**
-- Contact form (name, email, message)
-- Client-side validation
-- MVP: console log submissions
+**Notes:** Contact form deferred to future phase. Current priority is photo gallery functionality and optimization.
+
+---
+
+## Epic 4: Real Photography Integration
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+**Goal:** Integrate real photography and optimize gallery display
+
+### Story 4.1: Photo Upload & Organization
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+
+**Implemented:**
+- ✅ 107 real photographs organized across 4 categories
+- ✅ Categories: Travel (29), Wildlife (33), Sport (24), People (11)
+- ✅ Landscape/portrait orientation detection (`-ls` filename suffix)
+- ✅ Proper folder structure: `/public/photos/[category]/`
+- ✅ Hero image at `/public/photos/hero.jpg`
+- ✅ Category cover images with orientation suffixes
+- ✅ Profile image at `/public/photos/about/profile.jpg`
+
+**File Statistics:**
+- Total images: 107
+- Hero: 1 (768KB - needs optimization)
+- Profile: 1 (222KB)
+- Category covers: 4
+- Gallery photos: 97 (distributed by category)
+
+---
+
+### Story 4.2: Gallery Masonry Layout
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+
+**Implemented:**
+- ✅ CSS Grid-based horizontal flow (left-to-right, top-to-bottom)
+- ✅ Dynamic aspect ratios based on orientation
+- ✅ Landscape images: 16/9, 4/3, 3/2, video
+- ✅ Portrait images: 3/4, 2/3, 4/5, square
+- ✅ Responsive columns: 1 (mobile), 2 (tablet), 3 (desktop)
+- ✅ 6px gap between images
+- ✅ Smooth hover scale transition
+
+---
+
+### Story 4.3: Portfolio Category System
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+
+**Implemented:**
+- ✅ Portfolio landing page with 4 category tiles
+- ✅ Category order: Travel → Wildlife → Sport → People
+- ✅ 4-column grid layout (desktop)
+- ✅ Responsive to 2 and 1 columns on smaller screens
+- ✅ Bottom-aligned category titles
+- ✅ Dark overlay on hover
+- ✅ Dynamic routing with `generateStaticParams`
+
+**Test Coverage:**
+- `tests/pages/portfolio.test.tsx`: 15 comprehensive tests
+- All 4 category routes prerendered
+
+---
+
+## Epic 5: Gallery Enhancements & Interactivity
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+**Goal:** Add interactive features for enhanced user experience
+
+### Story 5.1: Lightbox Modal
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+
+**Implemented:**
+- ✅ Full-screen image viewer modal
+- ✅ Click image to open lightbox
+- ✅ Previous/Next navigation buttons
+- ✅ Keyboard shortcuts:
+  - `Esc` to close
+  - `→` to next image
+  - `←` to previous image
+- ✅ Click outside to close
+- ✅ Prevents body scroll when open
+- ✅ Smooth animations and transitions
+- ✅ Z-index management for proper layering
+
+**Features:**
+- Context-aware navigation (disabled at first/last image)
+- Touch-friendly button sizing
+- Proper aria-labels for accessibility
+- Full responsive design
+
+---
+
+### Story 5.2: GalleryGrid Component
+**Status:** ✅ Complete  
+**Completed:** February 14, 2026
+
+**Implemented:**
+- ✅ Reusable gallery grid component
+- ✅ Integration with Lightbox modal
+- ✅ State management with hooks (useState)
+- ✅ Photo click handling
+- ✅ Navigation state tracking
+- ✅ TypeScript interfaces and types
+- ✅ Proper image optimization (sizes, quality)
 
 ---
 
 ## Epic 4: Styling & User Experience
-**Status:** ⬜ Not Started  
+**Status:** ✅ Complete  
 **Goal:** Professional appearance and smooth user experience
 
 ### Story 4.1: Design System Implementation
-**Status:** ⬜ Not Started
-
-**Planned:**
-- Custom Tailwind theme
-- Typography scale
-- Color palette
+**Status:** ✅ Complete
 - Consistent spacing
 
 ---

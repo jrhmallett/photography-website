@@ -19,7 +19,7 @@ export default function About() {
           {/* Profile Image */}
           <div className="relative aspect-[3/4] overflow-hidden bg-gray-900">
             <Image
-              src="/photos/profile.jpg"
+              src="/photos/about/profile.jpg"
               alt="Jonathan Mallett - Photographer"
               fill
               className="object-cover object-center grayscale"
@@ -35,21 +35,15 @@ export default function About() {
             
             <div className="space-y-4 text-gray-300 font-light leading-relaxed">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris.
+                Photography started as simple curiosity and slowly became something I carry with me. It&apos;s a creative outlet and is my way of slowing down and trying to notice moments that might otherwise pass.
               </p>
               
               <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                I enjoy trying and learning all different genres of photography. Some days it&apos;s wildlife and the satisfaction of what comes from having patience. Other times it&apos;s documentary-style work, capturing real, unposed moments as they happen. Travel is a big part of my life and visiting new places has a way of sharpening the eye, which I like to take back to places I&apos;m more familiar with.
               </p>
               
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium 
-                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
-                veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                For me, photography is about following what feels interesting in the moment and seeing where that leads.
               </p>
             </div>
 

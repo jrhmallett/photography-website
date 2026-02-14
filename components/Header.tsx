@@ -22,16 +22,16 @@ export default function Header() {
           {/* Navigation Links */}
           <div className="flex items-center gap-8">
             <Link 
-              href="/about" 
-              className="text-sm font-light tracking-wider text-white hover:text-gray-300 transition-colors uppercase"
-            >
-              About
-            </Link>
-            <Link 
               href="/portfolio" 
               className="text-sm font-light tracking-wider text-white hover:text-gray-300 transition-colors uppercase"
             >
               Portfolio
+            </Link>
+            <Link 
+              href="/about" 
+              className="text-sm font-light tracking-wider text-white hover:text-gray-300 transition-colors uppercase"
+            >
+              About
             </Link>
           </div>
         </div>

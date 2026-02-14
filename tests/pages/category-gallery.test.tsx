@@ -47,7 +47,7 @@ describe('Sport Category Gallery', () => {
     expect(portfolioLinks[0]).toHaveAttribute('href', '/portfolio');
   });
 
-  test('renders 6 gallery images', async () => {
+  test('renders 24 gallery images', async () => {
     render(await CategoryGallery({ params: sportParams }));
     
     const images = screen.getAllByRole('img');
@@ -56,7 +56,7 @@ describe('Sport Category Gallery', () => {
       img.getAttribute('alt')?.includes('Sport photography')
     );
     
-    expect(galleryImages.length).toBe(6);
+    expect(galleryImages.length).toBe(24);
   });
 
   test('all gallery images have alt text', async () => {
@@ -86,7 +86,7 @@ describe('Wildlife Category Gallery', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('renders 6 gallery images', async () => {
+  test('renders 33 gallery images', async () => {
     render(await CategoryGallery({ params: wildlifeParams }));
     
     const images = screen.getAllByRole('img');
@@ -94,7 +94,7 @@ describe('Wildlife Category Gallery', () => {
       img.getAttribute('alt')?.includes('Wildlife photography')
     );
     
-    expect(galleryImages.length).toBe(6);
+    expect(galleryImages.length).toBe(33);
   });
 
   test('renders back to portfolio link', async () => {
@@ -121,7 +121,7 @@ describe('Travel Category Gallery', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('renders 6 gallery images', async () => {
+  test('renders 29 gallery images', async () => {
     render(await CategoryGallery({ params: travelParams }));
     
     const images = screen.getAllByRole('img');
@@ -129,7 +129,7 @@ describe('Travel Category Gallery', () => {
       img.getAttribute('alt')?.includes('Travel photography')
     );
     
-    expect(galleryImages.length).toBe(6);
+    expect(galleryImages.length).toBe(29);
   });
 
   test('renders back to portfolio link', async () => {

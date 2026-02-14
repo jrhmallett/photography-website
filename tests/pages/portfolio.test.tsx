@@ -117,9 +117,9 @@ describe('Portfolio Landing Page Accessibility', () => {
     const h1 = screen.getByRole('heading', { level: 1 });
     expect(h1).toBeInTheDocument();
     
-    // Should have h2 for each category (3 total)
+    // Should have h2 for each category (4 total: Travel, Wildlife, Sport, People)
     const h2Elements = screen.getAllByRole('heading', { level: 2 });
-    expect(h2Elements.length).toBe(3);
+    expect(h2Elements.length).toBe(4);
   });
 
   test('all category cards are keyboard accessible', () => {
@@ -128,10 +128,12 @@ describe('Portfolio Landing Page Accessibility', () => {
     const sportLink = screen.getByRole('link', { name: /sport/i });
     const wildlifeLink = screen.getByRole('link', { name: /wildlife/i });
     const travelLink = screen.getByRole('link', { name: /travel/i });
+    const peopleLink = screen.getByRole('link', { name: /people/i });
     
     expect(sportLink).toBeVisible();
     expect(wildlifeLink).toBeVisible();
     expect(travelLink).toBeVisible();
+    expect(peopleLink).toBeVisible();
   });
 
   test('all links have proper href attributes', () => {
