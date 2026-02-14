@@ -25,8 +25,8 @@ const categoryData: Record<string, {
     title: "People",
     description: "Human connection, portraits, and stories",
     photos: [
-      { id: 1, src: "/photos/people/people-ls.jpg", alt: "People photography" },
-      { id: 2, src: "/photos/people/people-2.jpg", alt: "People photography" },
+      { id: 1, src: "/photos/people/people.jpg", alt: "People photography" },
+      { id: 2, src: "/photos/people/people-2-ls.jpg", alt: "People photography" },
       { id: 3, src: "/photos/people/people-3.jpg", alt: "People photography" },
       { id: 4, src: "/photos/people/people-4.jpg", alt: "People photography" },
       { id: 5, src: "/photos/people/people-5.jpg", alt: "People photography" },
