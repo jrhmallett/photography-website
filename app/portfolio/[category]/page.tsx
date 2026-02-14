@@ -114,6 +114,7 @@ const categoryData: Record<string, {
     title: "Travel",
     description: "Stories from around the world",
     photos: [
+      { id: 1, src: "/photos/travel/travel.jpg", alt: "Travel photography" },
       { id: 2, src: "/photos/travel/travel-2.jpg", alt: "Travel photography" },
       { id: 3, src: "/photos/travel/travel-3-ls.jpg", alt: "Travel photography" },
       { id: 4, src: "/photos/travel/travel-4-ls.jpg", alt: "Travel photography" },
