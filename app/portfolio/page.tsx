@@ -32,7 +32,7 @@ const categories = [
     slug: "people",
     title: "People",
     description: "Human connection, portraits, and stories",
-    image: "/photos/categories/people-ls.jpg",
+    image: "/photos/categories/people.jpg",
   },
 ];
 
