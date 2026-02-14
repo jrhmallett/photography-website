@@ -25,6 +25,7 @@ const categoryData: Record<string, {
     title: "People",
     description: "Human connection, portraits, and stories",
     photos: [
+      { id: 1, src: "/photos/people/people-ls.jpg", alt: "People photography" },
       { id: 2, src: "/photos/people/people-2.jpg", alt: "People photography" },
       { id: 3, src: "/photos/people/people-3.jpg", alt: "People photography" },
       { id: 4, src: "/photos/people/people-4.jpg", alt: "People photography" },
@@ -42,6 +43,7 @@ const categoryData: Record<string, {
     title: "Sport",
     description: "Athletic moments and competitive spirit",
     photos: [
+      { id: 0, src: "/photos/sport/sport-ls.jpg", alt: "Sport photography" },
       { id: 1, src: "/photos/sport/sport-1-ls.jpg", alt: "Sport photography" },
       { id: 2, src: "/photos/sport/sport-2-ls.jpg", alt: "Sport photography" },
       { id: 3, src: "/photos/sport/sport-3-ls.jpg", alt: "Sport photography" },
@@ -72,6 +74,7 @@ const categoryData: Record<string, {
     title: "Wildlife",
     description: "Nature's beauty in its purest form",
     photos: [
+      { id: 0, src: "/photos/wildlife/wildlife-ls.jpg", alt: "Wildlife photography" },
       { id: 1, src: "/photos/wildlife/wildlife-1.jpg", alt: "Wildlife photography" },
       { id: 2, src: "/photos/wildlife/wildlife-2-ls.jpg", alt: "Wildlife photography" },
       { id: 3, src: "/photos/wildlife/wildlife-3-ls.jpg", alt: "Wildlife photography" },
