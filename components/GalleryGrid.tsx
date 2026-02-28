@@ -15,8 +15,15 @@ interface GalleryGridProps {
   photos: Photo[];
 }
 
+interface ImageDimensions {
+  width: number;
+  height: number;
+  aspectRatio: number;
+}
+
 export default function GalleryGrid({ photos }: GalleryGridProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [imageDimensions, setImageDimensions] = useState<Map<number, ImageDimensions>>(new Map());
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -38,28 +45,48 @@ export default function GalleryGrid({ photos }: GalleryGridProps) {
     }
   };
 
+  const handleImageLoad = (photoId: number, naturalWidth: number, naturalHeight: number) => {
+    const aspectRatio = naturalWidth / naturalHeight;
+    setImageDimensions(prev => {
+      const next = new Map(prev);
+      next.set(photoId, { width: naturalWidth, height: naturalHeight, aspectRatio });
+      return next;
+    });
+  };
+
+  // Calculate row span based on aspect ratio
+  const getRowSpan = (photoId: number): string => {
+    const dimensions = imageDimensions.get(photoId);
+    if (!dimensions) return 'row-span-2'; // Default while loading
+    
+    const { aspectRatio } = dimensions;
+    
+    // Portrait images (taller than wide): span more rows
+    if (aspectRatio < 0.85) {
+      return 'row-span-3'; // Very tall portraits
+    } else if (aspectRatio < 1.15) {
+      return 'row-span-2'; // Standard portraits and squares
+    } else if (aspectRatio < 1.5) {
+      return 'row-span-2'; // Slightly wide
+    } else {
+      return 'row-span-1'; // Landscape images
+    }
+  };
+
   return (
     <>
-      {/* Photo Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Photo Grid - Masonry Layout */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[200px]" style={{ gridAutoFlow: 'dense' }}>
         {photos.map((photo, index) => {
-          // Check if filename ends with '-ls' before extension (landscape)
-          const isLandscape = photo.src.includes('-ls.');
-          
-          // Landscape aspect ratios for images ending in '-ls'
-          const landscapeHeights = ['aspect-[16/9]', 'aspect-[4/3]', 'aspect-[3/2]', 'aspect-video'];
-          // Portrait aspect ratios for standard images
-          const portraitHeights = ['aspect-[3/4]', 'aspect-[2/3]', 'aspect-[4/5]', 'aspect-square'];
-          
-          const heights = isLandscape ? landscapeHeights : portraitHeights;
-          const heightClass = heights[index % heights.length];
+          const rowSpanClass = getRowSpan(photo.id);
           
           return (
             <div
               key={photo.id}
+              className={`${rowSpanClass}`}
             >
               <div 
-                className={`group relative ${heightClass} overflow-hidden bg-gray-900 cursor-pointer`}
+                className="group relative w-full h-full overflow-hidden bg-gray-900 cursor-pointer"
                 onClick={() => openLightbox(index)}
               >
                 <Image
@@ -68,6 +95,9 @@ export default function GalleryGrid({ photos }: GalleryGridProps) {
                   fill
                   className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  onLoadingComplete={({ naturalWidth, naturalHeight }) => 
+                    handleImageLoad(photo.id, naturalWidth, naturalHeight)
+                  }
                 />
                 
                 {/* Hover Overlay */}

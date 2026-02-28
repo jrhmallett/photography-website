@@ -104,7 +104,7 @@ export default function Lightbox({
             fill
             className="object-contain"
             sizes="100vw"
-            priority
+            loading="eager"
           />
         </div>
       </div>
