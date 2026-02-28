@@ -53,8 +53,8 @@ export default function About() {
                 Get in touch
               </h2>
               <div className="flex flex-col gap-2 text-sm font-light">
-                <a href="mailto:jrhmallett@gmail.com" className="hover:text-gray-400 transition-colors">
-                  jrhmallett@gmail.com
+                <a href="mailto:contact@jonathanmallett.com" className="hover:text-gray-400 transition-colors">
+                  contact@jonathanmallett.com
                 </a>
                 {/* Add social media links as needed */}
               </div>
