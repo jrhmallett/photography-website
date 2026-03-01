@@ -157,10 +157,15 @@ These 17 images exceed 700KB and significantly impact lightbox load times:
 ## Contact & Email Setup
 
 **Email Forwarding:**
-- Address: contact@jonathanmallett.com
-- Forwards to: Gmail (jrhmallett@gmail.com)
+- **Primary Address:** contact@jonathanmallett.com (configured, awaiting DNS propagation)
+- **Temporary Address:** jrhmallett@gmail.com (currently displayed on site)
 - Setup via: Google Domains email forwarding
-- Status: Active as of Feb 2026
+- **Status:** DNS records added but propagating (24-48 hours typical)
+
+**Important:** Once DNS fully propagates, update locations to contact@jonathanmallett.com:
+1. `/app/about/page.tsx` (About page text)
+2. `/components/Footer.tsx` (Footer contact link)
+3. `/tests/pages/about.test.tsx` (Test cases)
 
 **Update locations if email changes:**
 1. `/app/about/page.tsx` (About page text)

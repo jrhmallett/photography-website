@@ -72,9 +72,9 @@ describe('About Page', () => {
   test('email link is present and correct', () => {
     render(<About />);
     
-    const emailLinks = screen.getAllByRole('link', { name: /contact@jonathanmallett.com/i });
+    const emailLinks = screen.getAllByRole('link', { name: /jrhmallett@gmail.com/i });
     expect(emailLinks[0]).toBeInTheDocument();
-    expect(emailLinks[0]).toHaveAttribute('href', 'mailto:contact@jonathanmallett.com');
+    expect(emailLinks[0]).toHaveAttribute('href', 'mailto:jrhmallett@gmail.com');
   });
 
   test('has main element', () => {
@@ -127,7 +127,7 @@ describe('About Page Accessibility', () => {
   test('email link has proper mailto protocol', () => {
     render(<About />);
     
-    const emailLinks = screen.getAllByRole('link', { name: /contact@jonathanmallett.com/i });
+    const emailLinks = screen.getAllByRole('link', { name: /jrhmallett@gmail.com/i });
     expect(emailLinks[0].getAttribute('href')).toMatch(/^mailto:/);
   });
 });

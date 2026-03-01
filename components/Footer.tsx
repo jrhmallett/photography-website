@@ -48,10 +48,10 @@ export default function Footer() {
             </h3>
             <div className="flex flex-col gap-2">
               <a 
-                href="mailto:contact@jonathanmallett.com" 
+                href="mailto:jrhmallett@gmail.com" 
                 className="text-sm font-light text-gray-300 hover:text-white transition-colors"
               >
-                contact@jonathanmallett.com
+                jrhmallett@gmail.com
               </a>
               {/* Add social media links as needed */}
             </div>
