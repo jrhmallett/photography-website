@@ -6,7 +6,7 @@
 **Type:** Next.js static photography portfolio with masonry gallery  
 **Live:** https://jonathanmallett.com  
 **Repository:** https://github.com/jrhmallett/photography-website  
-**Deployed on:** Netlify (auto-deploy on GitHub push)
+**Deployed on:** Vercel (auto-deploy on GitHub push)
 
 ---
 
@@ -15,7 +15,7 @@
 - **Framework:** Next.js 14+ (App Router)
 - **Styling:** Tailwind CSS
 - **Images:** Next.js Image optimization (WebP format, quality: 85)
-- **Deployment:** Netlify (automatic on push)
+- **Deployment:** Vercel (automatic on push)
 - **Domain:** jonathanmallett.com (Google Domains)
 - **Email:** contact@jonathanmallett.com → forwards to Gmail
 
@@ -190,12 +190,12 @@ git add .
 git commit -m "Your change description"
 git push origin dev        # Push to dev branch
 ```
-- Netlify automatically creates **preview deployment** for dev branch
-- Preview URL: `dev--jonathanmallett.netlify.app` (or similar)
+- Vercel automatically creates **preview deployment** for dev branch
+- Preview URL: Check Vercel Dashboard → Deployments for preview link
 - Review changes on preview site before going to production
 
 **Step 2: Review Preview**
-1. Go to Netlify Dashboard → Deploys
+1. Go to Vercel Dashboard → Deployments (https://vercel.com/jonathan-malletts-projects/photography-website)
 2. Find dev branch deployment
 3. Click preview URL to review
 4. Test thoroughly on preview site
@@ -219,9 +219,9 @@ npm start                  # Run production build locally
 
 ### Monitor Deployment:
 1. **GitHub Commits:** https://github.com/jrhmallett/photography-website/commits/main
-2. **Netlify Dashboard:** Check "Deploys" tab (shows both main & dev deployments)
+2. **Vercel Dashboard:** https://vercel.com/jonathan-malletts-projects/photography-website/deployments
 3. **Production site:** https://jonathanmallett.com
-4. **Dev preview:** https://dev--jonathanmallett.netlify.app (or check Netlify for actual URL)
+4. **Dev preview:** Check Vercel Dashboard for branch-specific preview URLs
 
 ---
 
