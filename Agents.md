@@ -178,21 +178,50 @@ These 17 images exceed 700KB and significantly impact lightbox load times:
 
 ## Deployment Process
 
-### Automatic (Recommended):
+### Branch-Based Workflow (Recommended):
+
+**Development → Preview → Production**
+
+**Step 1: Work on Dev Branch**
 ```bash
+git checkout dev           # Switch to dev branch
+# Make your changes...
 git add .
 git commit -m "Your change description"
-git push
+git push origin dev        # Push to dev branch
 ```
-- Netlify detects push automatically
-- Builds Next.js site (~2-3 min)
-- Auto-deploys when build succeeds
-- Check status: https://app.netlify.com/
+- Netlify automatically creates **preview deployment** for dev branch
+- Preview URL: `dev--jonathanmallett.netlify.app` (or similar)
+- Review changes on preview site before going to production
+
+**Step 2: Review Preview**
+1. Go to Netlify Dashboard → Deploys
+2. Find dev branch deployment
+3. Click preview URL to review
+4. Test thoroughly on preview site
+
+**Step 3: Deploy to Production**
+When satisfied with preview:
+```bash
+git checkout main          # Switch to main branch
+git merge dev              # Merge dev into main
+git push origin main       # Deploy to production
+```
+- Production site updates: https://jonathanmallett.com
+- Dev branch remains separate for next changes
+
+### Quick Local Review (Alternative):
+```bash
+npm run build              # Create production build
+npm start                  # Run production build locally
+# Review at http://localhost:3000
+```
 
 ### Monitor Deployment:
 1. **GitHub Commits:** https://github.com/jrhmallett/photography-website/commits/main
-2. **Netlify Dashboard:** Check "Deploys" tab
-3. **Live site:** https://jonathanmallett.com
+2. **Netlify Dashboard:** Check "Deploys" tab (shows both main & dev deployments)
+3. **Production site:** https://jonathanmallett.com
+4. **Dev preview:** https://dev--jonathanmallett.netlify.app (or check Netlify for actual URL)
 
 ---
 
