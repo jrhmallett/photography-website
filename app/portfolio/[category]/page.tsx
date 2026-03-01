@@ -71,7 +71,7 @@ const categoryData: Record<string, {
     ],
   },
   wildlife: {
-    title: "Wildlife",
+    title: "Nature",
     description: "Nature's beauty in its purest form",
     photos: [
       { id: 0, src: "/photos/wildlife/wildlife-ls.jpg", alt: "Wildlife photography" },

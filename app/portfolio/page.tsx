@@ -18,7 +18,7 @@ const categories = [
   },
   {
     slug: "wildlife",
-    title: "Wildlife",
+    title: "Nature",
     description: "Nature's beauty, untamed creatures, natural habitats",
     image: "/photos/categories/wildlife-ls.jpg",
   },

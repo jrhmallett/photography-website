@@ -25,7 +25,7 @@
 
 ```
 /app
-  /portfolio/[category]/page.tsx    ← Category pages (People, Travel, Sport, Wildlife)
+  /portfolio/[category]/page.tsx    ← Category pages (People, Travel, Sport, Nature)
   /about/page.tsx                    ← About page with contact email
   layout.tsx                         ← Root layout
 /components
@@ -149,7 +149,7 @@ These 17 images exceed 700KB and significantly impact lightbox load times:
 |----------|------|--------|-----|----------|
 | **People** | /portfolio/people | 12 existing | Portraits & landscapes | Human connection, portraiture |
 | **Travel** | /portfolio/travel | 30 + 9 new (Feb 2026) | Portraits & landscapes | Global stories, culture |
-| **Wildlife** | /portfolio/wildlife | 21+ existing | Mostly landscape | Animals, nature |
+| **Nature** | /portfolio/wildlife | 21+ existing | Mostly landscape | Animals, nature |
 | **Sport** | /portfolio/sport | 25+ existing | All landscape | Action, sports |
 
 ---

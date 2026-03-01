@@ -1,7 +1,7 @@
 /**
  * Category Gallery Pages - Unit Tests
  * 
- * Tests for the dynamic category gallery pages (Sport, Wildlife, Travel).
+ * Tests for the dynamic category gallery pages (Sport, Nature, Travel).
  * Validates photo grids, navigation, and back links.
  */
 
@@ -71,7 +71,7 @@ describe('Sport Category Gallery', () => {
   });
 });
 
-describe('Wildlife Category Gallery', () => {
+describe('Nature Category Gallery', () => {
   const wildlifeParams = Promise.resolve({ category: 'wildlife' });
 
   test('renders without crashing', async () => {
@@ -79,10 +79,10 @@ describe('Wildlife Category Gallery', () => {
     expect(container).toBeInTheDocument();
   });
 
-  test('renders Wildlife heading', async () => {
+  test('renders Nature heading', async () => {
     render(await CategoryGallery({ params: wildlifeParams }));
     
-    const heading = screen.getByRole('heading', { name: /^wildlife$/i, level: 1 });
+    const heading = screen.getByRole('heading', { name: /^nature$/i, level: 1 });
     expect(heading).toBeInTheDocument();
   });
 

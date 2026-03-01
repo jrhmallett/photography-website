@@ -58,11 +58,11 @@ describe('Portfolio Landing Page', () => {
     expect(sportLink).toHaveAttribute('href', '/portfolio/sport');
   });
 
-  test('renders Wildlife category card', () => {
+  test('renders Nature category card', () => {
     render(<Portfolio />);
     
-    const wildlifeHeading = screen.getByRole('heading', { name: /wildlife/i, level: 2 });
-    const wildlifeLink = screen.getByRole('link', { name: /wildlife/i });
+    const wildlifeHeading = screen.getByRole('heading', { name: /nature/i, level: 2 });
+    const wildlifeLink = screen.getByRole('link', { name: /nature/i });
     
     expect(wildlifeHeading).toBeInTheDocument();
     expect(wildlifeLink).toHaveAttribute('href', '/portfolio/wildlife');
