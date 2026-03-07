@@ -124,7 +124,7 @@ Local changes → GitHub push → Vercel build → Production/Preview deployment
 ## Contact
 
 - Website: https://jonathanmallett.com
-- Email: jrhmallett@gmail.com
+- Email: contact@jonathanmallett.com
 - GitHub: https://github.com/jrhmallett/photography-website
 
 © Jonathan Mallett — All photography rights reserved.

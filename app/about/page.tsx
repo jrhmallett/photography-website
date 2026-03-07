@@ -14,19 +14,20 @@ export default function About() {
 
       {/* About Content */}
       <main className="mx-auto max-w-4xl px-6 pt-32 pb-20">
+        {/* Contact */}
+        <div className="mb-10 md:mb-12">
+          <h2 className="mb-3 text-sm font-light tracking-widest uppercase text-gray-400">
+            Get in touch
+          </h2>
+          <div className="flex flex-col gap-2 text-sm font-light">
+            <a href="mailto:contact@jonathanmallett.com" className="hover:text-gray-400 transition-colors">
+              contact@jonathanmallett.com
+            </a>
+          </div>
+        </div>
+
         {/* Profile Section */}
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-          {/* Profile Image */}
-          <div className="relative aspect-[3/4] overflow-hidden bg-gray-900">
-            <Image
-              src="/photos/about/profile.jpg"
-              alt="Jonathan Mallett - Photographer"
-              fill
-              className="object-cover object-center grayscale"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-          </div>
-
           {/* Bio Text */}
           <div className="flex flex-col justify-center space-y-6">
             <h1 className="text-4xl font-light tracking-wide">
@@ -46,19 +47,17 @@ export default function About() {
                 For me, photography is about following what feels interesting in the moment and seeing where that leads.
               </p>
             </div>
+          </div>
 
-            {/* Contact/Social */}
-            <div className="pt-4">
-              <h2 className="mb-3 text-sm font-light tracking-widest uppercase text-gray-400">
-                Get in touch
-              </h2>
-              <div className="flex flex-col gap-2 text-sm font-light">
-                <a href="mailto:jrhmallett@gmail.com" className="hover:text-gray-400 transition-colors">
-                  jrhmallett@gmail.com
-                </a>
-                {/* Add social media links as needed */}
-              </div>
-            </div>
+          {/* Profile Image */}
+          <div className="relative mx-auto w-3/4 max-w-xs aspect-[3/4] overflow-hidden bg-gray-900 md:mx-0 md:w-full md:max-w-none">
+            <Image
+              src="/photos/about/profile.jpg"
+              alt="Jonathan Mallett - Photographer"
+              fill
+              className="object-cover object-center grayscale"
+              sizes="(max-width: 768px) 75vw, 50vw"
+            />
           </div>
         </div>
       </main>

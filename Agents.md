@@ -267,7 +267,7 @@ Agents must **not**:
 ## Contact
 
 Owner: Jonathan Mallett  
-Email in site content: jrhmallett@gmail.com  
+Email in site content: contact@jonathanmallett.com (forwards to jrhmallett@gmail.com)  
 Domain: https://jonathanmallett.com  
 GitHub: https://github.com/jrhmallett
 
