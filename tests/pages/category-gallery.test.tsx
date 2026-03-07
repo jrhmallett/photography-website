@@ -1,7 +1,7 @@
 /**
  * Category Gallery Pages - Unit Tests
  * 
- * Tests for the dynamic category gallery pages (Sport, Nature, Travel).
+ * Tests for the dynamic category gallery pages (Sport, Nature, Places).
  * Validates photo grids, navigation, and back links.
  */
 
@@ -47,7 +47,7 @@ describe('Sport Category Gallery', () => {
     expect(portfolioLinks[0]).toHaveAttribute('href', '/portfolio');
   });
 
-  test('renders 24 gallery images', async () => {
+  test('renders 25 gallery images', async () => {
     render(await CategoryGallery({ params: sportParams }));
     
     const images = screen.getAllByRole('img');
@@ -56,7 +56,7 @@ describe('Sport Category Gallery', () => {
       img.getAttribute('alt')?.includes('Sport photography')
     );
     
-    expect(galleryImages.length).toBe(24);
+    expect(galleryImages.length).toBe(25);
   });
 
   test('all gallery images have alt text', async () => {
@@ -86,7 +86,7 @@ describe('Nature Category Gallery', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('renders 33 gallery images', async () => {
+  test('renders 34 gallery images', async () => {
     render(await CategoryGallery({ params: wildlifeParams }));
     
     const images = screen.getAllByRole('img');
@@ -94,7 +94,7 @@ describe('Nature Category Gallery', () => {
       img.getAttribute('alt')?.includes('Wildlife photography')
     );
     
-    expect(galleryImages.length).toBe(33);
+    expect(galleryImages.length).toBe(34);
   });
 
   test('renders back to portfolio link', async () => {
@@ -106,7 +106,7 @@ describe('Nature Category Gallery', () => {
   });
 });
 
-describe('Travel Category Gallery', () => {
+describe('Places Category Gallery', () => {
   const travelParams = Promise.resolve({ category: 'travel' });
 
   test('renders without crashing', async () => {
@@ -114,14 +114,14 @@ describe('Travel Category Gallery', () => {
     expect(container).toBeInTheDocument();
   });
 
-  test('renders Travel heading', async () => {
+  test('renders Places heading', async () => {
     render(await CategoryGallery({ params: travelParams }));
     
-    const heading = screen.getByRole('heading', { name: /^travel$/i, level: 1 });
+    const heading = screen.getByRole('heading', { name: /^places$/i, level: 1 });
     expect(heading).toBeInTheDocument();
   });
 
-  test('renders 29 gallery images', async () => {
+  test('renders 39 gallery images', async () => {
     render(await CategoryGallery({ params: travelParams }));
     
     const images = screen.getAllByRole('img');
@@ -129,7 +129,7 @@ describe('Travel Category Gallery', () => {
       img.getAttribute('alt')?.includes('Travel photography')
     );
     
-    expect(galleryImages.length).toBe(29);
+    expect(galleryImages.length).toBe(39);
   });
 
   test('renders back to portfolio link', async () => {

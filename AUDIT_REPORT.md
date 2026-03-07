@@ -179,7 +179,7 @@ Line 1:1  ⚠️ Unused eslint-disable directive
 #### 2-4. Category Gallery Tests (3 failures)
 - **Sport Gallery:** Expected 6 images, got 24 ✗
 - **Wildlife Gallery:** Expected 6 images, got 33 ✗
-- **Travel Gallery:** Expected 6 images, got 29 ✗
+- **Places Gallery (travel route):** Expected 6 images, got 29 ✗
 - **Reason:** Implementation changed to show ALL photos, not just 6
 - **Fix:** Update test expectations or create parameterized tests
 - **File:** `tests/pages/category-gallery.test.tsx` Lines 59, 97, 132
@@ -460,7 +460,7 @@ export const metadata: Metadata = {
 ```tsx
 export const metadata: Metadata = {
   title: "Jonathan Mallett Photography",
-  description: "A curated photography portfolio featuring travel, wildlife, sport, and people photography",
+  description: "A curated photography portfolio featuring places, wildlife, sport, and people photography",
 };
 ```
 
@@ -550,7 +550,7 @@ export const metadata: Metadata = {
 - [ ] Update category gallery tests: 
   - Sport: expect 24 instead of 6
   - Wildlife: expect 33 instead of 6
-  - Travel: expect 29 instead of 6
+  - Places (travel route): expect 29 instead of 6
 - [ ] Consider adding parameterized tests
 - **Time:** 30 minutes
 - **Files:** `tests/pages/portfolio.test.tsx`, `tests/pages/category-gallery.test.tsx`

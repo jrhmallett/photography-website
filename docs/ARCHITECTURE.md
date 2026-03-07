@@ -1,197 +1,156 @@
 # Photography Website - Architecture Documentation
 
-**Last Updated:** February 8, 2026  
-**Project:** Jonathan's Photography Portfolio  
-**Tech Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS
+**Last Updated:** March 7, 2026  
+**Project:** Jonathan Mallett Photography Portfolio  
+**Tech Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS 4
 
 ---
 
 ## Overview
 
-This is a photography portfolio website built using modern web development practices with AI-assisted development. The project serves two purposes:
-1. Create a professional photography portfolio without relying on social media
-2. Learn modern software development practices, AI-assisted coding, and DevOps methodologies
+This repository is a photography-first portfolio application using the Next.js App Router. The architecture favors static rendering where possible, minimal UI chrome, and optimized image delivery.
+
+Core architectural priorities:
+
+1. Preserve visual quality of photographs
+2. Keep route and component structure simple
+3. Maintain strong performance on image-heavy pages
+4. Ensure keyboard-accessible interactions (especially lightbox navigation)
 
 ---
 
 ## Technology Stack
 
-### Frontend Framework: Next.js 16
-**Why Next.js?**
-- Built on React - the industry-standard UI library
-- Automatic image optimization (critical for photography sites)
-- Static Site Generation (SSG) for fast page loads
-- App Router architecture for modern React patterns
-- Built-in TypeScript support
-- Excellent developer experience with fast refresh
-
-**Alternatives Considered:**
-- Plain React: Would require manual optimization setup
-- Gatsby: Good for photography but slower builds
-- Eleventy: Best performance but limited to static, less learning value for React ecosystem
-
-**Decision:** Next.js provides the best balance of performance, modern React patterns, and learning value.
+- **Framework:** Next.js 16 (App Router)
+- **UI runtime:** React 19
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **Image delivery:** `next/image` with WebP output in `next.config.ts`
+- **Analytics:** `@vercel/analytics`, `@vercel/speed-insights`
+- **Testing:** Jest + React Testing Library
+- **Deployment:** Vercel
 
 ---
 
-### Language: TypeScript
-**Why TypeScript?**
-- Industry standard for professional JavaScript development
-- Catches errors at compile-time before they reach production
-- Better IDE support and autocomplete
-- Self-documenting code through types
-- Teaches professional development practices
+## Route Architecture
 
-**Decision:** TypeScript over JavaScript for professional habits and better tooling.
+### Primary Routes
 
----
+- `/` → home hero page (`app/page.tsx`)
+- `/portfolio` → category landing (`app/portfolio/page.tsx`)
+- `/portfolio/[category]` → category gallery (`app/portfolio/[category]/page.tsx`)
+- `/about` → about/profile page (`app/about/page.tsx`)
 
-### Styling: Tailwind CSS 4
-**Why Tailwind?**
-- Utility-first approach speeds up development
-- No custom CSS naming conventions needed
-- Responsive design built-in
-- Small production bundle (unused styles purged)
-- Easy to learn for non-developers
-- Excellent with AI coding assistants (clear, predictable patterns)
+### Category Route Generation
 
-**Decision:** Tailwind over traditional CSS or CSS-in-JS for rapid development and AI compatibility.
+`app/portfolio/[category]/page.tsx` defines `generateStaticParams()` for:
+
+- `travel` (displayed as Places)
+- `wildlife`
+- `sport`
+- `people`
+
+Unknown categories are handled with `notFound()`.
 
 ---
 
-### Testing: Jest + React Testing Library
-**Why Jest?**
-- Standard testing framework for React applications
-- Fast execution with parallel test running
-- Excellent TypeScript support
-- Snapshot testing for UI components
+## Component Architecture
 
-**Why React Testing Library?**
-- Tests how users interact with components (not implementation details)
-- Encourages accessibility best practices
-- Industry standard for React testing
+### Shared Layout and Navigation
+
+- `app/layout.tsx` defines global metadata, font setup, and mounts Analytics + Speed Insights
+- `components/Header.tsx` is used by all page routes
+- `components/Footer.tsx` exists but is currently not mounted by page routes
+
+### Gallery System
+
+`components/GalleryGrid.tsx` responsibilities:
+
+- render masonry-style CSS grid
+- compute image aspect ratio at runtime via `onLoadingComplete`
+- assign row-span classes to reduce whitespace
+- open/close lightbox and handle next/previous state
+
+Current grid behavior:
+
+- `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`
+- `auto-rows-[200px]`
+- `gridAutoFlow: 'dense'`
+
+### Lightbox System
+
+`components/Lightbox.tsx` responsibilities:
+
+- modal image display with `object-contain`
+- keyboard handling: `Escape`, `ArrowLeft`, `ArrowRight`
+- backdrop click to close
+- temporary body scroll lock while open
+
+The lightbox requests the same image source path in a larger view; it does not switch to a separate original-file endpoint.
 
 ---
 
-## Project Structure
+## Content Model
 
-```
-/Photography-website
-├── app/                  # Next.js App Router pages
-│   ├── layout.tsx        # Root layout component
-│   ├── page.tsx          # Home page
-│   ├── globals.css       # Global styles
-│   └── [pages]/          # Individual page routes
-├── components/           # Reusable React components
-├── public/               # Static assets (images, fonts, etc.)
-│   └── photos/           # Photography images
-├── tests/                # Unit and integration tests
-├── docs/                 # Project documentation
-├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-├── tailwind.config.ts    # Tailwind CSS configuration
-├── next.config.ts        # Next.js configuration
-└── jest.config.js        # Jest testing configuration
-```
+Category image data is stored in a local `categoryData` object inside `app/portfolio/[category]/page.tsx`.
+
+Each photo entry uses:
+
+- numeric `id`
+- `src` under `public/photos/<category>/`
+- `alt`
+- optional `title`
+
+This keeps the project static and straightforward to maintain without a CMS.
 
 ---
 
-## Architecture Decisions
+## Image and Performance Strategy
 
-### Static-First Approach
-**Decision:** Start with static site generation (SSG), add dynamic features only when needed.
+- `next/image` is used across the site for responsive optimization
+- `next.config.ts` enables WebP output and explicit image/device sizes
+- Home hero image is prioritized and uses high quality (`quality={95}`)
+- Gallery images remain lazy-loaded by default
+- Lightbox image loads eagerly only when opened
 
-**Rationale:**
-- Photography portfolios are mostly static content
-- SSG provides fastest page loads
-- Can add dynamic features incrementally (contact forms, CMS)
-- Easier to host (Netlify, Vercel, GitHub Pages)
-- Lower complexity for learning
+---
 
-### Image Optimization Strategy
-**Decision:** Use Next.js Image component with AVIF/WebP formats.
+## Testing and Quality
 
-**Implementation:**
-- Next.js Image component handles optimization automatically
-- Lazy loading enabled by default
-- Responsive images for different viewport sizes
-- Modern formats (AVIF, WebP) with fallbacks
+- ESLint is configured via `eslint.config.mjs`
+- Unit/integration tests are in `tests/`
+- Jest config is in `jest.config.js`
 
-### Component-Based Architecture
-**Decision:** Small, reusable components over large page files.
+Primary commands:
 
-**Benefits:**
-- Easier to test individual components
-- Promotes code reuse
-- Clearer separation of concerns
-- Better for AI-assisted development (smaller, focused prompts)
+- `npm run lint`
+- `npm test`
+- `npm run test:coverage`
+- `npm run build`
 
 ---
 
 ## Deployment Architecture
 
-### Hosting: Netlify
-**Why Netlify?**
-- Free tier suitable for portfolio sites
-- Automatic deployments from GitHub
-- Built-in CI/CD pipeline
-- Preview deployments for branches
-- Custom domain support
-- Edge network for fast global access
+### Hosting Platform
 
-**Deployment Flow:**
-```
-Local Development → GitHub Push → Netlify Build → Live Site
-                  ↓
-            Branch Push → Preview URL (for testing)
+Production and preview deployments run on **Vercel** from the connected GitHub repository.
+
+### Deployment Flow
+
+```text
+Local changes → GitHub push → Vercel build → Preview/Production deployment
 ```
 
 ---
 
-## Development Workflow
+## Future Evolution (Constrained)
 
-### AI-Assisted Development
-This project uses AI (GitHub Copilot, Claude) to write code. The human role focuses on:
-- **Prompt Engineering:** Writing clear specifications for AI
-- **Architecture Decisions:** Choosing technologies and patterns
-- **Code Review:** Validating AI outputs meet requirements
-- **Documentation:** Explaining what was built and why
-- **Testing:** Ensuring code works as expected
+Any future changes should preserve the photography-first approach. Potential additions should remain lightweight and avoid visual clutter, including:
 
-### Version Control: Git + GitHub
-- Feature branch workflow
-- Descriptive commit messages
-- Pull requests for code review (self-review for learning)
-- Main branch protected (always deployable)
-
----
-
-## Future Considerations
-
-### Phase 2 Enhancements (Optional)
-- **CMS Integration:** Headless CMS (Sanity, Strapi) for easier photo management
-- **Contact Form:** Email integration via SendGrid or Netlify Forms
-- **Categories/Filtering:** Organize photos by type, location, date
-- **Search:** Find photos by tags or metadata
-- **Analytics:** Track visitor engagement (privacy-respecting)
-- **Performance:** Optimize for Lighthouse score >95
-
-### Scalability
-Current architecture supports:
-- Hundreds of photos without performance issues
-- Adding dynamic features incrementally
-- Migrating to database-backed CMS if needed
-
----
-
-## Key Learnings Documented
-
-*This section will be updated as the project progresses with architectural insights discovered during development.*
-
-### Iteration 1: Initial Setup
-- Next.js 16 uses App Router by default (simpler than Pages Router)
-- Tailwind v4 has different PostCSS setup than v3
-- Jest integration with Next.js requires specific configuration
+- small metadata/SEO refinements
+- accessibility improvements
+- performance tuning for larger image sets
 
 ---
 

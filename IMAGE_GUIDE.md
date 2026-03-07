@@ -6,10 +6,10 @@ This guide explains all the images you need to add to make your website fully fu
 
 - [ ] Home page hero image
 - [ ] Profile photo for About page
-- [ ] 3 category cover images (Sport, Wildlife, Travel)
+- [ ] 3 category cover images (Sport, Wildlife, Places)
 - [ ] 6+ photos for Sport gallery
 - [ ] 6+ photos for Wildlife gallery
-- [ ] 6+ photos for Travel gallery
+- [ ] 6+ photos for Places gallery
 
 **Total minimum**: 11 images to get the site working
 
@@ -55,7 +55,7 @@ This guide explains all the images you need to add to make your website fully fu
 #### travel.jpg
 - **Dimensions**: 1200x800px or higher (3:2 landscape)
 - **Format**: JPG
-- **Description**: Representative image for Travel category
+- **Description**: Representative image for Places category
 
 ---
 
@@ -81,7 +81,7 @@ Each category needs at least 6 photos. You can add more by continuing the number
 - **File size**: Under 300KB each recommended
 - **Content**: Animals, nature, habitats, behavior
 
-#### Travel Gallery
+#### Places Gallery
 **Location**: `/public/photos/travel/`
 
 - travel-1.jpg through travel-6.jpg (minimum)
@@ -122,7 +122,7 @@ Visit each page to verify images load correctly:
 - http://localhost:3000/portfolio (category covers)
 - http://localhost:3000/portfolio/sport (sport gallery)
 - http://localhost:3000/portfolio/wildlife (wildlife gallery)
-- http://localhost:3000/portfolio/travel (travel gallery)
+- http://localhost:3000/portfolio/travel (places gallery)
 
 ---
 

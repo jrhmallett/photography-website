@@ -1,431 +1,192 @@
+
 # Photography Website - Setup Guide
 
-**Last Updated:** February 8, 2026
+**Last Updated:** March 7, 2026
 
-This guide explains how to set up and run the Photography Website project locally.
+This guide explains how to run and validate the Jonathan Mallett Photography portfolio locally.
 
 ---
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+- Node.js 18+
+- npm 9+
+- Git 2+
 
-### Required Software
+Verify your environment:
 
-1. **Node.js** (v18 or higher)
-   - Download: https://nodejs.org/
-   - Verify installation: `node --version`
-   - This project tested with: Node.js v23.10.0
-
-2. **npm** (comes with Node.js)
-   - Verify installation: `npm --version`
-   - This project tested with: npm 10.9.2
-
-3. **Git** (v2.0 or higher)
-   - Download: https://git-scm.com/
-   - Verify installation: `git --version`
-   - This project tested with: Git 2.39.5
-
-4. **VS Code** (recommended)
-   - Download: https://code.visualstudio.com/
-   - Recommended extensions:
-     - ESLint
-     - Prettier - Code formatter
-     - Tailwind CSS IntelliSense
-     - TypeScript and JavaScript Language Features
+```bash
+node --version
+npm --version
+git --version
+```
 
 ---
 
 ## Initial Setup
 
-### 1. Clone the Repository
+### 1) Clone the Repository
 
 ```bash
-# Clone from GitHub (replace with actual repo URL)
-git clone https://github.com/YOUR_USERNAME/photography-website.git
-
-# Navigate to project directory
+git clone https://github.com/jrhmallett/photography-website.git
 cd photography-website
 ```
 
-### 2. Install Dependencies
+### 2) Install Dependencies
 
 ```bash
-# Install all project dependencies
 npm install
-
-# This will install:
-# - Next.js 16
-# - React 19
-# - TypeScript 5
-# - Tailwind CSS 4
-# - Jest and testing libraries
-# - ESLint and related tools
 ```
 
-Installation takes approximately 1-2 minutes depending on your internet connection.
-
-### 3. Verify Installation
-
-```bash
-# Check that all key files exist
-ls -la
-
-# You should see:
-# - package.json
-# - package-lock.json
-# - node_modules/
-# - tsconfig.json
-# - tailwind.config.ts
-# - next.config.ts
-```
-
----
-
-## Running the Project
-
-### Development Server
-
-Start the Next.js development server:
+### 3) Start Development Server
 
 ```bash
 npm run dev
 ```
 
-**Output:**
-```
-▲ Next.js 16.1.6 (Turbopack)
-- Local:   http://localhost:3000
-- Network: http://192.168.x.x:3000
+Open: http://localhost:3000
 
-✓ Starting...
-✓ Ready in ~400ms
-```
-
-**Access the site:**
-- Open your browser to: http://localhost:3000
-- The page auto-reloads when you save changes
-- Hot Module Replacement (HMR) enabled for instant updates
-
-**Stop the server:**
-- Press `Ctrl + C` in the terminal
+Stop server: `Ctrl + C`
 
 ---
 
-### Production Build
-
-Build the project for production:
+## Build and Run in Production Mode
 
 ```bash
 npm run build
-```
-
-This command:
-1. Compiles TypeScript to JavaScript
-2. Optimizes React components
-3. Generates static pages
-4. Minifies CSS and JavaScript
-5. Optimizes images
-
-**Expected output:**
-```
-✓ Compiled successfully
-✓ Generating static pages
-✓ Finalizing page optimization
-
-Route (app)        Size
-┌ ○ /              ...KB
-```
-
-**Run production build locally:**
-
-```bash
 npm run start
 ```
 
-Access at: http://localhost:3000
+This is the recommended local production check before shipping changes.
 
 ---
 
-### Linting
+## Quality Checks
 
-Check code quality with ESLint:
+Run these before committing:
 
 ```bash
 npm run lint
-```
-
-This checks for:
-- TypeScript errors
-- Code style issues
-- Potential bugs
-- Best practice violations
-
-**Auto-fix issues:**
-```bash
-npx eslint --fix
-```
-
----
-
-### Testing
-
-Run the test suite:
-
-```bash
-# Run all tests once
 npm test
+npm run build
+```
 
-# Run tests in watch mode (re-runs on file changes)
-npm run test:watch
+Optional coverage run:
 
-# Run tests with coverage report
+```bash
 npm run test:coverage
 ```
 
-**Test coverage report shows:**
-- % of lines covered
-- % of functions tested
-- % of branches tested
-- Uncovered code locations
-
 ---
 
-## Git Configuration
-
-### First-Time Setup
-
-Configure Git with your details:
+## Project Commands
 
 ```bash
-# Set your name (used in commits)
-git config --global user.name "Your Name"
-
-# Set your email (used in commits)
-git config --global user.email "your.email@example.com"
-
-# Verify configuration
-git config user.name
-git config user.email
-```
-
-### Git Workflow
-
-**Create a feature branch:**
-```bash
-# Create and switch to new branch
-git checkout -b feature/your-feature-name
-```
-
-**Make changes and commit:**
-```bash
-# Check what files changed
-git status
-
-# Stage files for commit
-git add .
-
-# Commit with descriptive message
-git commit -m "Feature: Add gallery page (see docs/FEATURES.md)"
-```
-
-**Push to GitHub:**
-```bash
-# First time pushing a new branch
-git push -u origin feature/your-feature-name
-
-# Subsequent pushes
-git push
-```
-
-**Merge back to main:**
-```bash
-# Switch to main branch
-git checkout main
-
-# Pull latest changes
-git pull
-
-# Merge your feature branch
-git merge feature/your-feature-name
-
-# Push to GitHub
-git push
+npm run dev
+npm run build
+npm run start
+npm run lint
+npm test
+npm run test:watch
+npm run test:coverage
 ```
 
 ---
 
-## Project Structure
+## Project Structure (Current)
 
-After setup, your project structure looks like:
-
-```
-/photography-website
-├── app/                # Next.js pages and layouts
-│   ├── layout.tsx      # Root layout (wraps all pages)
-│   ├── page.tsx        # Home page
-│   └── globals.css     # Global CSS
-├── components/         # Reusable React components (created as needed)
-├── public/             # Static files (images, fonts, etc.)
-│   ├── next.svg        # Sample SVG
-│   └── vercel.svg      # Sample SVG
-├── tests/              # Unit and integration tests
-│   └── setup.test.ts   # Project setup tests
-├── docs/               # Project documentation
-│   ├── ARCHITECTURE.md # Tech stack and decisions
-│   └── SETUP.md        # This file
-├── node_modules/       # Dependencies (not committed to Git)
-├── .next/              # Next.js build output (not committed)
-├── package.json        # Dependencies and scripts
-├── tsconfig.json       # TypeScript configuration
-├── tailwind.config.ts  # Tailwind CSS configuration
-├── next.config.ts      # Next.js configuration
-├── jest.config.js      # Jest test configuration
-├── .gitignore          # Files to exclude from Git
-├── .eslintrc.json      # ESLint configuration
-└── README.md           # Project overview
+```text
+app/
+  layout.tsx
+  page.tsx
+  loading.tsx
+  not-found.tsx
+  about/page.tsx
+  portfolio/page.tsx
+  portfolio/[category]/page.tsx
+components/
+  Header.tsx
+  GalleryGrid.tsx
+  Lightbox.tsx
+  Footer.tsx
+public/
+  photos/
+tests/
+docs/
+next.config.ts
+package.json
 ```
 
 ---
 
-## Common Issues & Troubleshooting
+## Adding New Images
 
-### Issue: Port 3000 already in use
+1. Add image files to `public/photos/<category>/`
+2. Add photo objects to the matching category in `app/portfolio/[category]/page.tsx`
+3. Include `id`, `src`, and descriptive `alt` (`title` optional)
+4. Place new entries at the top if they should display first
 
-**Error:**
+Example photo object:
+
+```ts
+{ id: 101, src: "/photos/people/new-image.jpg", alt: "Description", title: "Optional Title" }
 ```
-Error: listen EADDRINUSE: address already in use :::3000
-```
 
-**Solution:**
+---
+
+## Troubleshooting
+
+### Port 3000 already in use
+
 ```bash
-# Option 1: Kill the process using port 3000
 lsof -i :3000
 kill -9 <PID>
+```
 
-# Option 2: Use a different port
+Or run on another port:
+
+```bash
 npm run dev -- -p 3001
 ```
 
----
+### Module not found / dependency issues
 
-### Issue: node_modules not found
-
-**Error:**
-```
-Cannot find module 'next'
-```
-
-**Solution:**
 ```bash
-# Reinstall dependencies
 rm -rf node_modules package-lock.json
 npm install
 ```
 
----
+### Build issues after major changes
 
-### Issue: TypeScript errors after pulling changes
-
-**Solution:**
 ```bash
-# Rebuild TypeScript types
 rm -rf .next
 npm run build
 ```
 
----
+### Jest cache issues
 
-### Issue: Tests failing with module errors
-
-**Solution:**
 ```bash
-# Clear Jest cache
 npx jest --clearCache
-
-# Reinstall test dependencies
-npm install --save-dev jest @testing-library/react @testing-library/jest-dom
-```
-
----
-
-## Environment Variables
-
-If the project requires environment variables (API keys, etc.):
-
-1. Copy the example file:
-   ```bash
-   cp .env.local.example .env.local
-   ```
-
-2. Edit `.env.local` with your values:
-   ```bash
-   # Example variables
-   NEXT_PUBLIC_SITE_URL=http://localhost:3000
-   ```
-
-3. Restart the dev server to load new variables
-
-**Important:** Never commit `.env.local` to Git (it's in `.gitignore`)
-
----
-
-## Development Tips
-
-### Fast Development Workflow
-
-1. Keep `npm run dev` running in one terminal
-2. Make changes in VS Code
-3. Save files (Cmd+S / Ctrl+S)
-4. Browser auto-refreshes with changes
-5. Check terminal for build errors
-
-### Before Committing
-
-```bash
-# Check for errors
-npm run lint
 npm test
-npm run build
-
-# All should pass before committing
 ```
 
-### VS Code Shortcuts
+---
 
-- `Cmd/Ctrl + P`: Quick file open
-- `Cmd/Ctrl + Shift + F`: Search across all files
-- `Cmd/Ctrl + B`: Toggle sidebar
-- `F12`: Go to definition
-- `Shift + F12`: Find all references
+## Deployment Notes
+
+The project deploys via Vercel from GitHub-connected branches.
+
+Typical flow:
+
+```text
+Local changes → Push to GitHub → Vercel preview/production build
+```
 
 ---
 
-## Getting Help
+## References
 
-### Project Resources
-
-- **Documentation:** Check `/docs` folder
-- **Architecture:** See `docs/ARCHITECTURE.md`
-- **Features:** See `docs/FEATURES.md`
-
-### External Resources
-
-- [Next.js Docs](https://nextjs.org/docs)
-- [React Docs](https://react.dev/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Tailwind CSS Docs](https://tailwindcss.com/docs)
-
----
-
-## Next Steps
-
-After setup is complete:
-
-1. ✅ Run `npm run dev` to start development server
-2. ✅ Open http://localhost:3000 to see the site
-3. ✅ Explore the codebase in VS Code
-4. ✅ Read `docs/ARCHITECTURE.md` to understand tech choices
-5. ✅ Check `docs/FEATURES.md` for what to build next
-
-**Ready to build!** 🚀
+- `README.md`
+- `docs/ARCHITECTURE.md`
+- `docs/FEATURES.md`
+- `Agents.md`

@@ -68,26 +68,26 @@ describe('Portfolio Landing Page', () => {
     expect(wildlifeLink).toHaveAttribute('href', '/portfolio/wildlife');
   });
 
-  test('renders Travel category card', () => {
+  test('renders Places category card', () => {
     render(<Portfolio />);
     
-    const travelHeading = screen.getByRole('heading', { name: /travel/i, level: 2 });
-    const travelLink = screen.getByRole('link', { name: /travel/i });
+    const placesHeading = screen.getByRole('heading', { name: /places/i, level: 2 });
+    const placesLink = screen.getByRole('link', { name: /places/i });
     
-    expect(travelHeading).toBeInTheDocument();
-    expect(travelLink).toHaveAttribute('href', '/portfolio/travel');
+    expect(placesHeading).toBeInTheDocument();
+    expect(placesLink).toHaveAttribute('href', '/portfolio/travel');
   });
 
   test('renders category images', () => {
     render(<Portfolio />);
     
     const sportImage = screen.getByAltText(/sport photography/i);
-    const wildlifeImage = screen.getByAltText(/wildlife photography/i);
-    const travelImage = screen.getByAltText(/travel photography/i);
+    const natureImage = screen.getByAltText(/nature photography/i);
+    const placesImage = screen.getByAltText(/places photography/i);
     
     expect(sportImage).toBeInTheDocument();
-    expect(wildlifeImage).toBeInTheDocument();
-    expect(travelImage).toBeInTheDocument();
+    expect(natureImage).toBeInTheDocument();
+    expect(placesImage).toBeInTheDocument();
   });
 
   test('has main element', () => {
@@ -117,22 +117,31 @@ describe('Portfolio Landing Page Accessibility', () => {
     const h1 = screen.getByRole('heading', { level: 1 });
     expect(h1).toBeInTheDocument();
     
-    // Should have h2 for each category (4 total: Travel, Wildlife, Sport, People)
+    // Should have h2 for each category (4 total: Nature, People, Places, Sport)
     const h2Elements = screen.getAllByRole('heading', { level: 2 });
     expect(h2Elements.length).toBe(4);
+  });
+
+  test('renders category cards in alphabetical order', () => {
+    render(<Portfolio />);
+
+    const h2Elements = screen.getAllByRole('heading', { level: 2 });
+    const categoryTitles = h2Elements.map((heading) => heading.textContent);
+
+    expect(categoryTitles).toEqual(['Nature', 'People', 'Places', 'Sport']);
   });
 
   test('all category cards are keyboard accessible', () => {
     render(<Portfolio />);
     
     const sportLink = screen.getByRole('link', { name: /sport/i });
-    const wildlifeLink = screen.getByRole('link', { name: /wildlife/i });
-    const travelLink = screen.getByRole('link', { name: /travel/i });
+    const wildlifeLink = screen.getByRole('link', { name: /nature/i });
+    const placesLink = screen.getByRole('link', { name: /places/i });
     const peopleLink = screen.getByRole('link', { name: /people/i });
     
     expect(sportLink).toBeVisible();
     expect(wildlifeLink).toBeVisible();
-    expect(travelLink).toBeVisible();
+    expect(placesLink).toBeVisible();
     expect(peopleLink).toBeVisible();
   });
 
