@@ -6,7 +6,7 @@ import GalleryGrid from "@/components/GalleryGrid";
 /**
  * Dynamic Category Gallery Page Component
  * 
- * Displays a grid of photos for a specific category (Sport, Wildlife, or Travel).
+ * Displays a grid of photos for a specific category (Sport, Wildlife, or Places).
  * Uses Next.js dynamic routes to handle multiple categories with one component.
  */
 
@@ -111,7 +111,7 @@ const categoryData: Record<string, {
     ],
   },
   travel: {
-    title: "Travel",
+    title: "Places",
     description: "Stories from around the world",
     photos: [
       { id: 101, src: "/photos/travel/Travel101.jpg", alt: "Travel photography" },

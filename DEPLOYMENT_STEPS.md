@@ -258,13 +258,13 @@ Visit each page and verify:
 - [ ] Scroll indicator visible at bottom
 
 **Portfolio** (`/portfolio`)
-- [ ] 4 category tiles visible (Travel, Wildlife, Sport, People)
+- [ ] 4 category tiles visible (Nature, People, Places, Sport)
 - [ ] Images load correctly with dark overlay
 - [ ] Titles centered on tiles
 - [ ] Hover effects work (darker overlay)
 - [ ] Categories are clickable (cursor changes to pointer)
 
-**Category Gallery** (`/portfolio/travel`)
+**Category Gallery** (`/portfolio/travel` - Places)
 - [ ] Images display in grid (varies by screen size)
 - [ ] All expected photos show (24-33 depending on category)
 - [ ] Hover effect shows subtle darkening

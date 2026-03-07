@@ -58,8 +58,8 @@ describe('About Page', () => {
   test('renders bio text', () => {
     render(<About />);
     
-    const bioTexts = screen.getAllByText(/Lorem ipsum dolor sit amet, consectetur adipiscing elit/i);
-    expect(bioTexts.length).toBeGreaterThan(0);
+    const bioText = screen.getByText(/Photography started as simple curiosity/i);
+    expect(bioText).toBeInTheDocument();
   });
 
   test('renders contact email section', () => {

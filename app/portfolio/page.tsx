@@ -6,16 +6,10 @@ import Header from "@/components/Header";
  * Portfolio Landing Page Component
  * 
  * Category selection page for different photography styles.
- * Users click on a category (Sport, Wildlife, Travel) to view that gallery.
+ * Users click on a category (Nature, People, Places, Sport) to view that gallery.
  */
 
 const categories = [
-  {
-    slug: "travel",
-    title: "Travel",
-    description: "Global stories, diverse cultures, breathtaking landscapes",
-    image: "/photos/categories/travel.jpg",
-  },
   {
     slug: "wildlife",
     title: "Nature",
@@ -23,16 +17,22 @@ const categories = [
     image: "/photos/categories/wildlife-ls.jpg",
   },
   {
-    slug: "sport",
-    title: "Sport",
-    description: "Athletic moments, peak performance, competitive spirit",
-    image: "/photos/categories/sport-ls.jpg",
-  },
-  {
     slug: "people",
     title: "People",
     description: "Human connection, portraits, and stories",
     image: "/photos/categories/people.jpg",
+  },
+  {
+    slug: "travel",
+    title: "Places",
+    description: "Global stories, diverse cultures, breathtaking landscapes",
+    image: "/photos/categories/travel.jpg",
+  },
+  {
+    slug: "sport",
+    title: "Sport",
+    description: "Athletic moments, peak performance, competitive spirit",
+    image: "/photos/categories/sport-ls.jpg",
   },
 ];
 

@@ -53,9 +53,9 @@ describe('Documentation Structure', () => {
     
     // Verify key sections exist
     expect(content).toContain('# Photography Website - Features');
-    expect(content).toContain('Epic 1');
-    expect(content).toContain('Story 1.1');
-    expect(content).toContain('Story 1.2');
+    expect(content).toContain('Current Product Scope');
+    expect(content).toContain('Implemented Features');
+    expect(content).toContain('Deferred / Future Enhancements');
     expect(content.length).toBeGreaterThan(1000);
   });
 

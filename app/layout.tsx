@@ -16,13 +16,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jonathan Mallett Photography",
-  description: "A curated photography portfolio featuring travel, wildlife, sport, and people photography by Jonathan Mallett",
+  description: "A curated photography portfolio featuring places, wildlife, sport, and people photography by Jonathan Mallett",
   icons: {
     icon: "/JM-favicon.ico",
   },
   openGraph: {
     title: "Jonathan Mallett Photography",
-    description: "A curated photography portfolio showcasing travel, wildlife, sport, and people photography",
+    description: "A curated photography portfolio showcasing places, wildlife, sport, and people photography",
     type: "website",
   },
 };
