@@ -20,7 +20,7 @@ export default function Home() {
       {/* Hero Section - Scales with viewport and avoids page scroll */}
       <main className="relative mt-20 h-[calc(100vh-5rem)] w-full">
         <Image
-          src="/photos/Hero.jpg"
+          src="/photos/hero.jpg"
           alt="Featured photograph by Jonathan Mallett"
           fill
           priority

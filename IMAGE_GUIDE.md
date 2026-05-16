@@ -14,7 +14,7 @@ This guide documents the current image structure used by the live site.
 ## Required Core Images
 
 ### 1) Hero Image (Home Page)
-Location: `/public/photos/Hero.jpg`
+Location: `/public/photos/hero.jpg`
 
 - Purpose: Featured image on the homepage
 - Recommended dimensions: 1920x1080 or larger
