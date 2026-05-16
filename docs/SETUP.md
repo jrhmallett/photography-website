@@ -1,7 +1,7 @@
 
 # Photography Website - Setup Guide
 
-**Last Updated:** March 7, 2026
+**Last Updated:** May 16, 2026
 
 This guide explains how to run and validate the Jonathan Mallett Photography portfolio locally.
 
@@ -129,7 +129,7 @@ package.json
 Example photo object:
 
 ```ts
-{ id: 101, src: "/photos/people/new-image.jpg", alt: "Description", title: "Optional Title" }
+{ id: 101, src: "/photos/places/new-image.jpg", alt: "Description", title: "Optional Title" }
 ```
 
 ---

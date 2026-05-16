@@ -163,7 +163,7 @@ After deployment completes:
 
 1. Click through:
    - [ ] Home page loads with hero image
-   - [ ] Portfolio shows 4 categories
+   - [ ] Portfolio shows 3 categories (Nature, Places, Sport)
    - [ ] Click a category to see gallery
    - [ ] Click an image to open lightbox
    - [ ] Click "About" to see profile
@@ -282,7 +282,7 @@ After nameservers propagate:
 
 - `https://jonathanmallett.com` - Home
 - `https://jonathanmallett.com/portfolio` - Portfolio
-- `https://jonathanmallett.com/portfolio/wildlife` - Gallery
+- `https://jonathanmallett.com/portfolio/nature` - Gallery
 - `https://jonathanmallett.com/about` - About
 
 All should work!

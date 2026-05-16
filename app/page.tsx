@@ -14,32 +14,27 @@ import Header from "@/components/Header";
  */
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="relative h-screen overflow-hidden bg-black">
       <Header />
 
-      {/* Hero Section - Full Screen Image */}
-      <main className="relative h-screen w-full">
+      {/* Hero Section - Scales with viewport and avoids page scroll */}
+      <main className="relative mt-20 h-[calc(100vh-5rem)] w-full">
         <Image
-          src="/photos/hero.jpg"
+          src="/photos/Hero.jpg"
           alt="Featured photograph by Jonathan Mallett"
           fill
           priority
-          className="object-cover object-center"
+          className="object-contain object-center"
           sizes="100vw"
-          quality={95}
+          quality={75}
         />
         
         {/* Subtle dark overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="h-8 w-px bg-white/50" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
       </main>
 
       {/* Copyright Footer */}
-      <div className="bg-black text-white text-center py-6 text-sm font-light text-gray-400">
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 bg-black/70 text-white text-center py-4 text-sm font-light text-gray-300 backdrop-blur-sm">
         © {new Date().getFullYear()} Jonathan Mallett Photography. All rights reserved.
       </div>
     </div>

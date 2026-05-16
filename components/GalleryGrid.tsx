@@ -95,9 +95,10 @@ export default function GalleryGrid({ photos }: GalleryGridProps) {
                   fill
                   className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  onLoadingComplete={({ naturalWidth, naturalHeight }) => 
-                    handleImageLoad(photo.id, naturalWidth, naturalHeight)
-                  }
+                  onLoad={(event) => {
+                    const img = event.currentTarget;
+                    handleImageLoad(photo.id, img.naturalWidth, img.naturalHeight);
+                  }}
                 />
                 
                 {/* Hover Overlay */}

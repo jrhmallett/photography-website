@@ -1,241 +1,106 @@
 # Photography Website - Image Guide
 
-This guide explains all the images you need to add to make your website fully functional.
+This guide documents the current image structure used by the live site.
 
-## 📋 Quick Checklist
+## Quick Checklist
 
 - [ ] Home page hero image
 - [ ] Profile photo for About page
-- [ ] 3 category cover images (Sport, Wildlife, Places)
-- [ ] 6+ photos for Sport gallery
-- [ ] 6+ photos for Wildlife gallery
-- [ ] 6+ photos for Places gallery
+- [ ] 3 category cover images (Sport, Nature, Places)
+- [ ] Curated sport gallery images
+- [ ] Curated nature gallery images
+- [ ] Curated places gallery images
 
-**Total minimum**: 11 images to get the site working
+## Required Core Images
 
----
+### 1) Hero Image (Home Page)
+Location: `/public/photos/Hero.jpg`
 
-## 🖼️ Required Images
+- Purpose: Featured image on the homepage
+- Recommended dimensions: 1920x1080 or larger
+- Format: JPG
 
-### 1. Hero Image (Home Page)
-**Location**: `/public/photos/hero.jpg`
+### 2) Profile Image (About Page)
+Location: `/public/photos/about/profile.jpg`
 
-- **Purpose**: Main landing page background image
-- **Dimensions**: 1920x1080px or higher (16:9 landscape)
-- **Format**: JPG
-- **File size**: Under 500KB recommended
-- **Description**: Your absolute best photograph that represents your style
+- Purpose: Photographer portrait on About page
+- Recommended dimensions: 800x800 or larger
+- Format: JPG
 
----
+### 3) Portfolio Category Cover Images
+Location: `/public/photos/categories/`
 
-### 2. Profile Photo (About Page)
-**Location**: `/public/photos/about/profile.jpg`
+- `nature-ls.jpg`
+- `places-ls.jpg`
+- `sport-ls.jpg`
 
-- **Purpose**: Your headshot on the About page
-- **Dimensions**: 800x800px or higher (1:1 square)
-- **Format**: JPG
-- **File size**: Under 200KB recommended
-- **Description**: Professional portrait (will display with grayscale filter)
+Notes:
+- These are shown on `/portfolio`
+- `sport-ls.jpg` is also used as the first image in the Sport gallery
 
----
+## Gallery Image Directories
 
-### 3. Category Cover Images (Portfolio Landing)
-**Location**: `/public/photos/categories/`
+### Sport Gallery
+Location: `/public/photos/sport/`
 
-#### sport.jpg
-- **Dimensions**: 1200x800px or higher (3:2 landscape)
-- **Format**: JPG
-- **Description**: Representative image for Sport category
+- Current naming pattern is `sport-*-ls.jpg`
+- Main cover image in this folder is `sport-ls.jpg`
 
-#### wildlife.jpg
-- **Dimensions**: 1200x800px or higher (3:2 landscape)
-- **Format**: JPG
-- **Description**: Representative image for Wildlife category
+### Nature Gallery
+Location: `/public/photos/nature/`
 
-#### travel.jpg
-- **Dimensions**: 1200x800px or higher (3:2 landscape)
-- **Format**: JPG
-- **Description**: Representative image for Places category
+- Current assets use legacy `wildlife-*` naming in many files
+- This is expected and supported by the current data map
 
----
+### Places Gallery
+Location: `/public/photos/places/`
 
-### 4. Gallery Images (Portfolio Categories)
+- Mixed naming is expected (for example `Travel101.jpg`, `travel-23-ls.jpg`, `travel-117.jpg`)
+- Keep exact filename case when referencing in code
 
-Each category needs at least 6 photos. You can add more by continuing the numbering pattern.
+## Updating Gallery Content
 
-#### Sport Gallery
-**Location**: `/public/photos/sport/`
+All category image lists are maintained in:
 
-- sport-1.jpg through sport-6.jpg (minimum)
-- **Dimensions**: 1200x1600px or higher (3:4 portrait)
-- **Format**: JPG
-- **File size**: Under 300KB each recommended
-- **Content**: Action shots, athletes, competitions, training
+- `app/portfolio/[category]/page.tsx`
 
-#### Wildlife Gallery
-**Location**: `/public/photos/wildlife/`
+When adding or removing files from `public/photos/<category>/`, update that file so every `src` matches a real image.
 
-- wildlife-1.jpg through wildlife-6.jpg (minimum)
-- **Dimensions**: 1200x1600px or higher (3:4 portrait)
-- **Format**: JPG
-- **File size**: Under 300KB each recommended
-- **Content**: Animals, nature, habitats, behavior
+Example entry:
 
-#### Places Gallery
-**Location**: `/public/photos/travel/`
+```ts
+{ id: 999, src: "/photos/places/new-photo.jpg", alt: "Travel photography" }
+```
 
-- travel-1.jpg through travel-6.jpg (minimum)
-- **Dimensions**: 1200x1600px or higher (3:4 portrait)
-- **Format**: JPG
-- **File size**: Under 300KB each recommended
-- **Content**: Landscapes, cultures, architecture, places
+## File Naming Rules
 
----
+- Filenames are case-sensitive
+- Use `.jpg` for photographic assets
+- Keep names stable once published to avoid cache confusion
+- If replacing an existing image, preserve exact path where possible
 
-## 🚀 How to Add Your Images
+## Local Verification Checklist
 
-### Step 1: Prepare Your Photos
-1. Select your best photographs for each category
-2. Optimize them for web (compress without losing quality)
-   - You can use tools like:
-     - [TinyPNG](https://tinypng.com/) - Online compression
-     - [JPEGmini](https://www.jpegmini.com/) - Desktop app
-     - Photoshop "Save for Web"
+Run the site locally:
 
-### Step 2: Rename Files
-Follow the exact naming conventions shown above:
-- `hero.jpg` (not Hero.jpg or hero.jpeg)
-- `profile.jpg`
-- `sport.jpg`, `wildlife.jpg`, `travel.jpg`
-- `sport-1.jpg`, `sport-2.jpg`, etc.
-
-### Step 3: Place in Correct Directories
-Copy your renamed images into their respective folders in `/public/photos/`
-
-### Step 4: Test Locally
 ```bash
 npm run dev
 ```
-Visit each page to verify images load correctly:
-- http://localhost:3000 (home page)
-- http://localhost:3000/about (profile photo)
-- http://localhost:3000/portfolio (category covers)
-- http://localhost:3000/portfolio/sport (sport gallery)
-- http://localhost:3000/portfolio/wildlife (wildlife gallery)
-- http://localhost:3000/portfolio/travel (places gallery)
 
----
+Check these routes:
 
-## ➕ Adding More Gallery Photos
+- `http://localhost:3000`
+- `http://localhost:3000/portfolio`
+- `http://localhost:3000/portfolio/sport`
+- `http://localhost:3000/portfolio/nature`
+- `http://localhost:3000/portfolio/places`
 
-If you want to add more than 6 photos per category:
+If an image is blank:
 
-1. **Add numbered files**: Continue the pattern (sport-7.jpg, sport-8.jpg, etc.)
+1. Confirm file exists in `public/photos/...`
+2. Confirm exact path and casing in `app/portfolio/[category]/page.tsx`
+3. Hard refresh browser (`Cmd+Shift+R`)
 
-2. **Update the page component**: Edit `/app/portfolio/[category]/page.tsx`
+## Last Updated
 
-   Find the relevant category section and add entries:
-   ```typescript
-   photos: [
-     { id: 1, src: "/photos/sport/sport-1.jpg", alt: "Sport photography 1", title: "Action Shot" },
-     // ... existing entries ...
-     { id: 7, src: "/photos/sport/sport-7.jpg", alt: "Sport photography 7", title: "New Photo" },
-   ]
-   ```
-
----
-
-## 🎨 Image Optimization Tips
-
-### Dimensions
-- **Hero/Category covers**: Landscape (wider than tall) works best
-- **Gallery photos**: Portrait (taller than wide) creates nice grid layout
-- **Profile**: Square maintains aspect ratio
-
-### File Size
-- Next.js automatically optimizes images, but starting with smaller files improves load times
-- Target: Under 500KB for hero, under 300KB for gallery photos
-
-### Quality Settings
-- JPG Quality: 80-85% is usually the sweet spot
-- Use JPG for photographs (not PNG)
-- Maintain original aspect ratio (don't stretch/distort)
-
-### Color Profile
-- Use sRGB color space for web
-- Export at 72 DPI (web standard)
-
----
-
-## ⚠️ Troubleshooting
-
-### Image Not Showing?
-- Check filename matches exactly (case-sensitive)
-- Verify file is in correct directory
-- Make sure it's a `.jpg` file (not .jpeg, .JPG, or .png)
-- Try hard refresh: Cmd+Shift+R (Mac) or Ctrl+Shift+R (Windows)
-
-### Image Looks Blurry?
-- Source image may be too small
-- Try uploading higher resolution version
-- Ensure you're not upscaling from smaller original
-
-### Page Loading Slowly?
-- Image files may be too large
-- Compress images more aggressively
-- Target under 300KB per gallery photo
-
----
-
-## 📊 File Structure Reference
-
-```
-public/photos/
-├── hero.jpg                    # 1920x1080 landscape
-├── .gitkeep                    # Instructions
-├── about/
-│   ├── profile.jpg             # 800x800 square
-│   └── .gitkeep
-├── categories/
-│   ├── sport.jpg               # 1200x800 landscape
-│   ├── wildlife.jpg            # 1200x800 landscape
-│   ├── travel.jpg              # 1200x800 landscape
-│   └── .gitkeep
-├── sport/
-│   ├── sport-1.jpg             # 1200x1600 portrait
-│   ├── sport-2.jpg
-│   ├── sport-3.jpg
-│   ├── sport-4.jpg
-│   ├── sport-5.jpg
-│   ├── sport-6.jpg
-│   └── .gitkeep
-├── wildlife/
-│   ├── wildlife-1.jpg          # 1200x1600 portrait
-│   ├── wildlife-2.jpg
-│   ├── wildlife-3.jpg
-│   ├── wildlife-4.jpg
-│   ├── wildlife-5.jpg
-│   ├── wildlife-6.jpg
-│   └── .gitkeep
-└── travel/
-    ├── travel-1.jpg            # 1200x1600 portrait
-    ├── travel-2.jpg
-    ├── travel-3.jpg
-    ├── travel-4.jpg
-    ├── travel-5.jpg
-    ├── travel-6.jpg
-    └── .gitkeep
-```
-
----
-
-## 🎯 Next Steps
-
-1. Read through this guide
-2. Select and prepare your photos
-3. Add the 11 minimum required images
-4. Run `npm run dev` to preview locally
-5. Once satisfied, commit and push to GitHub
-6. Deploy to production (Vercel/Netlify)
-
-Need help? Check the `.gitkeep` files in each directory for specific requirements!
+May 16, 2026

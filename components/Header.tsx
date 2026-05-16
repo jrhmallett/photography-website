@@ -8,9 +8,9 @@ import Link from "next/link";
  */
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
-      <nav className="mx-auto max-w-7xl px-6 py-4">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-black/80 backdrop-blur-sm">
+      <nav className="mx-auto h-full max-w-7xl px-6">
+        <div className="flex h-full items-center justify-between">
           {/* Logo/Site Title */}
           <Link 
             href="/" 

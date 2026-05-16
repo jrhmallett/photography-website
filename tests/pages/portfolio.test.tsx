@@ -61,11 +61,11 @@ describe('Portfolio Landing Page', () => {
   test('renders Nature category card', () => {
     render(<Portfolio />);
     
-    const wildlifeHeading = screen.getByRole('heading', { name: /nature/i, level: 2 });
-    const wildlifeLink = screen.getByRole('link', { name: /nature/i });
+    const natureHeading = screen.getByRole('heading', { name: /nature/i, level: 2 });
+    const natureLink = screen.getByRole('link', { name: /nature/i });
     
-    expect(wildlifeHeading).toBeInTheDocument();
-    expect(wildlifeLink).toHaveAttribute('href', '/portfolio/wildlife');
+    expect(natureHeading).toBeInTheDocument();
+    expect(natureLink).toHaveAttribute('href', '/portfolio/nature');
   });
 
   test('renders Places category card', () => {
@@ -75,7 +75,7 @@ describe('Portfolio Landing Page', () => {
     const placesLink = screen.getByRole('link', { name: /places/i });
     
     expect(placesHeading).toBeInTheDocument();
-    expect(placesLink).toHaveAttribute('href', '/portfolio/travel');
+    expect(placesLink).toHaveAttribute('href', '/portfolio/places');
   });
 
   test('renders category images', () => {
@@ -117,9 +117,9 @@ describe('Portfolio Landing Page Accessibility', () => {
     const h1 = screen.getByRole('heading', { level: 1 });
     expect(h1).toBeInTheDocument();
     
-    // Should have h2 for each category (4 total: Nature, People, Places, Sport)
+    // Should have h2 for each category (3 total: Nature, Places, Sport)
     const h2Elements = screen.getAllByRole('heading', { level: 2 });
-    expect(h2Elements.length).toBe(4);
+    expect(h2Elements.length).toBe(3);
   });
 
   test('renders category cards in alphabetical order', () => {
@@ -128,21 +128,19 @@ describe('Portfolio Landing Page Accessibility', () => {
     const h2Elements = screen.getAllByRole('heading', { level: 2 });
     const categoryTitles = h2Elements.map((heading) => heading.textContent);
 
-    expect(categoryTitles).toEqual(['Nature', 'People', 'Places', 'Sport']);
+    expect(categoryTitles).toEqual(['Nature', 'Places', 'Sport']);
   });
 
   test('all category cards are keyboard accessible', () => {
     render(<Portfolio />);
     
     const sportLink = screen.getByRole('link', { name: /sport/i });
-    const wildlifeLink = screen.getByRole('link', { name: /nature/i });
+    const natureLink = screen.getByRole('link', { name: /nature/i });
     const placesLink = screen.getByRole('link', { name: /places/i });
-    const peopleLink = screen.getByRole('link', { name: /people/i });
     
     expect(sportLink).toBeVisible();
-    expect(wildlifeLink).toBeVisible();
+    expect(natureLink).toBeVisible();
     expect(placesLink).toBeVisible();
-    expect(peopleLink).toBeVisible();
   });
 
   test('all links have proper href attributes', () => {

@@ -6,27 +6,21 @@ import Header from "@/components/Header";
  * Portfolio Landing Page Component
  * 
  * Category selection page for different photography styles.
- * Users click on a category (Nature, People, Places, Sport) to view that gallery.
+ * Users click on a category (Nature, Places, Sport) to view that gallery.
  */
 
 const categories = [
   {
-    slug: "wildlife",
+    slug: "nature",
     title: "Nature",
     description: "Nature's beauty, untamed creatures, natural habitats",
-    image: "/photos/categories/wildlife-ls.jpg",
+    image: "/photos/categories/nature-ls.jpg",
   },
   {
-    slug: "people",
-    title: "People",
-    description: "Human connection, portraits, and stories",
-    image: "/photos/categories/people.jpg",
-  },
-  {
-    slug: "travel",
+    slug: "places",
     title: "Places",
     description: "Global stories, diverse cultures, breathtaking landscapes",
-    image: "/photos/categories/travel.jpg",
+    image: "/photos/categories/places-ls.jpg",
   },
   {
     slug: "sport",
@@ -52,7 +46,7 @@ export default function Portfolio() {
           </div>
 
           {/* Category Grid */}
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {categories.map((category) => (
               <Link
                 key={category.slug}

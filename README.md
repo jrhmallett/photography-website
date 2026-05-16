@@ -25,7 +25,7 @@ Primary goals:
 
 - Next.js 16 App Router project with static category generation via `generateStaticParams`
 - Hero landing page with high-quality featured image
-- Portfolio category landing page and four gallery routes (`people`, `travel` [Places], `wildlife`, `sport`)
+- Portfolio category landing page and three gallery routes (`places`, `nature`, `sport`)
 - Masonry-style gallery grid with runtime aspect-ratio row spanning
 - Lightbox modal with keyboard navigation (`Escape`, `ArrowLeft`, `ArrowRight`)
 - Shared header navigation across pages
@@ -110,6 +110,12 @@ Deployment flow:
 Local changes → GitHub push → Vercel build → Production/Preview deployment
 ```
 
+Direct production deploy from local machine (optional):
+
+```bash
+npx vercel --prod
+```
+
 ---
 
 ## Documentation
@@ -131,5 +137,5 @@ Local changes → GitHub push → Vercel build → Production/Preview deployment
 
 ---
 
-**Last Updated:** March 7, 2026
+**Last Updated:** May 16, 2026
 

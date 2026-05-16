@@ -188,7 +188,7 @@ git push origin main
 Visit: https://your-domain.com (or .vercel.app)
 - [ ] Home page loads with hero image
 - [ ] Navigation links work (Portfolio, About)
-- [ ] Portfolio shows 4 categories
+- [ ] Portfolio shows 3 categories (Nature, Places, Sport)
 - [ ] Click category to view gallery
 - [ ] Click image to open lightbox
 - [ ] Lightbox navigation works (⬅️ ➡️)

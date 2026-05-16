@@ -1,6 +1,6 @@
 # Photography Website - Architecture Documentation
 
-**Last Updated:** March 7, 2026  
+**Last Updated:** May 16, 2026  
 **Project:** Jonathan Mallett Photography Portfolio  
 **Tech Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS 4
 
@@ -45,10 +45,9 @@ Core architectural priorities:
 
 `app/portfolio/[category]/page.tsx` defines `generateStaticParams()` for:
 
-- `travel` (displayed as Places)
-- `wildlife`
+- `places` (previously travel)
+- `nature` (previously wildlife)
 - `sport`
-- `people`
 
 Unknown categories are handled with `notFound()`.
 
@@ -67,7 +66,7 @@ Unknown categories are handled with `notFound()`.
 `components/GalleryGrid.tsx` responsibilities:
 
 - render masonry-style CSS grid
-- compute image aspect ratio at runtime via `onLoadingComplete`
+- compute image aspect ratio at runtime via image `onLoad`
 - assign row-span classes to reduce whitespace
 - open/close lightbox and handle next/previous state
 
@@ -109,7 +108,8 @@ This keeps the project static and straightforward to maintain without a CMS.
 
 - `next/image` is used across the site for responsive optimization
 - `next.config.ts` enables WebP output and explicit image/device sizes
-- Home hero image is prioritized and uses high quality (`quality={95}`)
+- Home hero image is prioritized and uses configured quality (`quality={75}`)
+- Home route uses a viewport-fitted layout to avoid page scroll
 - Gallery images remain lazy-loaded by default
 - Lightbox image loads eagerly only when opened
 

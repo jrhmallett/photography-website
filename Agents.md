@@ -102,7 +102,7 @@ Guidelines:
 Implemented features:
 
 - CSS grid with dense packing (`gridAutoFlow: 'dense'`)
-- Runtime orientation detection via `onLoadingComplete`
+- Runtime orientation detection via image `onLoad`
 - Dynamic row span assignment based on image aspect ratio
 - Hover zoom and optional title reveal
 
@@ -144,9 +144,8 @@ Note: Lightbox does **not** switch to a separate original-file endpoint; it requ
 
 Available gallery categories:
 
-- `/portfolio/people`
-- `/portfolio/travel` (Places)
-- `/portfolio/wildlife`
+- `/portfolio/places`
+- `/portfolio/nature`
 - `/portfolio/sport`
 
 `app/portfolio/[category]/page.tsx` uses a local `categoryData` map and `generateStaticParams()` for static generation of these categories.
@@ -166,7 +165,7 @@ Available gallery categories:
 
 Example object:
 
-`{ id: 101, src: "/photos/people/new-image.jpg", alt: "Description", title: "Optional Title" }`
+`{ id: 101, src: "/photos/places/new-image.jpg", alt: "Description", title: "Optional Title" }`
 
 ---
 
@@ -193,7 +192,7 @@ Never:
 ## Performance Notes
 
 - `next/image` provides responsive delivery and WebP formatting (per `next.config.ts`)
-- Hero image on home page uses `priority` and `quality={95}`
+- Hero image on home page uses `priority` and `quality={75}`
 - Gallery images are lazily loaded by default
 - Lightbox loads eagerly only after user interaction
 

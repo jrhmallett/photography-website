@@ -255,16 +255,16 @@ Visit each page and verify:
 - [ ] Page loads quickly (< 3 seconds)
 - [ ] Hero image displays properly
 - [ ] Text is readable and styled correctly
-- [ ] Scroll indicator visible at bottom
+- [ ] No vertical scroll required on standard desktop viewport
 
 **Portfolio** (`/portfolio`)
-- [ ] 4 category tiles visible (Nature, People, Places, Sport)
+- [ ] 3 category tiles visible (Nature, Places, Sport)
 - [ ] Images load correctly with dark overlay
 - [ ] Titles centered on tiles
 - [ ] Hover effects work (darker overlay)
 - [ ] Categories are clickable (cursor changes to pointer)
 
-**Category Gallery** (`/portfolio/travel` - Places)
+**Category Gallery** (`/portfolio/places`)
 - [ ] Images display in grid (varies by screen size)
 - [ ] All expected photos show (24-33 depending on category)
 - [ ] Hover effect shows subtle darkening
@@ -415,7 +415,7 @@ This shows:
 - Main: `https://jonathanmallett.com`
 - Portfolio: `https://jonathanmallett.com/portfolio`
 - About: `https://jonathanmallett.com/about`
-- Category: `https://jonathanmallett.com/portfolio/wildlife`
+- Category: `https://jonathanmallett.com/portfolio/nature`
 
 **During Propagation (Temporary):**
 - Main: `https://photography-website-xxxxx.vercel.app`

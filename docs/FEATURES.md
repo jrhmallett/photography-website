@@ -1,6 +1,6 @@
 # Photography Website - Features
 
-**Last Updated:** March 7, 2026
+**Last Updated:** May 16, 2026
 
 This document tracks what is currently implemented in the photography portfolio and what remains optional future work.
 
@@ -12,7 +12,7 @@ The site is a minimal, photography-first portfolio with:
 
 - Hero landing page
 - Portfolio category landing page
-- Four category galleries (`people`, `travel` [Places], `wildlife`, `sport`)
+- Three category galleries (`places`, `nature`, `sport`)
 - About page
 - Masonry-style gallery layout
 - Lightbox with keyboard navigation
@@ -31,7 +31,7 @@ The site is a minimal, photography-first portfolio with:
 
 ### 2) Routing and Pages
 
-- `/` home page with full-screen hero image
+- `/` home page with viewport-fitted hero image (no vertical page scroll)
 - `/portfolio` category selection grid
 - `/portfolio/[category]` dynamic category page
 - `/about` profile and biography page
@@ -48,7 +48,7 @@ The site is a minimal, photography-first portfolio with:
 
 - `GalleryGrid` reusable component
 - Dense CSS grid masonry effect
-- Runtime image aspect-ratio detection via `onLoadingComplete`
+- Runtime image aspect-ratio detection via image `onLoad`
 - Dynamic row-span assignment for portrait/landscape variation
 - Hover zoom effect and optional title reveal
 
