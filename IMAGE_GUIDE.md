@@ -7,9 +7,9 @@ This guide documents the current image structure used by the live site.
 - [ ] Home page hero image
 - [ ] Profile photo for About page
 - [ ] 3 category cover images (Sport, Nature, Places)
-- [ ] Curated sport gallery images
-- [ ] Curated nature gallery images
-- [ ] Curated places gallery images
+- [ ] Sport gallery images following filename convention
+- [ ] Nature gallery images following filename convention
+- [ ] Places gallery images following filename convention
 
 ## Required Core Images
 
@@ -36,48 +36,60 @@ Location: `/public/photos/categories/`
 
 Notes:
 - These are shown on `/portfolio`
-- `sport-ls.jpg` is also used as the first image in the Sport gallery
+- `sport-ls.jpg` is the Sport category cover image on `/portfolio`
 
 ## Gallery Image Directories
 
 ### Sport Gallery
 Location: `/public/photos/sport/`
 
-- Current naming pattern is `sport-*-ls.jpg`
-- Main cover image in this folder is `sport-ls.jpg`
+- Required naming pattern: `sport-occasion-year-number.jpg`
+- Example: `sport-silverstone-2026-1.jpg`
+- Grouping behavior on `/portfolio/sport`:
+	- Sub-heading per unique `occasion + year` (for example `Silverstone 2026`)
+	- Photos under each sub-heading sorted by `number` ascending (`1, 2, 3, ...`)
+	- Section order is newest year first, then occasion name
 
 ### Nature Gallery
 Location: `/public/photos/nature/`
 
-- Current assets use legacy `wildlife-*` naming in many files
-- This is expected and supported by the current data map
+- Required naming pattern: `nature-animal-number.jpg`
+- Example: `nature-birds-1.jpg`
+- Grouping behavior on `/portfolio/nature`:
+	- Sub-heading per unique `animal`
+	- Photos under each sub-heading sorted by `number` ascending (`1, 2, 3, ...`)
+	- Animal groups are displayed alphabetically
 
 ### Places Gallery
 Location: `/public/photos/places/`
 
-- Mixed naming is expected (for example `Travel101.jpg`, `travel-23-ls.jpg`, `travel-117.jpg`)
-- Keep exact filename case when referencing in code
+- Required naming pattern: `places-country-number.jpg`
+- Example: `places-switzerland-1.jpg`
+- Grouping behavior on `/portfolio/places`:
+	- Sub-heading per unique `country`
+	- Photos under each sub-heading sorted by `number` ascending (`1, 2, 3, ...`)
+	- Country groups are ordered by the first number found for that country (ascending)
 
 ## Updating Gallery Content
 
-All category image lists are maintained in:
+Gallery pages now read the file system automatically from these folders:
+
+- `public/photos/places/`
+- `public/photos/sport/`
+- `public/photos/nature/`
+
+No manual image list updates are required as long as filenames follow the conventions above.
+
+Implementation file:
 
 - `app/portfolio/[category]/page.tsx`
-
-When adding or removing files from `public/photos/<category>/`, update that file so every `src` matches a real image.
-
-Example entry:
-
-```ts
-{ id: 999, src: "/photos/places/new-photo.jpg", alt: "Travel photography" }
-```
 
 ## File Naming Rules
 
 - Filenames are case-sensitive
 - Use `.jpg` for photographic assets
 - Keep names stable once published to avoid cache confusion
-- If replacing an existing image, preserve exact path where possible
+- Keep numeric suffixes contiguous when possible for cleaner sequencing
 
 ## Local Verification Checklist
 
@@ -98,9 +110,9 @@ Check these routes:
 If an image is blank:
 
 1. Confirm file exists in `public/photos/...`
-2. Confirm exact path and casing in `app/portfolio/[category]/page.tsx`
+2. Confirm filename matches the category naming pattern
 3. Hard refresh browser (`Cmd+Shift+R`)
 
 ## Last Updated
 
-May 16, 2026
+August 1, 2026

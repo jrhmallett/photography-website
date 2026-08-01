@@ -1,6 +1,6 @@
 # Photography Website - Architecture Documentation
 
-**Last Updated:** May 16, 2026  
+**Last Updated:** August 1, 2026  
 **Project:** Jonathan Mallett Photography Portfolio  
 **Tech Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS 4
 
@@ -51,6 +51,8 @@ Core architectural priorities:
 
 Unknown categories are handled with `notFound()`.
 
+For valid categories, gallery content is assembled server-side from image filenames in `public/photos/<category>/`.
+
 ---
 
 ## Component Architecture
@@ -69,6 +71,13 @@ Unknown categories are handled with `notFound()`.
 - compute image aspect ratio at runtime via image `onLoad`
 - assign row-span classes to reduce whitespace
 - open/close lightbox and handle next/previous state
+
+`app/portfolio/[category]/page.tsx` responsibilities:
+
+- read category image directories using Node `fs/promises`
+- parse filename conventions into grouped sections
+- sort each section's photos by sequence number ascending
+- render sub-heading + masonry grid for each group
 
 Current grid behavior:
 
@@ -91,16 +100,29 @@ The lightbox requests the same image source path in a larger view; it does not s
 
 ## Content Model
 
-Category image data is stored in a local `categoryData` object inside `app/portfolio/[category]/page.tsx`.
+Category metadata (title/description/folder) is stored in a local `categoryData` object inside `app/portfolio/[category]/page.tsx`.
+
+Photo items are generated dynamically by parsing filenames from the filesystem.
+
+Current filename conventions:
+
+- Places: `places-country-number.jpg`
+- Sport: `sport-occasion-year-number.jpg`
+- Nature: `nature-animal-number.jpg`
+
+Section grouping:
+
+- Places grouped by country (ordered by each country's first file number, ascending)
+- Sport grouped by occasion + year (year descending, then occasion)
+- Nature grouped by animal (alphabetical)
 
 Each photo entry uses:
 
 - numeric `id`
 - `src` under `public/photos/<category>/`
 - `alt`
-- optional `title`
 
-This keeps the project static and straightforward to maintain without a CMS.
+This keeps the project static and straightforward to maintain without a CMS while allowing content updates through file additions/renames alone.
 
 ---
 

@@ -15,18 +15,24 @@ const categories = [
     title: "Nature",
     description: "Nature's beauty, untamed creatures, natural habitats",
     image: "/photos/categories/nature-ls.jpg",
+    objectPosition: "center center",
+    hoverScaleClass: "group-hover:scale-105",
   },
   {
     slug: "places",
     title: "Places",
     description: "Global stories, diverse cultures, breathtaking landscapes",
     image: "/photos/categories/places-ls.jpg",
+    objectPosition: "center center",
+    hoverScaleClass: "group-hover:scale-105",
   },
   {
     slug: "sport",
     title: "Sport",
     description: "Athletic moments, peak performance, competitive spirit",
-    image: "/photos/categories/sport-ls.jpg",
+    image: "/photos/sport/sport-ls.jpg",
+    objectPosition: "26% 42%",
+    hoverScaleClass: "group-hover:scale-102",
   },
 ];
 
@@ -58,7 +64,8 @@ export default function Portfolio() {
                   src={category.image}
                   alt={`${category.title} photography by Jonathan Mallett`}
                   fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className={`object-cover transition-transform duration-500 ${category.hoverScaleClass}`}
+                  style={{ objectPosition: category.objectPosition }}
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
 

@@ -47,16 +47,24 @@ describe('Sport Category Gallery', () => {
     expect(portfolioLinks[0]).toHaveAttribute('href', '/portfolio');
   });
 
-  test('renders 25 gallery images', async () => {
+  test('renders sport subsection headings', async () => {
+    render(await CategoryGallery({ params: sportParams }));
+
+    expect(screen.getByRole('heading', { name: /silverstone 2026/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /silverstone 2025/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /silverstone 2024/i, level: 2 })).toBeInTheDocument();
+  });
+
+  test('renders 33 gallery images', async () => {
     render(await CategoryGallery({ params: sportParams }));
     
     const images = screen.getAllByRole('img');
     // Filter out navigation images (only count gallery images)
     const galleryImages = images.filter(img => 
-      img.getAttribute('alt')?.includes('Sport photography')
+      /sport photography/i.test(img.getAttribute('alt') ?? '')
     );
     
-    expect(galleryImages.length).toBe(25);
+    expect(galleryImages.length).toBe(33);
   });
 
   test('all gallery images have alt text', async () => {
@@ -86,15 +94,25 @@ describe('Nature Category Gallery', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('renders 30 gallery images', async () => {
+  test('renders nature subsection headings', async () => {
+    render(await CategoryGallery({ params: natureParams }));
+
+    expect(screen.getByRole('heading', { name: /^birds$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^dogs$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^monkeys$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^squirrel$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^goat$/i, level: 2 })).toBeInTheDocument();
+  });
+
+  test('renders 41 gallery images', async () => {
     render(await CategoryGallery({ params: natureParams }));
     
     const images = screen.getAllByRole('img');
     const galleryImages = images.filter(img => 
-      img.getAttribute('alt')?.includes('Wildlife photography')
+      /wildlife photography/i.test(img.getAttribute('alt') ?? '')
     );
     
-    expect(galleryImages.length).toBe(30);
+    expect(galleryImages.length).toBe(41);
   });
 
   test('renders back to portfolio link', async () => {
@@ -121,15 +139,71 @@ describe('Places Category Gallery', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('renders 45 gallery images', async () => {
+  test('renders places subsection headings', async () => {
+    render(await CategoryGallery({ params: placesParams }));
+
+    expect(screen.getByRole('heading', { name: /^croatia$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^italy$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^marrakech$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^porto$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^switzerland$/i, level: 2 })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^uk$/i, level: 2 })).toBeInTheDocument();
+  });
+
+  test('renders places groups in file-number order', async () => {
+    render(await CategoryGallery({ params: placesParams }));
+
+    const subsectionHeadings = screen
+      .getAllByRole('heading', { level: 2 })
+      .map((heading) => heading.textContent);
+
+    expect(subsectionHeadings).toEqual([
+      'Switzerland',
+      'Marrakech',
+      'UK',
+      'Porto',
+      'Croatia',
+      'Italy',
+    ]);
+  });
+
+  test('renders ascending photo numbers inside each places group', async () => {
+    render(await CategoryGallery({ params: placesParams }));
+
+    const images = screen.getAllByRole('img');
+    const placeImages = images.filter((img) => /travel photography/i.test(img.getAttribute('alt') ?? ''));
+
+    const numbersByCountry = new Map<string, number[]>();
+
+    placeImages.forEach((img) => {
+      const src = img.getAttribute('src') ?? '';
+      const match = src.match(/\/photos\/places\/places-([a-z-]+)-(\d+)\.(jpg|jpeg|png|webp)$/i);
+      if (!match) {
+        return;
+      }
+
+      const country = match[1].toLowerCase();
+      const number = Number.parseInt(match[2], 10);
+      const existing = numbersByCountry.get(country) ?? [];
+      existing.push(number);
+      numbersByCountry.set(country, existing);
+    });
+
+    numbersByCountry.forEach((numbers) => {
+      const sorted = [...numbers].sort((a, b) => a - b);
+      expect(numbers).toEqual(sorted);
+    });
+  });
+
+  test('renders 35 gallery images', async () => {
     render(await CategoryGallery({ params: placesParams }));
     
     const images = screen.getAllByRole('img');
     const galleryImages = images.filter(img => 
-      img.getAttribute('alt')?.includes('Travel photography')
+      /travel photography/i.test(img.getAttribute('alt') ?? '')
     );
     
-    expect(galleryImages.length).toBe(45);
+    expect(galleryImages.length).toBe(35);
   });
 
   test('renders back to portfolio link', async () => {

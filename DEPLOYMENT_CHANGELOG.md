@@ -32,8 +32,8 @@ Use this file to record each production deployment.
 - Domain: https://jonathanmallett.com
 - Vercel deployment URL: https://photography-website-59kb89519-jonathan-malletts-projects.vercel.app
 - Git branch: main
-- Commit SHA: pending local commit
-- Tag: pending local tag
+- Commit SHA: 04b128c
+- Tag: v2026.05.16
 - Summary of changes:
   - Updated Sport image mapping to use `sport-ls.jpg`
   - Removed stale Places image paths and mapped missing slot to `travel-117.jpg`
@@ -48,4 +48,4 @@ Use this file to record each production deployment.
 - Rollback plan:
   - Re-deploy previous Vercel production deployment from dashboard if needed
 - Notes:
-  - Fill in commit SHA and tag after local commit/tag steps complete.
+  - Deployment metadata finalized after push to origin/main.

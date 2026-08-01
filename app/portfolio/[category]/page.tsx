@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { readdir } from "node:fs/promises";
+import path from "node:path";
 import Header from "@/components/Header";
-import GalleryGrid from "@/components/GalleryGrid";
+import GroupedGalleryGrid from "@/components/GroupedGalleryGrid";
 
 /**
  * Dynamic Category Gallery Page Component
@@ -10,129 +12,192 @@ import GalleryGrid from "@/components/GalleryGrid";
  * Uses Next.js dynamic routes to handle multiple categories with one component.
  */
 
-// Define available categories and their photo collections
 const categoryData: Record<string, {
   title: string;
   description: string;
-  photos: Array<{
-    id: number;
-    src: string;
-    alt: string;
-    title?: string;
-  }>;
+  folder: string;
 }> = {
-
   sport: {
     title: "Sport",
     description: "Athletic moments and competitive spirit",
-    photos: [
-      { id: 0, src: "/photos/categories/sport-ls.jpg", alt: "Sport photography" },
-      { id: 1, src: "/photos/sport/sport-1-ls.jpg", alt: "Sport photography" },
-      { id: 2, src: "/photos/sport/sport-2-ls.jpg", alt: "Sport photography" },
-      { id: 3, src: "/photos/sport/sport-3-ls.jpg", alt: "Sport photography" },
-      { id: 4, src: "/photos/sport/sport-4-ls.jpg", alt: "Sport photography" },
-      { id: 5, src: "/photos/sport/sport-5-ls.jpg", alt: "Sport photography" },
-      { id: 6, src: "/photos/sport/sport-6-ls.jpg", alt: "Sport photography" },
-      { id: 7, src: "/photos/sport/sport-7-ls.jpg", alt: "Sport photography" },
-      { id: 8, src: "/photos/sport/sport-8-ls.jpg", alt: "Sport photography" },
-      { id: 9, src: "/photos/sport/sport-9-ls.jpg", alt: "Sport photography" },
-      { id: 10, src: "/photos/sport/sport-10-ls.jpg", alt: "Sport photography" },
-      { id: 11, src: "/photos/sport/sport-11-ls.jpg", alt: "Sport photography" },
-      { id: 13, src: "/photos/sport/sport-13-ls.jpg", alt: "Sport photography" },
-      { id: 14, src: "/photos/sport/sport-14-ls.jpg", alt: "Sport photography" },
-      { id: 16, src: "/photos/sport/sport-16-ls.jpg", alt: "Sport photography" },
-      { id: 17, src: "/photos/sport/sport-17-ls.jpg", alt: "Sport photography" },
-      { id: 18, src: "/photos/sport/sport-18-ls.jpg", alt: "Sport photography" },
-      { id: 19, src: "/photos/sport/sport-19-ls.jpg", alt: "Sport photography" },
-      { id: 21, src: "/photos/sport/sport-21-ls.jpg", alt: "Sport photography" },
-      { id: 22, src: "/photos/sport/sport-22-ls.jpg", alt: "Sport photography" },
-      { id: 23, src: "/photos/sport/sport-23-ls.jpg", alt: "Sport photography" },
-      { id: 24, src: "/photos/sport/sport-24-ls.jpg", alt: "Sport photography" },
-      { id: 25, src: "/photos/sport/sport-25-ls.jpg", alt: "Sport photography" },
-      { id: 26, src: "/photos/sport/sport-26-ls.jpg", alt: "Sport photography" },
-      { id: 27, src: "/photos/sport/sport-27-ls.jpg", alt: "Sport photography" },
-    ],
+    folder: "sport",
   },
   nature: {
     title: "Nature",
     description: "Nature's beauty in its purest form",
-    photos: [
-      { id: 35, src: "/photos/nature/Nature-35-ls.jpg", alt: "Wildlife photography" },
-      { id: 0, src: "/photos/nature/wildlife-ls.jpg", alt: "Wildlife photography" },
-      { id: 1, src: "/photos/nature/wildlife-1.jpg", alt: "Wildlife photography" },
-      { id: 2, src: "/photos/nature/wildlife-2-ls.jpg", alt: "Wildlife photography" },
-      { id: 3, src: "/photos/nature/wildlife-3-ls.jpg", alt: "Wildlife photography" },
-      { id: 4, src: "/photos/nature/wildlife-4-ls.jpg", alt: "Wildlife photography" },
-      { id: 5, src: "/photos/nature/wildlife-5.jpg", alt: "Wildlife photography" },
-      { id: 6, src: "/photos/nature/wildlife-6.jpg", alt: "Wildlife photography" },
-      { id: 7, src: "/photos/nature/wildlife-7-ls.jpg", alt: "Wildlife photography" },
-      { id: 8, src: "/photos/nature/wildlife8.jpg", alt: "Wildlife photography" },
-      { id: 10, src: "/photos/nature/wildlife-10-ls.jpg", alt: "Wildlife photography" },
-      { id: 11, src: "/photos/nature/wildlife-11-ls.jpg", alt: "Wildlife photography" },
-      { id: 12, src: "/photos/nature/wildlife-12-ls.jpg", alt: "Wildlife photography" },
-      { id: 13, src: "/photos/nature/wildlife-13-ls.jpg", alt: "Wildlife photography" },
-      { id: 14, src: "/photos/nature/wildlife-14-ls.jpg", alt: "Wildlife photography" },
-      { id: 15, src: "/photos/nature/wildlife-15-ls.jpg", alt: "Wildlife photography" },
-      { id: 17, src: "/photos/nature/wildlife-17-ls.jpg", alt: "Wildlife photography" },
-      { id: 18, src: "/photos/nature/wildlife-18-ls.jpg", alt: "Wildlife photography" },
-      { id: 19, src: "/photos/nature/wildlife-19.jpg", alt: "Wildlife photography" },
-      { id: 20, src: "/photos/nature/wildlife-20.jpg", alt: "Wildlife photography" },
-      { id: 21, src: "/photos/nature/wildlife-21-ls.jpg", alt: "Wildlife photography" },
-      { id: 22, src: "/photos/nature/wildlife-22-ls.jpg", alt: "Wildlife photography" },
-      { id: 27, src: "/photos/nature/wildlife-27-ls.jpg", alt: "Wildlife photography" },
-      { id: 28, src: "/photos/nature/wildlife-28-ls.jpg", alt: "Wildlife photography" },
-      { id: 29, src: "/photos/nature/wildlife-29-ls.jpg", alt: "Wildlife photography" },
-      { id: 30, src: "/photos/nature/wildlife-30.jpg", alt: "Wildlife photography" },
-      { id: 31, src: "/photos/nature/wildlife-31.jpg", alt: "Wildlife photography" },
-      { id: 32, src: "/photos/nature/wildlife-32.jpg", alt: "Wildlife photography" },
-      { id: 33, src: "/photos/nature/wildlife-33.jpg", alt: "Wildlife photography" },
-    ],
+    folder: "nature",
   },
   places: {
     title: "Places",
     description: "Stories from around the world",
-    photos: [
-      { id: 116, src: "/photos/places/places-ls.jpg", alt: "Travel photography" },
-      { id: 115, src: "/photos/places/Places-115-ls.jpg", alt: "Travel photography" },
-      { id: 114, src: "/photos/places/Places-114-ls.jpg", alt: "Travel photography" },
-      { id: 113, src: "/photos/places/Places-113-ls.jpg", alt: "Travel photography" },
-      { id: 112, src: "/photos/places/Places-112-ls.jpg", alt: "Travel photography" },
-      { id: 111, src: "/photos/places/Places-111-ls.jpg", alt: "Travel photography" },
-      { id: 101, src: "/photos/places/Travel101.jpg", alt: "Travel photography" },
-      { id: 102, src: "/photos/places/Travel102.jpg", alt: "Travel photography" },
-      { id: 103, src: "/photos/places/Travel103.jpg", alt: "Travel photography" },
-      { id: 104, src: "/photos/places/Travel104.jpg", alt: "Travel photography" },
-      { id: 105, src: "/photos/places/Travel105.jpg", alt: "Travel photography" },
-      { id: 106, src: "/photos/places/Travel106.jpg", alt: "Travel photography" },
-      { id: 107, src: "/photos/places/Travel107.jpg", alt: "Travel photography" },
-      { id: 108, src: "/photos/places/Travel108.jpg", alt: "Travel photography" },
-      { id: 109, src: "/photos/places/Travel109.jpg", alt: "Travel photography" },
-      { id: 1, src: "/photos/places/travel-117.jpg", alt: "Travel photography" },
-      { id: 2, src: "/photos/places/travel-2.jpg", alt: "Travel photography" },
-      { id: 3, src: "/photos/places/travel-3-ls.jpg", alt: "Travel photography" },
-      { id: 4, src: "/photos/places/travel-4-ls.jpg", alt: "Travel photography" },
-      { id: 5, src: "/photos/places/travel-5-ls.jpg", alt: "Travel photography" },
-      { id: 6, src: "/photos/places/travel-6-ls.jpg", alt: "Travel photography" },
-      { id: 8, src: "/photos/places/travel-8-ls.jpg", alt: "Travel photography" },
-      { id: 11, src: "/photos/places/travel-11-ls.jpg", alt: "Travel photography" },
-      { id: 12, src: "/photos/places/travel-12.jpg", alt: "Travel photography" },
-      { id: 14, src: "/photos/places/travel-14.jpg", alt: "Travel photography" },
-      { id: 15, src: "/photos/places/Travel-15-ls.jpg", alt: "Travel photography" },
-      { id: 17, src: "/photos/places/travel-17.jpg", alt: "Travel photography" },
-      { id: 18, src: "/photos/places/travel-18-ls.jpg", alt: "Travel photography" },
-      { id: 19, src: "/photos/places/travel-19-ls.jpg", alt: "Travel photography" },
-      { id: 20, src: "/photos/places/travel-20.jpg", alt: "Travel photography" },
-      { id: 21, src: "/photos/places/travel-21-ls.jpg", alt: "Travel photography" },
-      { id: 22, src: "/photos/places/travel-22-ls.jpg", alt: "Travel photography" },
-      { id: 23, src: "/photos/places/travel-23-ls.jpg", alt: "Travel photography" },
-      { id: 25, src: "/photos/places/travel-25.jpg", alt: "Travel photography" },
-      { id: 26, src: "/photos/places/travel-26.jpg", alt: "Travel photography" },
-      { id: 27, src: "/photos/places/travel-27.jpg", alt: "Travel photography" },
-      { id: 28, src: "/photos/places/travel-28-ls.jpg", alt: "Travel photography" },
-      { id: 29, src: "/photos/places/travel-29.jpg", alt: "Travel photography" },
-    ],
+    folder: "places",
   },
 };
+
+interface GalleryPhoto {
+  id: number;
+  src: string;
+  alt: string;
+}
+
+interface GalleryGroup {
+  heading: string;
+  photos: GalleryPhoto[];
+  sortLabel: string;
+  sortYear?: number;
+  sortStart?: number;
+  sortEnd?: number;
+}
+
+const supportedExtensions = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+
+const toDisplayText = (value: string) => {
+  if (value.toLowerCase() === "uk") {
+    return "UK";
+  }
+
+  return value
+    .split("-")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+};
+
+async function buildGroupedGallery(category: string): Promise<GalleryGroup[]> {
+  const categoryConfig = categoryData[category];
+
+  if (!categoryConfig) {
+    return [];
+  }
+
+  const photoDir = path.join(process.cwd(), "public", "photos", categoryConfig.folder);
+  const fileNames = await readdir(photoDir);
+
+  const groups = new Map<string, { heading: string; sortLabel: string; sortYear?: number; sortStart?: number; sortEnd?: number; photos: Array<{ src: string; alt: string; sequence: number }> }>();
+
+  for (const fileName of fileNames) {
+    if (fileName.startsWith(".")) {
+      continue;
+    }
+
+    const extension = path.extname(fileName).toLowerCase();
+    if (!supportedExtensions.has(extension)) {
+      continue;
+    }
+
+    if (category === "places") {
+      const match = fileName.match(/^places-(.+)-(\d+)\.(jpg|jpeg|png|webp)$/i);
+      if (!match) {
+        continue;
+      }
+
+      const countrySlug = match[1].toLowerCase();
+      const sequence = Number.parseInt(match[2], 10);
+      const groupKey = countrySlug;
+      const heading = toDisplayText(countrySlug);
+      const existing = groups.get(groupKey) ?? { heading, sortLabel: heading, sortStart: sequence, sortEnd: sequence, photos: [] };
+
+      existing.sortStart = Math.min(existing.sortStart ?? sequence, sequence);
+      existing.sortEnd = Math.max(existing.sortEnd ?? sequence, sequence);
+
+      existing.photos.push({
+        src: `/photos/places/${fileName}`,
+        alt: `${heading} travel photography`,
+        sequence,
+      });
+
+      groups.set(groupKey, existing);
+      continue;
+    }
+
+    if (category === "sport") {
+      const match = fileName.match(/^sport-(.+)-(\d{4})-(\d+)\.(jpg|jpeg|png|webp)$/i);
+      if (!match) {
+        continue;
+      }
+
+      const placeSlug = match[1].toLowerCase();
+      const year = Number.parseInt(match[2], 10);
+      const sequence = Number.parseInt(match[3], 10);
+      const place = toDisplayText(placeSlug);
+      const heading = `${place} ${year}`;
+      const groupKey = `${placeSlug}-${year}`;
+      const existing = groups.get(groupKey) ?? { heading, sortLabel: place, sortYear: year, photos: [] };
+
+      existing.photos.push({
+        src: `/photos/sport/${fileName}`,
+        alt: `${heading} sport photography`,
+        sequence,
+      });
+
+      groups.set(groupKey, existing);
+      continue;
+    }
+
+    if (category === "nature") {
+      const match = fileName.match(/^nature-(.+)-(\d+)\.(jpg|jpeg|png|webp)$/i);
+      if (!match) {
+        continue;
+      }
+
+      const animalSlug = match[1].toLowerCase();
+      const sequence = Number.parseInt(match[2], 10);
+      const heading = toDisplayText(animalSlug);
+      const groupKey = animalSlug;
+      const existing = groups.get(groupKey) ?? { heading, sortLabel: heading, photos: [] };
+
+      existing.photos.push({
+        src: `/photos/nature/${fileName}`,
+        alt: `${heading} wildlife photography`,
+        sequence,
+      });
+
+      groups.set(groupKey, existing);
+    }
+  }
+
+  const sortedGroups = Array.from(groups.values()).sort((a, b) => {
+    if (category === "places") {
+      const startDiff = (a.sortStart ?? Number.MAX_SAFE_INTEGER) - (b.sortStart ?? Number.MAX_SAFE_INTEGER);
+      if (startDiff !== 0) {
+        return startDiff;
+      }
+
+      const endDiff = (a.sortEnd ?? Number.MAX_SAFE_INTEGER) - (b.sortEnd ?? Number.MAX_SAFE_INTEGER);
+      if (endDiff !== 0) {
+        return endDiff;
+      }
+    }
+
+    if (category === "sport") {
+      const yearDiff = (b.sortYear ?? 0) - (a.sortYear ?? 0);
+      if (yearDiff !== 0) {
+        return yearDiff;
+      }
+    }
+
+    return a.sortLabel.localeCompare(b.sortLabel);
+  });
+
+  return sortedGroups.map((group) => {
+    const sortedPhotos = group.photos
+      .sort((a, b) => a.sequence - b.sequence)
+      .map((photo, index) => ({
+        id: index + 1,
+        src: photo.src,
+        alt: photo.alt,
+      }));
+
+    return {
+      heading: group.heading,
+      photos: sortedPhotos,
+      sortLabel: group.sortLabel,
+      sortYear: group.sortYear,
+        sortStart: group.sortStart,
+        sortEnd: group.sortEnd,
+    };
+  });
+}
 
 interface PageProps {
   params: Promise<{
@@ -150,12 +215,14 @@ export async function generateStaticParams() {
 
 export default async function CategoryGallery({ params }: PageProps) {
   const { category } = await params;
-  
+
   // Check if category exists
   const data = categoryData[category];
   if (!data) {
     notFound();
   }
+
+  const groupedPhotos = await buildGroupedGallery(category);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -181,8 +248,8 @@ export default async function CategoryGallery({ params }: PageProps) {
             </h1>
           </div>
 
-          {/* Photo Grid - Masonry style with varying heights */}
-          <GalleryGrid photos={data.photos} />
+          {/* Grouped Photo Grids with shared lightbox navigation */}
+          <GroupedGalleryGrid groups={groupedPhotos} />
         </div>
       </main>
 
