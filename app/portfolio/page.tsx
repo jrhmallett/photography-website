@@ -30,7 +30,7 @@ const categories = [
     slug: "sport",
     title: "Sport",
     description: "Athletic moments, peak performance, competitive spirit",
-    image: "/photos/sport/sport-ls.jpg",
+    image: "/photos/categories/sport-ls.jpg",
     objectPosition: "26% 42%",
     hoverScaleClass: "group-hover:scale-102",
   },
