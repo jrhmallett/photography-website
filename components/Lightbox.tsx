@@ -45,14 +45,17 @@ export default function Lightbox({
   }, [onClose, onNext, onPrevious, hasNext, hasPrevious]);
 
   return (
-    <div 
-      className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white p-4"
       onClick={onClose}
     >
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-10"
+        className="absolute right-4 top-4 z-10 text-neutral-500 transition-colors hover:text-neutral-900"
         aria-label="Close lightbox"
       >
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,7 +70,7 @@ export default function Lightbox({
             e.stopPropagation();
             onPrevious();
           }}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-10"
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 text-neutral-500 transition-colors hover:text-neutral-900"
           aria-label="Previous image"
         >
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +86,7 @@ export default function Lightbox({
             e.stopPropagation();
             onNext();
           }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-10"
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 text-neutral-500 transition-colors hover:text-neutral-900"
           aria-label="Next image"
         >
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -30,14 +30,6 @@ describe('Header Component', () => {
     expect(aboutLink).toHaveAttribute('href', '/about');
   });
 
-  test('renders Portfolio navigation link', () => {
-    render(<Header />);
-    
-    const portfolioLink = screen.getByRole('link', { name: /^portfolio$/i });
-    expect(portfolioLink).toBeInTheDocument();
-    expect(portfolioLink).toHaveAttribute('href', '/portfolio');
-  });
-
   test('has proper semantic HTML structure', () => {
     const { container } = render(<Header />);
     
@@ -52,7 +44,14 @@ describe('Header Component', () => {
     render(<Header />);
     
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(3); // Home, About, Portfolio
+    expect(links).toHaveLength(3); // Home, Portfolio, and About
+  });
+
+  test('links Portfolio to the homepage', () => {
+    render(<Header />);
+
+    const portfolioLink = screen.getByRole('link', { name: /^portfolio$/i });
+    expect(portfolioLink).toHaveAttribute('href', '/');
   });
 });
 

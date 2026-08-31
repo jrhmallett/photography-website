@@ -1,8 +1,7 @@
 /**
  * Home Page - Unit Tests
  * 
- * Tests for the minimalist landing page inspired by Alan Schaller's design.
- * Validates navigation, hero image, and accessibility.
+ * Tests for the image-first homepage gallery.
  */
 
 import { render, screen } from '@testing-library/react';
@@ -39,27 +38,13 @@ describe('Home Page', () => {
     expect(aboutLinks[0]).toHaveAttribute('href', '/about');
   });
 
-  test('renders Portfolio navigation link', () => {
+  test('renders the curated gallery images', () => {
     render(<Home />);
-    
-    const portfolioLinks = screen.getAllByRole('link', { name: /portfolio/i });
-    expect(portfolioLinks.length).toBeGreaterThan(0);
-    expect(portfolioLinks[0]).toHaveAttribute('href', '/portfolio');
-  });
 
-  test('renders hero image with alt text', () => {
-    render(<Home />);
-    
-    const heroImage = screen.getByAltText(/featured photograph by jonathan mallett/i);
-    expect(heroImage).toBeInTheDocument();
-    expect(heroImage).toHaveAttribute('src');
-  });
-
-  test('hero image has priority loading', () => {
-    render(<Home />);
-    
-    const heroImage = screen.getByAltText(/featured photograph by jonathan mallett/i);
-    expect(heroImage).toBeInTheDocument();
+    const galleryImages = screen.getAllByRole('img');
+    expect(galleryImages).toHaveLength(33);
+    expect(galleryImages[0]).toHaveAttribute('src', '/photos/places/places-marrakech-7.jpg');
+    expect(galleryImages[32]).toHaveAttribute('src', '/photos/nature/nature-birds-31.jpg');
   });
 
   test('has main element with proper semantic HTML', () => {
@@ -94,6 +79,13 @@ describe('Home Page Accessibility', () => {
       expect(img).toHaveAttribute('alt');
       expect(img.getAttribute('alt')).not.toBe('');
     });
+  });
+
+  test('links Portfolio back to the homepage', () => {
+    render(<Home />);
+
+    const portfolioLink = screen.getByRole('link', { name: /^portfolio$/i });
+    expect(portfolioLink).toHaveAttribute('href', '/');
   });
 
   test('navigation links are keyboard accessible', () => {

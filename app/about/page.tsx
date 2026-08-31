@@ -9,14 +9,14 @@ import Header from "@/components/Header";
  */
 export default function About() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <Header />
 
       {/* About Content */}
       <main className="mx-auto max-w-4xl px-6 pt-32 pb-20">
         {/* Contact */}
         <div className="mb-10 md:mb-12">
-          <h2 className="mb-3 text-sm font-light tracking-widest uppercase text-gray-400">
+          <h2 className="mb-3 text-sm font-normal tracking-widest uppercase text-neutral-500">
             Get in touch
           </h2>
           <div className="flex flex-col gap-2 text-sm font-light">
@@ -34,7 +34,7 @@ export default function About() {
               Jonathan Mallett
             </h1>
             
-            <div className="space-y-4 text-gray-300 font-light leading-relaxed">
+            <div className="space-y-4 font-normal leading-relaxed text-neutral-700">
               <p>
                 Photography started as simple curiosity and slowly became something I carry with me. It&apos;s a creative outlet and is my way of slowing down and trying to notice moments that might otherwise pass.
               </p>
@@ -50,7 +50,7 @@ export default function About() {
           </div>
 
           {/* Profile Image */}
-          <div className="relative mx-auto w-3/4 max-w-xs aspect-[3/4] overflow-hidden bg-gray-900 md:mx-0 md:w-full md:max-w-none">
+          <div className="relative mx-auto aspect-[3/4] w-3/4 max-w-xs overflow-hidden bg-neutral-100 md:mx-0 md:w-full md:max-w-none">
             <Image
               src="/photos/about/profile.jpg"
               alt="Jonathan Mallett - Photographer"

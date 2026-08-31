@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Lightbox from './Lightbox';
 
@@ -24,6 +24,32 @@ interface ImageDimensions {
 export default function GalleryGrid({ photos }: GalleryGridProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [imageDimensions, setImageDimensions] = useState<Map<number, ImageDimensions>>(new Map());
+  const [columnCount, setColumnCount] = useState(1);
+
+  useEffect(() => {
+    const updateColumnCount = () => {
+      const viewportWidth = window.innerWidth;
+      const matches = (query: string, minimumWidth: number) =>
+        typeof window.matchMedia === 'function'
+          ? window.matchMedia(query).matches
+          : viewportWidth >= minimumWidth;
+
+      if (matches('(min-width: 1280px)', 1280)) {
+        setColumnCount(4);
+      } else if (matches('(min-width: 1024px)', 1024)) {
+        setColumnCount(3);
+      } else if (matches('(min-width: 640px)', 640)) {
+        setColumnCount(2);
+      } else {
+        setColumnCount(1);
+      }
+    };
+
+    updateColumnCount();
+    window.addEventListener('resize', updateColumnCount);
+
+    return () => window.removeEventListener('resize', updateColumnCount);
+  }, []);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -54,68 +80,56 @@ export default function GalleryGrid({ photos }: GalleryGridProps) {
     });
   };
 
-  // Calculate row span based on aspect ratio
-  const getRowSpan = (photoId: number): string => {
-    const dimensions = imageDimensions.get(photoId);
-    if (!dimensions) return 'row-span-2'; // Default while loading
-    
-    const { aspectRatio } = dimensions;
-    
-    // Portrait images (taller than wide): span more rows
-    if (aspectRatio < 0.85) {
-      return 'row-span-3'; // Very tall portraits
-    } else if (aspectRatio < 1.15) {
-      return 'row-span-2'; // Standard portraits and squares
-    } else if (aspectRatio < 1.5) {
-      return 'row-span-2'; // Slightly wide
-    } else {
-      return 'row-span-1'; // Landscape images
+  const columns = Array.from({ length: columnCount }, (_, columnIndex) => {
+    const columnPhotos = photos.filter((_, photoIndex) => photoIndex % columnCount === columnIndex);
+
+    const lastPhotoIsInFirstColumn = (photos.length - 1) % columnCount === 0;
+
+    if (columnCount > 1 && lastPhotoIsInFirstColumn && columnIndex === 0) {
+      return columnPhotos.slice(0, -1);
     }
-  };
+
+    if (columnCount > 1 && lastPhotoIsInFirstColumn && columnIndex === columnCount - 1) {
+      return [...columnPhotos, ...photos.slice(-1)];
+    }
+
+    return columnPhotos;
+  });
 
   return (
     <>
-      {/* Photo Grid - Masonry Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[200px]" style={{ gridAutoFlow: 'dense' }}>
-        {photos.map((photo, index) => {
-          const rowSpanClass = getRowSpan(photo.id);
-          
-          return (
-            <div
-              key={photo.id}
-              className={`${rowSpanClass}`}
-            >
-              <div 
-                className="group relative w-full h-full overflow-hidden bg-gray-900 cursor-pointer"
-                onClick={() => openLightbox(index)}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  onLoad={(event) => {
-                    const img = event.currentTarget;
-                    handleImageLoad(photo.id, img.naturalWidth, img.naturalHeight);
-                  }}
-                />
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
-                
-                {/* Photo Title on Hover */}
-                {photo.title && (
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform">
-                    <p className="text-sm font-light tracking-wider uppercase">
-                      {photo.title}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
+      <div className="mx-auto flex max-w-[1800px] gap-[8px] bg-white">
+        {columns.map((column, columnIndex) => (
+          <div key={columnIndex} className="flex min-w-0 flex-1 flex-col gap-[8px]">
+            {column.map((photo) => {
+              const photoIndex = photos.findIndex((item) => item.id === photo.id);
+              const aspectRatio = imageDimensions.get(photo.id)?.aspectRatio ?? 4 / 3;
+
+              return (
+                <button
+                  key={photo.id}
+                  type="button"
+                  aria-label={`Open ${photo.alt}`}
+                  className="group relative block w-full shrink-0 cursor-zoom-in overflow-hidden bg-white text-left"
+                  style={{ aspectRatio }}
+                  onClick={() => openLightbox(photoIndex)}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    onLoad={(event) => {
+                      const img = event.currentTarget;
+                      handleImageLoad(photo.id, img.naturalWidth, img.naturalHeight);
+                    }}
+                  />
+                </button>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
       {/* Lightbox */}

@@ -1,39 +1,30 @@
 import Link from "next/link";
 
-/**
- * Header Component
- * 
- * Shared navigation header used across all pages.
- * Features a fixed position with backdrop blur for a modern glass effect.
- */
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-black/80 backdrop-blur-sm">
-      <nav className="mx-auto h-full max-w-7xl px-6">
-        <div className="flex h-full items-center justify-between">
-          {/* Logo/Site Title */}
-          <Link 
-            href="/" 
-            className="text-xl font-light tracking-wide text-white hover:text-gray-300 transition-colors"
+    <header className="fixed left-0 right-0 top-0 z-50 h-20 bg-white/95 backdrop-blur-sm">
+      <nav className="mx-auto flex h-full max-w-[1800px] items-center justify-between px-4 sm:px-6">
+        <Link
+          href="/"
+          className="text-base font-normal tracking-[0.16em] text-neutral-900 uppercase transition-colors hover:text-neutral-500 sm:text-lg"
+        >
+          Jonathan Mallett Photography
+        </Link>
+
+        <div className="flex items-center gap-6 sm:gap-8">
+          <Link
+            href="/"
+            className="text-xs font-normal tracking-[0.18em] text-neutral-900 uppercase transition-colors hover:text-neutral-500 sm:text-sm"
           >
-            Jonathan Mallett Photography
+            Portfolio
           </Link>
 
-          {/* Navigation Links */}
-          <div className="flex items-center gap-8">
-            <Link 
-              href="/portfolio" 
-              className="text-sm font-light tracking-wider text-white hover:text-gray-300 transition-colors uppercase"
-            >
-              Portfolio
-            </Link>
-            <Link 
-              href="/about" 
-              className="text-sm font-light tracking-wider text-white hover:text-gray-300 transition-colors uppercase"
-            >
-              About
-            </Link>
-          </div>
+          <Link
+            href="/about"
+            className="text-xs font-normal tracking-[0.18em] text-neutral-900 uppercase transition-colors hover:text-neutral-500 sm:text-sm"
+          >
+            About
+          </Link>
         </div>
       </nav>
     </header>
