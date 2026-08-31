@@ -3,7 +3,7 @@
 ## Project Overview
 
 **Site:** Jonathan Mallett Photography Portfolio  
-**Type:** Next.js App Router photography portfolio with category galleries and lightbox  
+**Type:** Next.js App Router photography portfolio with a unified gallery and lightbox
 **Live:** https://jonathanmallett.com  
 **Repository:** https://github.com/jrhmallett/photography-website  
 **Deployment:** Vercel (GitHub-connected deployments)
@@ -75,9 +75,7 @@ Prohibited actions include:
 
 ## Project Structure (Current)
 
-- `app/page.tsx` — Home (hero image)
-- `app/portfolio/page.tsx` — Portfolio category landing
-- `app/portfolio/[category]/page.tsx` — Dynamic category gallery pages
+- `app/page.tsx` — Homepage with the curated portfolio gallery
 - `app/about/page.tsx` — About page
 - `app/layout.tsx` — Root metadata, fonts, analytics, speed insights
 - `components/Header.tsx` — Shared top navigation
@@ -101,32 +99,17 @@ Guidelines:
 
 Implemented features:
 
-- CSS grid with dense packing (`gridAutoFlow: 'dense'`)
-- Runtime orientation detection via image `onLoad`
-- Dynamic row span assignment based on image aspect ratio
-- Hover zoom and optional title reveal
-
-Row span rules (current logic):
-
-| Aspect Ratio | Row Span Class |
-|---|---|
-| `< 0.85` | `row-span-3` |
-| `0.85 – <1.15` | `row-span-2` |
-| `1.15 – <1.5` | `row-span-2` |
-| `>= 1.5` | `row-span-1` |
-
-Grid settings (current classes):
-
-- `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`
-- `gap-6`
-- `auto-rows-[200px]`
-- `gridAutoFlow: 'dense'`
+- Responsive masonry columns with consistent 8px gutters
+- Runtime natural aspect-ratio detection via image `onLoad`
+- Row order preserved across responsive columns
+- Subtle hover zoom without text overlays
 
 Responsive behavior:
 
 - Mobile: 1 column
 - Small/Tablet+: 2 columns (`sm` breakpoint)
 - Desktop: 3 columns (`lg` breakpoint)
+- Wide desktop: 4 columns (`xl` breakpoint)
 
 ### Lightbox Behavior (`components/Lightbox.tsx`)
 
@@ -142,21 +125,20 @@ Note: Lightbox does **not** switch to a separate original-file endpoint; it requ
 
 ## Routing and Content Categories
 
-Available gallery categories:
+The live application has two routes:
 
-- `/portfolio/places`
-- `/portfolio/nature`
-- `/portfolio/sport`
+- `/` — the unified curated portfolio
+- `/about` — biography and contact email
 
-`app/portfolio/[category]/page.tsx` uses a local `categoryData` map and `generateStaticParams()` for static generation of these categories.
+The former `/portfolio` route tree was removed. `/portfolio` and its category URLs return 404. The category folders under `public/photos/` remain for asset organization.
 
 ---
 
 ## Adding New Images (Current Workflow)
 
 1. Add image file to `public/photos/<category>/`.
-2. Add a new photo object in the relevant category array inside `app/portfolio/[category]/page.tsx`.
-3. Place new entries at the **top** of the array if they should appear first.
+2. Add a new photo object to the curated `photos` array inside `app/page.tsx`.
+3. Place the entry where it should appear in the homepage sequence.
 4. Ensure each item has:
    - unique numeric `id`
    - valid `src`
@@ -192,7 +174,6 @@ Never:
 ## Performance Notes
 
 - `next/image` provides responsive delivery and WebP formatting (per `next.config.ts`)
-- Hero image on home page uses `priority` and `quality={75}`
 - Gallery images are lazily loaded by default
 - Lightbox loads eagerly only after user interaction
 

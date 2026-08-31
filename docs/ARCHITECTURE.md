@@ -1,6 +1,6 @@
 # Photography Website - Architecture Documentation
 
-**Last Updated:** August 1, 2026  
+**Last Updated:** August 31, 2026  
 **Project:** Jonathan Mallett Photography Portfolio  
 **Tech Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS 4
 
@@ -36,22 +36,9 @@ Core architectural priorities:
 
 ### Primary Routes
 
-- `/` → home hero page (`app/page.tsx`)
-- `/portfolio` → category landing (`app/portfolio/page.tsx`)
-- `/portfolio/[category]` → category gallery (`app/portfolio/[category]/page.tsx`)
+- `/` → unified curated portfolio gallery (`app/page.tsx`)
 - `/about` → about/profile page (`app/about/page.tsx`)
-
-### Category Route Generation
-
-`app/portfolio/[category]/page.tsx` defines `generateStaticParams()` for:
-
-- `places` (previously travel)
-- `nature` (previously wildlife)
-- `sport`
-
-Unknown categories are handled with `notFound()`.
-
-For valid categories, gallery content is assembled server-side from image filenames in `public/photos/<category>/`.
+- `/portfolio` and its former category routes are intentionally removed and return 404.
 
 ---
 
@@ -67,23 +54,9 @@ For valid categories, gallery content is assembled server-side from image filena
 
 `components/GalleryGrid.tsx` responsibilities:
 
-- render masonry-style CSS grid
+- render responsive masonry columns with a consistent 8px gutter
 - compute image aspect ratio at runtime via image `onLoad`
-- assign row-span classes to reduce whitespace
 - open/close lightbox and handle next/previous state
-
-`app/portfolio/[category]/page.tsx` responsibilities:
-
-- read category image directories using Node `fs/promises`
-- parse filename conventions into grouped sections
-- sort each section's photos by sequence number ascending
-- render sub-heading + masonry grid for each group
-
-Current grid behavior:
-
-- `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`
-- `auto-rows-[200px]`
-- `gridAutoFlow: 'dense'`
 
 ### Lightbox System
 
@@ -100,9 +73,7 @@ The lightbox requests the same image source path in a larger view; it does not s
 
 ## Content Model
 
-Category metadata (title/description/folder) is stored in a local `categoryData` object inside `app/portfolio/[category]/page.tsx`.
-
-Photo items are generated dynamically by parsing filenames from the filesystem.
+The homepage contains a curated list of 33 photo objects in `app/page.tsx`. Each object has a stable numeric ID, an image source, and descriptive alt text. The selected assets remain organized by category under `public/photos/`, but the homepage presents them as one portfolio sequence.
 
 Current filename conventions:
 
@@ -110,19 +81,7 @@ Current filename conventions:
 - Sport: `sport-occasion-year-number.jpg`
 - Nature: `nature-animal-number.jpg`
 
-Section grouping:
-
-- Places grouped by country (ordered by each country's first file number, ascending)
-- Sport grouped by occasion + year (year descending, then occasion)
-- Nature grouped by animal (alphabetical)
-
-Each photo entry uses:
-
-- numeric `id`
-- `src` under `public/photos/<category>/`
-- `alt`
-
-This keeps the project static and straightforward to maintain without a CMS while allowing content updates through file additions/renames alone.
+The portfolio is intentionally maintained in code rather than through a CMS so its selection and order remain explicit and reviewable.
 
 ---
 
@@ -130,8 +89,6 @@ This keeps the project static and straightforward to maintain without a CMS whil
 
 - `next/image` is used across the site for responsive optimization
 - `next.config.ts` enables WebP output and explicit image/device sizes
-- Home hero image is prioritized and uses configured quality (`quality={75}`)
-- Home route uses a viewport-fitted layout to avoid page scroll
 - Gallery images remain lazy-loaded by default
 - Lightbox image loads eagerly only when opened
 

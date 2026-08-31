@@ -1,5 +1,7 @@
 # Complete Deployment Walkthrough - Option C
 
+> **Current implementation (August 31, 2026):** The next deployment should verify the unified homepage gallery at `/`, the About page at `/about`, and a 404 response at `/portfolio`. The older hero and category-gallery checks below are historical and no longer describe the application.
+
 **Goal:** Domain → Vercel Account → Deploy with Custom Domain  
 **Estimated Time:** 15 minutes (+ 24-48 hrs for domain propagation)  
 **Cost:** $10-15/year for domain, $0/month hosting
@@ -253,22 +255,13 @@ Visit each page and verify:
 
 **Home Page** (`https://jonathanmallett.com`)
 - [ ] Page loads quickly (< 3 seconds)
-- [ ] Hero image displays properly
-- [ ] Text is readable and styled correctly
-- [ ] No vertical scroll required on standard desktop viewport
+- [ ] Curated gallery displays with consistent spacing
+- [ ] Images retain their natural proportions without cropping
+- [ ] Portfolio and About navigation links work
 
-**Portfolio** (`/portfolio`)
-- [ ] 3 category tiles visible (Nature, Places, Sport)
-- [ ] Images load correctly with dark overlay
-- [ ] Titles centered on tiles
-- [ ] Hover effects work (darker overlay)
-- [ ] Categories are clickable (cursor changes to pointer)
-
-**Category Gallery** (`/portfolio/places`)
-- [ ] Images display in grid (varies by screen size)
-- [ ] All expected photos show (24-33 depending on category)
-- [ ] Hover effect shows subtle darkening
-- [ ] Images load with different aspect ratios
+**Removed Portfolio Route** (`/portfolio`)
+- [ ] Returns 404
+- [ ] Does not redirect to the homepage
 
 **Lightbox** (Click any gallery image)
 - [ ] Modal opens with full-size image
@@ -298,7 +291,7 @@ Visit each page and verify:
 3. Refresh page (Ctrl+R)
 4. Check:
    - [ ] Total load time < 3 seconds
-   - [ ] Hero image < 1MB
+   - [ ] Gallery images load without 404 errors
    - [ ] CSS/JS files load quickly
    - [ ] No 404 errors (red items)
    - [ ] No failed requests

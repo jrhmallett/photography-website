@@ -1,6 +1,6 @@
 # Photography Website - Features
 
-**Last Updated:** May 16, 2026
+**Last Updated:** August 31, 2026
 
 This document tracks what is currently implemented in the photography portfolio and what remains optional future work.
 
@@ -10,11 +10,9 @@ This document tracks what is currently implemented in the photography portfolio 
 
 The site is a minimal, photography-first portfolio with:
 
-- Hero landing page
-- Portfolio category landing page
-- Three category galleries (`places`, `nature`, `sport`)
+- Curated homepage portfolio gallery with 33 photographs
 - About page
-- Masonry-style gallery layout
+- Responsive masonry columns with natural image proportions
 - Lightbox with keyboard navigation
 
 ---
@@ -31,26 +29,23 @@ The site is a minimal, photography-first portfolio with:
 
 ### 2) Routing and Pages
 
-- `/` home page with viewport-fitted hero image (no vertical page scroll)
-- `/portfolio` category selection grid
-- `/portfolio/[category]` dynamic category page
+- `/` unified portfolio gallery
 - `/about` profile and biography page
-- `notFound()` handling for invalid categories
+- `/portfolio` and its former category routes are removed and return 404
 
-### 3) Portfolio Category System
+### 3) Portfolio Gallery
 
-- Category cards on portfolio landing page
-- Static category generation via `generateStaticParams()`
-- Category data stored in local `categoryData` map
-- Ordered, curated image arrays per category
+- Curated photo list with explicit display order
+- Category folders retained for asset organization
+- Portfolio navigation link returns to the homepage
 
 ### 4) Gallery Layout and Rendering
 
 - `GalleryGrid` reusable component
-- Dense CSS grid masonry effect
+- Responsive masonry columns
 - Runtime image aspect-ratio detection via image `onLoad`
-- Dynamic row-span assignment for portrait/landscape variation
-- Hover zoom effect and optional title reveal
+- Natural image proportions without cropping
+- Consistent 8px gutters between images
 
 ### 5) Lightbox Interaction
 
@@ -66,14 +61,14 @@ The site is a minimal, photography-first portfolio with:
 - `next/image` used throughout key surfaces
 - WebP output enabled in `next.config.ts`
 - Gallery images lazy-loaded by default
-- High-priority hero image loading on home page
+- Responsive image sizing through `next/image`
 
 ### 7) Accessibility and Usability
 
 - Alt text for image assets
 - Keyboard-accessible lightbox controls
 - Semantic page structure with clear headings
-- High-contrast dark UI with readable typography
+- Light monochrome UI with readable typography
 
 ### 8) Analytics and Deployment
 
@@ -98,7 +93,7 @@ Current tests in `tests/` cover:
 
 - Setup and documentation checks
 - Header component behavior
-- Core pages (`home`, `portfolio`, `about`, category gallery)
+- Core pages (`home`, `about`)
 
 Use:
 

@@ -1,6 +1,8 @@
 # LIVE DEPLOYMENT - REAL-TIME WALKTHROUGH
 ## jonathanmallett.com on Google Domains + Vercel
 
+> **Current implementation (August 31, 2026):** The pending deployment is a unified 33-photo gallery at `/` with an About page at `/about`. The former `/portfolio` route tree has been removed locally and must return 404 after deployment. Replace any old hero or category-page checks below with the current verification checklist in this note.
+
 **Start Time:** Now  
 **Expected Duration:** 15 minutes to live  
 **Total Cost:** ~$12/year (domain only)
@@ -162,11 +164,12 @@ After deployment completes:
 ### 4.2 Test It Works
 
 1. Click through:
-   - [ ] Home page loads with hero image
-   - [ ] Portfolio shows 3 categories (Nature, Places, Sport)
-   - [ ] Click a category to see gallery
+   - [ ] Home page loads with the curated gallery
+   - [ ] Images retain their proportions and consistent spacing
    - [ ] Click an image to open lightbox
+   - [ ] Lightbox close and keyboard navigation work
    - [ ] Click "About" to see profile
+   - [ ] `/portfolio` returns 404 without a redirect
    - [ ] All responsive (shrink window)
 
 ✅ **CHECKPOINT: Site works perfectly on Vercel!**
@@ -322,9 +325,8 @@ All should work!
 
 **Your New URLs:**
 - Portfolio: `https://jonathanmallett.com`
-- Portfolio: `https://jonathanmallett.com/portfolio`
+- Legacy portfolio route: `https://jonathanmallett.com/portfolio` (expected 404)
 - About: `https://jonathanmallett.com/about`
-- Gallery: `https://jonathanmallett.com/portfolio/[category]`
 
 **Management Dashboards:**
 - Vercel: https://vercel.com/dashboard

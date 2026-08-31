@@ -23,12 +23,11 @@ Primary goals:
 
 ## Current Features
 
-- Next.js 16 App Router project with static category generation via `generateStaticParams`
-- Hero landing page with high-quality featured image
-- Portfolio category landing page and three gallery routes (`places`, `nature`, `sport`)
-- Masonry-style gallery grid with runtime aspect-ratio row spanning
+- Next.js 16 App Router project with an image-first homepage
+- 33-photo curated portfolio presented in responsive masonry columns
+- Complete-image previews with consistent 8px spacing
 - Lightbox modal with keyboard navigation (`Escape`, `ArrowLeft`, `ArrowRight`)
-- Shared header navigation across pages
+- Shared light monochrome header with Portfolio and About links
 - About page with photographer bio and contact email
 - `@vercel/analytics` and `@vercel/speed-insights` enabled in root layout
 - Jest + React Testing Library test suite
@@ -76,8 +75,6 @@ app/
       layout.tsx
       page.tsx
       about/page.tsx
-      portfolio/page.tsx
-      portfolio/[category]/page.tsx
 components/
       Header.tsx
       GalleryGrid.tsx
@@ -97,6 +94,8 @@ docs/
 - WebP output is configured in `next.config.ts`
 - Gallery images lazy-load by default
 - Lightbox image loads eagerly only after user interaction
+- The curated photo selection and order are maintained in `app/page.tsx`
+- The former `/portfolio` route tree has been removed and returns 404
 
 ---
 
@@ -137,5 +136,5 @@ npx vercel --prod
 
 ---
 
-**Last Updated:** May 16, 2026
+**Last Updated:** August 31, 2026
 

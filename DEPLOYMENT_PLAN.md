@@ -1,5 +1,7 @@
 # Photography Website - Deployment Plan
 
+> **Current implementation (August 31, 2026):** The local code uses `/` as the unified 33-photo portfolio gallery and `/about` as its secondary route. The former `/portfolio` route tree has been removed locally and will return 404 after the next deployment. The legacy checklist text below is historical planning material; use the current verification checklist in this note when deploying the redesign.
+
 **Current Status:** Production Ready ✅  
 **Build Status:** Clean (10 routes prerendered)  
 **Test Coverage:** 98.8% passing  
@@ -186,15 +188,14 @@ git push origin main
 **5.1 Verify Site Works**
 ```
 Visit: https://your-domain.com (or .vercel.app)
-- [ ] Home page loads with hero image
+- [ ] Home page loads with the curated gallery
 - [ ] Navigation links work (Portfolio, About)
-- [ ] Portfolio shows 3 categories (Nature, Places, Sport)
-- [ ] Click category to view gallery
+- [ ] Images retain their proportions and consistent spacing
 - [ ] Click image to open lightbox
 - [ ] Lightbox navigation works (⬅️ ➡️)
 - [ ] Close lightbox (X button or ESC key)
 - [ ] About page loads with bio
-- [ ] Footer links work
+- [ ] `/portfolio` returns 404 without a redirect
 - [ ] Mobile view responsive (test on phone/tablet)
 ```
 

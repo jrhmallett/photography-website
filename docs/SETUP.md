@@ -1,7 +1,7 @@
 
 # Photography Website - Setup Guide
 
-**Last Updated:** May 16, 2026
+**Last Updated:** August 31, 2026
 
 This guide explains how to run and validate the Jonathan Mallett Photography portfolio locally.
 
@@ -102,8 +102,6 @@ app/
   loading.tsx
   not-found.tsx
   about/page.tsx
-  portfolio/page.tsx
-  portfolio/[category]/page.tsx
 components/
   Header.tsx
   GalleryGrid.tsx
@@ -121,15 +119,15 @@ package.json
 
 ## Adding New Images
 
-1. Add image files to `public/photos/<category>/`
-2. Add photo objects to the matching category in `app/portfolio/[category]/page.tsx`
-3. Include `id`, `src`, and descriptive `alt` (`title` optional)
-4. Place new entries at the top if they should display first
+1. Add the image file to the appropriate `public/photos/<category>/` folder.
+2. Add a photo object to the curated `photos` list in `app/page.tsx`.
+3. Include a unique `id`, the exact `src`, and descriptive `alt` text.
+4. Place the entry where it should appear in the homepage sequence.
 
 Example photo object:
 
 ```ts
-{ id: 101, src: "/photos/places/new-image.jpg", alt: "Description", title: "Optional Title" }
+{ id: 34, src: "/photos/places/new-image.jpg", alt: "Description" }
 ```
 
 ---
@@ -181,6 +179,8 @@ Typical flow:
 ```text
 Local changes → Push to GitHub → Vercel preview/production build
 ```
+
+The final application routes are `/` and `/about`. The removed `/portfolio` route is expected to return 404.
 
 ---
 

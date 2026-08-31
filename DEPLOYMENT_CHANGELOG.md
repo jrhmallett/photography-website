@@ -14,11 +14,9 @@ Use this file to record each production deployment.
 - Tag:
 - Summary of changes:
 - Verification checklist:
-  - Home page loads
-  - Portfolio categories load
-  - Sport gallery image paths correct
-  - Places gallery has no blank tiles
-  - Hero image viewport behavior verified
+  - Home gallery loads
+  - About page loads
+  - Lightbox interaction works
 - Rollback plan:
 - Notes:
 
@@ -36,8 +34,8 @@ Use this file to record each production deployment.
 - Tag: v2026.05.16
 - Summary of changes:
   - Updated Sport image mapping to use `sport-ls.jpg`
-  - Removed stale Places image paths and mapped missing slot to `travel-117.jpg`
-  - Refined homepage hero to viewport-fit without requiring page scroll
+  - Removed stale Places image paths and corrected the image mapping
+  - Refined the homepage hero to viewport-fit without requiring page scroll
   - Updated project documentation to match current categories, image paths, and deployment flow
 - Verification checklist:
   - Home page loads
@@ -49,3 +47,26 @@ Use this file to record each production deployment.
   - Re-deploy previous Vercel production deployment from dashboard if needed
 - Notes:
   - Deployment metadata finalized after push to origin/main.
+
+---
+
+## 2026-08-31 (pending deployment)
+
+- Date (UTC): 2026-08-31
+- Deployed by: GitHub Copilot + Jonathan Mallett
+- Environment: prepared locally; deploy after push to `main`
+- Domain: https://jonathanmallett.com
+- Git branch: main
+- Summary of changes:
+  - Replaced the hero homepage with a curated 33-photo portfolio gallery
+  - Added responsive masonry columns with natural image proportions and 8px gutters
+  - Added a light monochrome lightbox and Portfolio link back to `/`
+  - Removed the legacy `/portfolio` route tree; the next deployment will make the route return 404
+- Verification checklist:
+  - Home gallery loads with the curated sequence
+  - About page loads with readable light-theme styling
+  - Lightbox opens, closes, and supports keyboard navigation
+  - `/portfolio` returns 404 without a redirect after deployment
+  - Production build and full test suite pass
+- Rollback plan:
+  - Re-deploy the previous Vercel production deployment from the dashboard if needed
