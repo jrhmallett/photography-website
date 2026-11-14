@@ -107,7 +107,7 @@ Implemented features:
 
 - Homepage and collection galleries use `balancedLayout`, with one column below the `md` breakpoint and two equal columns at `md` and above.
 - Image order follows the configured sequence; intrinsic width and height reserve space and preserve proportions without cropping.
-- Portrait images are centered and limited to `min(75vh, 600px)` in height; landscapes and squares use the available column width.
+- On the homepage, portraits and squares are centered and limited to `min(75vh, 500px)` in height; landscapes use the available column width. In collection galleries, portraits are limited to `min(75vh, 600px)`, while landscapes and squares use the column width.
 - Homepage uses the compact spacing variant; collection galleries use the standard gaps.
 - Gallery buttons open the lightbox and have a subtle hover opacity change.
 

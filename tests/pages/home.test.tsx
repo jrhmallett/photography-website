@@ -47,14 +47,25 @@ describe('Home Page', () => {
     expect(galleryImages.map((image) => image.getAttribute('src'))).toEqual(homePhotos.map((photo) => photoImageSrc(photo.src)));
   });
 
+  test('shows the selected Motorsport photographs in order', () => {
+    render(<Home />);
+    const sources = screen.getAllByRole('img').map((image) => image.getAttribute('src'));
+    expect(sources.filter((src) => src?.startsWith('/photos/sport/'))).toEqual([
+      '/photos/sport/Motorsport2.jpg',
+      '/photos/sport/Motorsport3.jpg',
+      '/photos/sport/Motorsport4.jpg',
+      '/photos/sport/Motorsport8.jpg',
+    ].map(photoImageSrc));
+  });
+
   test('uses the balanced layout for all homepage photos', () => {
     render(<Home />);
     const figures = screen.getAllByRole('figure');
-    expect(figures[0].parentElement).toHaveClass('md:grid-cols-2');
+    expect(figures[0].parentElement).toHaveClass('md:grid-cols-2', 'gap-x-4', 'gap-y-4', 'md:gap-x-5', 'lg:gap-x-6', 'lg:gap-y-5');
     homePhotos.forEach((photo, index) => {
       expect(figures[index]).not.toHaveClass('md:col-span-10');
-      if (photo.height > photo.width) {
-        expect(figures[index]).toHaveClass('max-w-[calc(min(75vh,600px)*var(--photo-ratio))]');
+      if (photo.height >= photo.width) {
+        expect(figures[index]).toHaveClass('max-w-[calc(min(75vh,500px)*var(--photo-ratio))]');
         expect(figures[index].style.getPropertyValue('--photo-ratio')).toBe(String(photo.width / photo.height));
       } else {
         expect(figures[index]).not.toHaveClass('justify-self-center');

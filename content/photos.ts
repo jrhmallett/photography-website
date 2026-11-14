@@ -125,7 +125,7 @@ export const photoCatalog: Photo[] = [
 ];
 
 // Reorder these IDs to change the homepage sequence.
-export const homePhotoIds = [40, 39, 41, 42, 49, 34, 35, 36, 37, 44, 48, 46, 47];
+export const homePhotoIds = [40, 39, 41, 42, 49, 34, 35, 36, 37, 97, 98, 99, 102];
 // These homepage images use a shared maximum displayed height for balance.
 export const homeBalancedPhotoIds = [49, 36, 37];
 export const workPhotoIds = [

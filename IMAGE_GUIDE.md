@@ -40,7 +40,7 @@ The overview previews and homepage sequence are curated independently of the col
 
 ## Layout and Delivery
 
-The homepage and collection galleries show one column below `md` and two equal columns at `md` and above. Portraits are centered with a maximum display height of `min(75vh, 600px)`; landscapes and squares use the available column width. Images keep their original aspect ratios without cropping, and the lightbox provides a larger view.
+The homepage and collection galleries show one column below `md` and two equal columns at `md` and above. Homepage portraits and squares are centered with a maximum display height of `min(75vh, 500px)`; collection portraits are limited to `min(75vh, 600px)`. Landscapes and collection squares use the available column width. Images keep their original aspect ratios without cropping, and the lightbox provides a larger view.
 
 `next/image` supplies responsive images with WebP output configured in `next.config.ts`. Gallery photos lazy-load by default; the lightbox image loads eagerly after opening. JPG/JPEG is preferred for photographs; aim for good visual quality and efficient file sizes without changing artistic intent.
 

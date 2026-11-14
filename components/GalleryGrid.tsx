@@ -20,12 +20,12 @@ export default function GalleryGrid({ photos, compact = false, balancedPhotoIds 
 
   return (
     <>
-      <div className={`grid grid-cols-1 items-center ${balancedLayout ? 'md:grid-cols-2' : 'md:grid-cols-12'} ${compact ? 'gap-x-5 gap-y-6 sm:gap-y-8 md:gap-x-6 md:gap-y-8 lg:gap-x-8 lg:gap-y-10' : 'gap-x-6 gap-y-8 sm:gap-y-12 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12'}`}>
+      <div className={`grid grid-cols-1 items-center ${balancedLayout ? 'md:grid-cols-2' : 'md:grid-cols-12'} ${compact ? 'gap-x-4 gap-y-4 md:gap-x-5 lg:gap-x-6 lg:gap-y-5' : 'gap-x-6 gap-y-8 sm:gap-y-12 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12'}`}>
         {photos.map((photo, index) => (
           <figure
             key={photo.id}
-            className={`${balancedLayout ? '' : placements[index % placements.length]} ${balancedLayout && photo.height > photo.width ? 'w-full max-w-[calc(min(75vh,600px)*var(--photo-ratio))] justify-self-center' : balancedPhotoIds.includes(photo.id) ? 'w-full max-w-[calc(min(70vw,440px)*var(--photo-ratio))] justify-self-center' : ''}`}
-            style={(balancedLayout && photo.height > photo.width) || balancedPhotoIds.includes(photo.id) ? { '--photo-ratio': photo.width / photo.height } as React.CSSProperties : undefined}
+            className={`${balancedLayout ? '' : placements[index % placements.length]} ${balancedLayout && compact && photo.height >= photo.width ? 'w-full max-w-[calc(min(75vh,500px)*var(--photo-ratio))] justify-self-center' : balancedLayout && photo.height > photo.width ? 'w-full max-w-[calc(min(75vh,600px)*var(--photo-ratio))] justify-self-center' : balancedPhotoIds.includes(photo.id) ? 'w-full max-w-[calc(min(70vw,440px)*var(--photo-ratio))] justify-self-center' : ''}`}
+            style={(balancedLayout && (photo.height > photo.width || (compact && photo.height === photo.width))) || balancedPhotoIds.includes(photo.id) ? { '--photo-ratio': photo.width / photo.height } as React.CSSProperties : undefined}
           >
             <button type="button" aria-label={`Open photograph: ${photo.alt}`} className="group block w-full cursor-zoom-in overflow-hidden bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-4" onClick={() => setLightboxIndex(index)}>
               <Image src={photoImageSrc(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 767px) 100vw, (max-width: 1200px) 75vw, 1100px" className="h-auto w-full transition-opacity duration-300 group-hover:opacity-90" />

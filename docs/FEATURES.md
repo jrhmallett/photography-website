@@ -47,7 +47,7 @@ The site is a minimal, photography-first portfolio with:
 - `GalleryGrid` reusable component
 - Homepage and collection galleries use one column below `md`, two equal columns at `md` and above
 - Intrinsic dimensions from the photo catalogue reserve space before loading
-- Portrait height is capped at `min(75vh, 600px)`; landscapes and squares use the available column width
+- Homepage portraits and squares are capped at `min(75vh, 500px)`; collection portraits are capped at `min(75vh, 600px)` and collection squares and landscapes use the available column width
 - Natural image proportions without cropping
 - Consistent responsive spacing, with a compact homepage variant
 

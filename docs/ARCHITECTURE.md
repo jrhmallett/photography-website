@@ -59,7 +59,7 @@ Core architectural priorities:
 
 - render one column below `md` and two equal columns at `md` and above for the homepage and collection galleries
 - use catalogue width and height to reserve space and preserve aspect ratios without cropping
-- limit portrait height to `min(75vh, 600px)` and center portraits; landscapes and squares use the available column width
+- center and limit homepage portraits and squares to `min(75vh, 500px)` in height; collection portraits are limited to `min(75vh, 600px)` and collection squares and landscapes use the column width
 - retain the supplied order and use compact spacing on the homepage
 - open/close lightbox and handle next/previous state
 

@@ -112,7 +112,7 @@ Edit `content/collections.ts` to change collection IDs, URL slugs, titles and op
 
 Collection galleries and previews are explicitly curated; filesystem changes do not update them automatically. Places is grouped New York, Marrakech, UK, Italy, Portugal, Netherlands; New York 1 follows New York 4 and Marrakech 2 follows Marrakech 9. Nature is grouped Birds, Landscape, Doug, and Motorsport follows its current numbers. Previews and the homepage have independent selections and ordering. The current galleries contain 25 Places, 21 Nature and 16 Motorsport photos.
 
-Homepage and collection galleries use one column below the `md` breakpoint and two equal columns at `md` and above. Portraits are centered with a maximum height of `min(75vh, 600px)`; landscape and square images use the available column width. Images retain their proportions and are not cropped. The homepage uses tighter spacing than the collection pages.
+Homepage and collection galleries use one column below the `md` breakpoint and two equal columns at `md` and above. Homepage portraits and squares are centered and limited to `min(75vh, 500px)` in height to balance mixed-orientation rows. Collection portraits are limited to `min(75vh, 600px)`; collection squares and landscapes use the available column width. Images retain their proportions and are not cropped. The homepage uses tighter spacing than the collection pages.
 
 ## Optional Stories
 
