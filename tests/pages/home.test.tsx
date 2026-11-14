@@ -6,6 +6,7 @@
 
 import { render, screen } from '@testing-library/react';
 import Home from '@/app/page';
+import { homePhotos, photoImageSrc } from '@/content/photos';
 
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
@@ -42,9 +43,30 @@ describe('Home Page', () => {
     render(<Home />);
 
     const galleryImages = screen.getAllByRole('img');
-    expect(galleryImages).toHaveLength(33);
-    expect(galleryImages[0]).toHaveAttribute('src', '/photos/places/places-marrakech-7.jpg');
-    expect(galleryImages[32]).toHaveAttribute('src', '/photos/nature/nature-birds-31.jpg');
+    expect(galleryImages).toHaveLength(13);
+    expect(galleryImages.map((image) => image.getAttribute('src'))).toEqual(homePhotos.map((photo) => photoImageSrc(photo.src)));
+  });
+
+  test('uses the balanced layout for all homepage photos', () => {
+    render(<Home />);
+    const figures = screen.getAllByRole('figure');
+    expect(figures[0].parentElement).toHaveClass('md:grid-cols-2');
+    homePhotos.forEach((photo, index) => {
+      expect(figures[index]).not.toHaveClass('md:col-span-10');
+      if (photo.height > photo.width) {
+        expect(figures[index]).toHaveClass('max-w-[calc(min(75vh,600px)*var(--photo-ratio))]');
+        expect(figures[index].style.getPropertyValue('--photo-ratio')).toBe(String(photo.width / photo.height));
+      } else {
+        expect(figures[index]).not.toHaveClass('justify-self-center');
+      }
+    });
+  });
+
+  test('opens with selected photography without introductory or approach sections', () => {
+    render(<Home />);
+    expect(screen.getByRole('heading', { name: /selected photography/i, level: 1 })).toHaveClass('sr-only');
+    expect(screen.queryByText(/looking a little closer/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/photographic approach/i)).not.toBeInTheDocument();
   });
 
   test('has main element with proper semantic HTML', () => {
@@ -81,11 +103,12 @@ describe('Home Page Accessibility', () => {
     });
   });
 
-  test('links Portfolio back to the homepage', () => {
+  test('links Portfolio to the work page without an extra gallery link', () => {
     render(<Home />);
 
-    const portfolioLink = screen.getByRole('link', { name: /^portfolio$/i });
-    expect(portfolioLink).toHaveAttribute('href', '/');
+    const workLink = screen.getByRole('link', { name: /^portfolio$/i });
+    expect(workLink).toHaveAttribute('href', '/work');
+    expect(screen.queryByRole('link', { name: /view all work/i })).not.toBeInTheDocument();
   });
 
   test('navigation links are keyboard accessible', () => {

@@ -167,6 +167,20 @@ describe('Git Repository', () => {
 });
 
 describe('Documentation Quality', () => {
+  test('image guide documents explicit photo curation and cache revisions', () => {
+    const content = fs.readFileSync(path.join(process.cwd(), 'IMAGE_GUIDE.md'), 'utf-8');
+    expect(content).toContain('does not automatically discover or order files');
+    expect(content).toContain('photoCatalog');
+    expect(content).toContain('previewPhotoIds');
+    expect(content).toContain('photoRevision');
+    expect(content).not.toContain('No manual image list updates are required');
+  });
+
+  test.each(['DEPLOYMENT_LIVE.md', 'DEPLOYMENT_PLAN.md', 'DEPLOYMENT_STEPS.md'])('%s is labeled as historical', (file) => {
+    const content = fs.readFileSync(path.join(process.cwd(), file), 'utf-8');
+    expect(content.slice(0, 500)).toMatch(/Historical.*not current deployment guidance/i);
+  });
+
   test('All markdown files have proper headings', () => {
     const docFiles = [
       'README.md',

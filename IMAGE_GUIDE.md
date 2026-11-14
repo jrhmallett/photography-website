@@ -1,118 +1,57 @@
 # Photography Website - Image Guide
 
-This guide documents the current image structure used by the live site.
+**Last Updated:** November 14, 2026
 
-## Quick Checklist
+All photographs are copyrighted by Jonathan Mallett and are provided only for display on this website. Do not scrape, export or redistribute them, use them for AI training, or create derivatives without approval.
 
-- [ ] Home page hero image
-- [ ] Profile photo for About page
-- [ ] 3 category cover images (Sport, Nature, Places)
-- [ ] Sport gallery images following filename convention
-- [ ] Nature gallery images following filename convention
-- [ ] Places gallery images following filename convention
+## Image Locations
 
-## Required Core Images
+- `public/photos/places/` — Places collection
+- `public/photos/nature/` — Nature collection
+- `public/photos/sport/` — Motorsport collection
+- `public/photos/about/profile.jpg` — About page portrait
 
-### 1) Hero Image (Home Page)
-Location: `/public/photos/hero.jpg`
+The homepage is a curated gallery, not a separate hero image. Portfolio overview images are selected from the photo catalogue; no category cover files are required.
 
-- Purpose: Featured image on the homepage
-- Recommended dimensions: 1920x1080 or larger
-- Format: JPG
+## Adding or Replacing a Photograph
 
-### 2) Profile Image (About Page)
-Location: `/public/photos/about/profile.jpg`
+The site **does not automatically discover or order files**. Configure each selection explicitly:
 
-- Purpose: Photographer portrait on About page
-- Recommended dimensions: 800x800 or larger
-- Format: JPG
+1. Add the file to the appropriate category directory. Keep the exact spelling and extension case in its path.
+2. Add an entry to `photoCatalog` in `content/photos.ts` with a unique numeric `id`, `src`, descriptive `alt`, and the image's intrinsic `width` and `height` in pixels. An optional `caption` is supported.
+3. Add its ID wherever it should appear: `homePhotoIds` in `content/photos.ts`, and/or the relevant `previewPhotoIds` and `photoIds` in `content/collections.ts`. These are separate ordered selections.
+4. If replacing a file without changing its name, update the dimensions when needed and change `photoRevision` in `content/photos.ts`. This changes the URLs used by `next/image` and prevents stale browser or image-optimizer cache entries. `next.config.ts` uses the same revision in its local image patterns.
+5. For a removed or renamed file, update every affected live selection or catalogue path. A file can be retained in the catalogue for historical reference, but must not be referenced by an active selection if it is absent.
+6. Run `npm test` and `npm run build`, and verify the affected galleries and lightbox locally. Folder changes alone do not modify photo order or selections.
 
-### 3) Portfolio Category Cover Images
-Location: `/public/photos/categories/`
+Example entry (choose an unused ID and actual dimensions):
 
-- `nature-ls.jpg`
-- `places-ls.jpg`
-- `sport-ls.jpg`
-
-Notes:
-- These are shown on `/portfolio`
-- `sport-ls.jpg` is the Sport category cover image on `/portfolio`
-
-## Gallery Image Directories
-
-### Sport Gallery
-Location: `/public/photos/sport/`
-
-- Required naming pattern: `sport-occasion-year-number.jpg`
-- Example: `sport-silverstone-2026-1.jpg`
-- Grouping behavior on `/portfolio/sport`:
-	- Sub-heading per unique `occasion + year` (for example `Silverstone 2026`)
-	- Photos under each sub-heading sorted by `number` ascending (`1, 2, 3, ...`)
-	- Section order is newest year first, then occasion name
-
-### Nature Gallery
-Location: `/public/photos/nature/`
-
-- Required naming pattern: `nature-animal-number.jpg`
-- Example: `nature-birds-1.jpg`
-- Grouping behavior on `/portfolio/nature`:
-	- Sub-heading per unique `animal`
-	- Photos under each sub-heading sorted by `number` ascending (`1, 2, 3, ...`)
-	- Animal groups are displayed alphabetically
-
-### Places Gallery
-Location: `/public/photos/places/`
-
-- Required naming pattern: `places-country-number.jpg`
-- Example: `places-switzerland-1.jpg`
-- Grouping behavior on `/portfolio/places`:
-	- Sub-heading per unique `country`
-	- Photos under each sub-heading sorted by `number` ascending (`1, 2, 3, ...`)
-	- Country groups are ordered by the first number found for that country (ascending)
-
-## Updating Gallery Content
-
-Gallery pages now read the file system automatically from these folders:
-
-- `public/photos/places/`
-- `public/photos/sport/`
-- `public/photos/nature/`
-
-No manual image list updates are required as long as filenames follow the conventions above.
-
-Implementation file:
-
-- `app/portfolio/[category]/page.tsx`
-
-## File Naming Rules
-
-- Filenames are case-sensitive
-- Use `.jpg` for photographic assets
-- Keep names stable once published to avoid cache confusion
-- Keep numeric suffixes contiguous when possible for cleaner sequencing
-
-## Local Verification Checklist
-
-Run the site locally:
-
-```bash
-npm run dev
+```ts
+{ id: 107, src: '/photos/places/new-image.jpg', alt: 'Description of the photograph', width: 2400, height: 1600 }
 ```
 
-Check these routes:
+## Current Collection Order
 
-- `http://localhost:3000`
-- `http://localhost:3000/portfolio`
-- `http://localhost:3000/portfolio/sport`
-- `http://localhost:3000/portfolio/nature`
-- `http://localhost:3000/portfolio/places`
+- **Places:** New York, Marrakech, UK, Italy, Portugal, Netherlands. Within groups, images follow their numbers except New York 1 immediately follows New York 4 and Marrakech 2 immediately follows Marrakech 9.
+- **Nature:** Birds, Landscape, Doug, with images in number order within each group.
+- **Motorsport:** current image numbers in ascending order.
 
-If an image is blank:
+The overview previews and homepage sequence are curated independently of the collection galleries. Renaming or renumbering photos can change which image a selected path identifies; review affected selections and update alt text where needed.
 
-1. Confirm file exists in `public/photos/...`
-2. Confirm filename matches the category naming pattern
-3. Hard refresh browser (`Cmd+Shift+R`)
+## Layout and Delivery
 
-## Last Updated
+The homepage and collection galleries show one column below `md` and two equal columns at `md` and above. Portraits are centered with a maximum display height of `min(75vh, 600px)`; landscapes and squares use the available column width. Images keep their original aspect ratios without cropping, and the lightbox provides a larger view.
 
-August 1, 2026
+`next/image` supplies responsive images with WebP output configured in `next.config.ts`. Gallery photos lazy-load by default; the lightbox image loads eagerly after opening. JPG/JPEG is preferred for photographs; aim for good visual quality and efficient file sizes without changing artistic intent.
+
+## Local Verification
+
+Start the site with `npm run dev`, or use `npm run build` followed by `npm run start` for a production-mode check. Verify the homepage and the appropriate collection pages:
+
+- `/work` — collection previews
+- `/work/people-and-places` — Places
+- `/work/land-and-environment` — Nature
+- `/work/movement-and-action` — Motorsport
+- `/about` — profile image
+
+If an image is missing, check the exact filename, catalogue path, active selection and dimensions. After replacing a file under the same name, confirm `photoRevision` was changed and refresh the browser. The former `/portfolio` routes are no longer implemented.

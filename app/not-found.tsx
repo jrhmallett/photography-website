@@ -25,7 +25,7 @@ export default function NotFound() {
             Go Home
           </Link>
           <Link
-            href="/portfolio"
+            href="/work"
             className="px-6 py-3 border border-white/20 text-sm font-light tracking-wider uppercase hover:bg-white hover:text-black transition-colors"
           >
             View Portfolio

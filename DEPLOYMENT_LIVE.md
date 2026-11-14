@@ -1,7 +1,7 @@
 # LIVE DEPLOYMENT - REAL-TIME WALKTHROUGH
 ## jonathanmallett.com on Google Domains + Vercel
 
-> **Current implementation (August 31, 2026):** The pending deployment is a unified 33-photo gallery at `/` with an About page at `/about`. The former `/portfolio` route tree has been removed locally and must return 404 after deployment. Replace any old hero or category-page checks below with the current verification checklist in this note.
+> **Historical walkthrough — not current deployment guidance.** The domain-purchase, provider, route, build-output and timing instructions below are retained as a historical record and may be obsolete. Do not assume the domain needs to be purchased or changes have been deployed. For the current application and verification workflow, see [README.md](README.md), [docs/SETUP.md](docs/SETUP.md) and [IMAGE_GUIDE.md](IMAGE_GUIDE.md); check Vercel for actual deployment status.
 
 **Start Time:** Now  
 **Expected Duration:** 15 minutes to live  

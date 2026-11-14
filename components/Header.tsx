@@ -1,30 +1,17 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { stories } from '@/content/stories';
 
 export default function Header() {
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 h-20 bg-white/95 backdrop-blur-sm">
-      <nav className="mx-auto flex h-full max-w-[1800px] items-center justify-between px-4 sm:px-6">
-        <Link
-          href="/"
-          className="text-base font-normal tracking-[0.16em] text-neutral-900 uppercase transition-colors hover:text-neutral-500 sm:text-lg"
-        >
-          Jonathan Mallett Photography
+    <header className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-14">
+      <nav aria-label="Main navigation" className="flex min-h-24 items-center justify-between gap-5 border-b border-neutral-200 py-6 sm:min-h-28">
+        <Link href="/" className="text-sm font-medium tracking-tight transition-colors hover:text-neutral-500 sm:text-base">
+          Jonathan Mallett <span className="font-normal text-neutral-500">Photography</span>
         </Link>
-
-        <div className="flex items-center gap-6 sm:gap-8">
-          <Link
-            href="/"
-            className="text-xs font-normal tracking-[0.18em] text-neutral-900 uppercase transition-colors hover:text-neutral-500 sm:text-sm"
-          >
-            Portfolio
-          </Link>
-
-          <Link
-            href="/about"
-            className="text-xs font-normal tracking-[0.18em] text-neutral-900 uppercase transition-colors hover:text-neutral-500 sm:text-sm"
-          >
-            About
-          </Link>
+        <div className="flex items-center gap-5 text-xs sm:gap-9 sm:text-sm">
+          <Link href="/work" className="transition-colors hover:text-neutral-500">Portfolio</Link>
+          {stories.length > 0 && <Link href="/stories" className="transition-colors hover:text-neutral-500">Stories</Link>}
+          <Link href="/about" className="transition-colors hover:text-neutral-500">About</Link>
         </div>
       </nav>
     </header>

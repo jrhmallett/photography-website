@@ -1,6 +1,6 @@
 # Complete Deployment Walkthrough - Option C
 
-> **Current implementation (August 31, 2026):** The next deployment should verify the unified homepage gallery at `/`, the About page at `/about`, and a 404 response at `/portfolio`. The older hero and category-gallery checks below are historical and no longer describe the application.
+> **Historical walkthrough — not current deployment guidance.** The domain-purchase, provider, route, test-result and timing instructions below are retained as a historical record and may be obsolete. In particular, do not treat the old expected test failure as acceptable. See [README.md](README.md), [docs/SETUP.md](docs/SETUP.md) and [IMAGE_GUIDE.md](IMAGE_GUIDE.md) for the current application and verification workflow; check Vercel for actual deployment status.
 
 **Goal:** Domain → Vercel Account → Deploy with Custom Domain  
 **Estimated Time:** 15 minutes (+ 24-48 hrs for domain propagation)  

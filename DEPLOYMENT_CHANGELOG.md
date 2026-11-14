@@ -2,6 +2,8 @@
 
 Use this file to record each production deployment.
 
+Entries below describe the state recorded at their dates, not the current local application. The pending entry is a historical note, not confirmation of a deployment. Check Vercel and the deployed commit for current production status; no November 14, 2026 deployment has been recorded here.
+
 ## Template
 
 - Date (UTC):
@@ -16,7 +18,9 @@ Use this file to record each production deployment.
 - Verification checklist:
   - Home gallery loads
   - About page loads
+  - Portfolio overview and collection galleries load in the intended order
   - Lightbox interaction works
+  - Responsive layout preserves image proportions
 - Rollback plan:
 - Notes:
 

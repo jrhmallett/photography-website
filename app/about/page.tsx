@@ -1,71 +1,36 @@
-import Image from "next/image";
-import Header from "@/components/Header";
+import Image from 'next/image';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
-/**
- * About Page Component
- * 
- * Single page about Jonathan Mallett and his photography.
- * Clean, minimalist design with bio and information.
- */
+export const metadata: Metadata = {
+  title: 'About | Jonathan Mallett Photography',
+  description: 'About Jonathan Mallett and his approach to photography.',
+};
+
 export default function About() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <>
       <Header />
-
-      {/* About Content */}
-      <main className="mx-auto max-w-4xl px-6 pt-32 pb-20">
-        {/* Contact */}
-        <div className="mb-10 md:mb-12">
-          <h2 className="mb-3 text-sm font-normal tracking-widest uppercase text-neutral-500">
-            Get in touch
-          </h2>
-          <div className="flex flex-col gap-2 text-sm font-light">
-            <a href="mailto:contact@jonathanmallett.com" className="hover:text-gray-400 transition-colors">
-              contact@jonathanmallett.com
-            </a>
+      <main className="mx-auto max-w-[1600px] px-5 pb-24 sm:px-8 sm:pb-36 lg:px-14">
+        <h1 className="sr-only">About Jonathan Mallett</h1>
+        <div className="grid items-start gap-12 pt-12 md:grid-cols-12 md:gap-10 md:pt-16">
+          <div className="max-w-sm md:col-span-4">
+            <Image src="/photos/about/profile.jpg" alt="Jonathan Mallett, photographer" width={1200} height={1600} sizes="(max-width: 767px) 80vw, 33vw" className="h-auto w-full" />
           </div>
-        </div>
-
-        {/* Profile Section */}
-        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-          {/* Bio Text */}
-          <div className="flex flex-col justify-center space-y-6">
-            <h1 className="text-4xl font-light tracking-wide">
-              Jonathan Mallett
-            </h1>
-            
-            <div className="space-y-4 font-normal leading-relaxed text-neutral-700">
-              <p>
-                Photography started as simple curiosity and slowly became something I carry with me. It&apos;s a creative outlet and is my way of slowing down and trying to notice moments that might otherwise pass.
-              </p>
-              
-              <p>
-                I enjoy trying and learning all different genres of photography. Some days it&apos;s wildlife and the satisfaction of what comes from having patience. Other times it&apos;s documentary-style work, capturing real, unposed moments as they happen. Travel is a big part of my life and visiting new places has a way of sharpening the eye, which I like to take back to places I&apos;m more familiar with.
-              </p>
-              
-              <p>
-                For me, photography is about following what feels interesting in the moment and seeing where that leads.
-              </p>
+          <div className="max-w-xl space-y-5 text-base leading-8 text-neutral-700 md:col-span-7 md:col-start-6">
+            <p>My interest in photography developed later in life, initially as a way of capturing everyday moments and things that caught my attention. Over time, this has grown into exploring different genres and ways of shooting, which is reflected in the variety of photographs I take. I&apos;ve also found that photography helps me slow down and pay more attention to what&apos;s happening around me.</p>
+            <p>I enjoy trying different types of photography and I don&apos;t have one particular subject or style that I stick to. I tend to photograph whatever interests me at the time, whether that&apos;s places, nature, sport or something completely different.</p>
+            <div className="pt-6">
+              <h2 className="text-xs uppercase tracking-[0.16em] text-neutral-500">Get in touch</h2>
+              <a href="mailto:contact@jonathanmallett.com" className="mt-3 inline-block text-sm underline decoration-neutral-300 underline-offset-4 hover:text-neutral-500">contact@jonathanmallett.com</a>
+              <Link href="/work" className="ml-6 inline-block text-sm underline decoration-neutral-300 underline-offset-4 hover:text-neutral-500">View the work <span aria-hidden="true">↗</span></Link>
             </div>
-          </div>
-
-          {/* Profile Image */}
-          <div className="relative mx-auto aspect-[3/4] w-3/4 max-w-xs overflow-hidden bg-neutral-100 md:mx-0 md:w-full md:max-w-none">
-            <Image
-              src="/photos/about/profile.jpg"
-              alt="Jonathan Mallett - Photographer"
-              fill
-              className="object-cover object-center grayscale"
-              sizes="(max-width: 768px) 75vw, 50vw"
-            />
           </div>
         </div>
       </main>
-
-      {/* Copyright Footer */}
-      <div className="bg-black text-white text-center py-6 text-sm font-light text-gray-400">
-        © {new Date().getFullYear()} Jonathan Mallett Photography. All rights reserved.
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }

@@ -3,7 +3,7 @@
 ## Project Overview
 
 **Site:** Jonathan Mallett Photography Portfolio  
-**Type:** Next.js App Router photography portfolio with a unified gallery and lightbox
+**Type:** Next.js App Router photography portfolio with curated galleries and a lightbox
 **Live:** https://jonathanmallett.com  
 **Repository:** https://github.com/jrhmallett/photography-website  
 **Deployment:** Vercel (GitHub-connected deployments)
@@ -76,12 +76,18 @@ Prohibited actions include:
 ## Project Structure (Current)
 
 - `app/page.tsx` — Homepage with the curated portfolio gallery
+- `app/work/page.tsx` — Portfolio collection overview
+- `app/work/[slug]/page.tsx` — Individual collection galleries
+- `app/stories/` — Optional stories index and detail routes
 - `app/about/page.tsx` — About page
 - `app/layout.tsx` — Root metadata, fonts, analytics, speed insights
+- `content/photos.ts` — Photo catalogue, homepage sequence, image cache revision
+- `content/collections.ts` — Collection details, preview selections and gallery sequences
+- `content/stories.ts` — Optional stories, currently empty
 - `components/Header.tsx` — Shared top navigation
-- `components/GalleryGrid.tsx` — Masonry-style gallery + lightbox trigger
+- `components/GalleryGrid.tsx` — Responsive gallery + lightbox trigger
 - `components/Lightbox.tsx` — Modal viewer with keyboard navigation
-- `components/Footer.tsx` — Available component (currently not mounted by pages)
+- `components/Footer.tsx` — Shared footer mounted on main pages
 - `public/photos/*` — Image assets by category
 - `next.config.ts` — Image format/size optimization config
 
@@ -95,26 +101,26 @@ Guidelines:
 
 ## Gallery Behavior (Implemented)
 
-### Masonry Layout (`components/GalleryGrid.tsx`)
+### Balanced Gallery Layout (`components/GalleryGrid.tsx`)
 
 Implemented features:
 
-- Responsive masonry columns with consistent 8px gutters
-- Runtime natural aspect-ratio detection via image `onLoad`
-- Row order preserved across responsive columns
-- Subtle hover zoom without text overlays
+- Homepage and collection galleries use `balancedLayout`, with one column below the `md` breakpoint and two equal columns at `md` and above.
+- Image order follows the configured sequence; intrinsic width and height reserve space and preserve proportions without cropping.
+- Portrait images are centered and limited to `min(75vh, 600px)` in height; landscapes and squares use the available column width.
+- Homepage uses the compact spacing variant; collection galleries use the standard gaps.
+- Gallery buttons open the lightbox and have a subtle hover opacity change.
 
 Responsive behavior:
 
-- Mobile: 1 column
-- Small/Tablet+: 2 columns (`sm` breakpoint)
-- Desktop: 3 columns (`lg` breakpoint)
-- Wide desktop: 4 columns (`xl` breakpoint)
+- The optional story gallery uses the default editorial placements rather than `balancedLayout`.
 
 ### Lightbox Behavior (`components/Lightbox.tsx`)
 
 - Lightbox opens only when a gallery item is clicked
 - Keyboard controls: `Escape`, `ArrowLeft`, `ArrowRight`
+- Previous/next controls and horizontal touch swipes navigate without wrapping
+- Focus is contained in the dialog and restored to the trigger when closed
 - Body scroll is disabled while lightbox is open
 - Backdrop click closes the lightbox
 - Lightbox image uses `loading="eager"` and `object-contain`
@@ -125,10 +131,15 @@ Note: Lightbox does **not** switch to a separate original-file endpoint; it requ
 
 ## Routing and Content Categories
 
-The live application has two routes:
+The current application routes are:
 
-- `/` — the unified curated portfolio
+- `/` — curated homepage gallery
+- `/work` — Portfolio overview with separately selected previews
+- `/work/people-and-places` — Places collection
+- `/work/land-and-environment` — Nature collection
+- `/work/movement-and-action` — Motorsport collection
 - `/about` — biography and contact email
+- `/stories` and `/stories/[slug]` — optional stories; the list is currently empty, so navigation is hidden and the index returns 404
 
 The former `/portfolio` route tree was removed. `/portfolio` and its category URLs return 404. The category folders under `public/photos/` remain for asset organization.
 
@@ -137,17 +148,22 @@ The former `/portfolio` route tree was removed. `/portfolio` and its category UR
 ## Adding New Images (Current Workflow)
 
 1. Add image file to `public/photos/<category>/`.
-2. Add a new photo object to the curated `photos` array inside `app/page.tsx`.
-3. Place the entry where it should appear in the homepage sequence.
-4. Ensure each item has:
+2. Add a new photo object to `photoCatalog` in `content/photos.ts`.
+3. Ensure each item has:
    - unique numeric `id`
-   - valid `src`
+   - valid `src` with exact filename and extension case
    - descriptive `alt`
-   - optional `title`
+   - intrinsic `width` and `height` in pixels
+   - optional `caption`
+4. Add its ID to `homePhotoIds`, a collection's `photoIds`, and/or `previewPhotoIds` as appropriate. These selections are independent and explicitly ordered; adding, deleting, renaming or reordering files alone does not update the site.
+5. When replacing a file under the same name, update its dimensions if necessary and change `photoRevision` in `content/photos.ts` to invalidate browser and optimizer caches. `next.config.ts` uses that revision to permit the query string.
+6. Remove or update affected IDs and paths when files are removed or renamed, then run tests and build.
 
 Example object:
 
-`{ id: 101, src: "/photos/places/new-image.jpg", alt: "Description", title: "Optional Title" }`
+`{ id: 107, src: "/photos/places/new-image.jpg", alt: "Description", width: 2400, height: 1600 }`
+
+Current collection sequences: Places groups New York, Marrakech, UK, Italy, Portugal, Netherlands; Nature groups Birds, Landscape, Doug; Motorsport follows its numbers. Specific Places overrides place New York 1 immediately after New York 4 and Marrakech 2 immediately after Marrakech 9. Preview and homepage order are independent of these sequences.
 
 ---
 
@@ -255,4 +271,4 @@ GitHub: https://github.com/jrhmallett
 
 ---
 
-Last updated: March 7, 2026
+Last updated: November 14, 2026

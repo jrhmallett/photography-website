@@ -2,9 +2,9 @@
 
 **Audit Date:** February 14, 2026  
 **Auditor:** Senior Engineering Review  
-**Project Status:** Historical audit; superseded by the August 31, 2026 portfolio redesign
+**Project Status:** Historical audit; superseded by later portfolio changes
 
-> This document records findings from February 14, 2026. Its references to the former hero page, portfolio route tree, lint failures, test failures, and intermediate category structure are historical and do not describe the current production application.
+> This document records findings from February 14, 2026. Its references to the former hero page, portfolio route tree, lint failures, test failures, and intermediate category structure are historical and do not describe the current local application. See [README.md](README.md) for current documentation and check Vercel for production status.
 
 ---
 

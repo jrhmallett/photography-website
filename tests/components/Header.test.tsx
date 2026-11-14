@@ -44,14 +44,14 @@ describe('Header Component', () => {
     render(<Header />);
     
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(3); // Home, Portfolio, and About
+    expect(links).toHaveLength(3); // Home, Work, and About
   });
 
-  test('links Portfolio to the homepage', () => {
+  test('links Portfolio to the work page', () => {
     render(<Header />);
 
-    const portfolioLink = screen.getByRole('link', { name: /^portfolio$/i });
-    expect(portfolioLink).toHaveAttribute('href', '/');
+    const workLink = screen.getByRole('link', { name: /^portfolio$/i });
+    expect(workLink).toHaveAttribute('href', '/work');
   });
 });
 

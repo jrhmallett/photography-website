@@ -1,6 +1,6 @@
 # Photography Website - Deployment Plan
 
-> **Current implementation (August 31, 2026):** The local code uses `/` as the unified 33-photo portfolio gallery and `/about` as its secondary route. The former `/portfolio` route tree has been removed locally and will return 404 after the next deployment. The legacy checklist text below is historical planning material; use the current verification checklist in this note when deploying the redesign.
+> **Historical deployment plan — not current deployment guidance.** The status, metrics, providers, prices, commands and checklists below are historical and may be obsolete. See [README.md](README.md), [docs/SETUP.md](docs/SETUP.md) and [IMAGE_GUIDE.md](IMAGE_GUIDE.md) for the current application and verification workflow; check Vercel for actual deployment status.
 
 **Current Status:** Production Ready ✅  
 **Build Status:** Clean (10 routes prerendered)  

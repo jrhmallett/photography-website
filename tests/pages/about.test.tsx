@@ -35,17 +35,18 @@ describe('About Page', () => {
     render(<About />);
     
     const aboutLinks = screen.getAllByRole('link', { name: /about/i });
-    const portfolioLinks = screen.getAllByRole('link', { name: /portfolio/i });
+    const workLinks = screen.getAllByRole('link', { name: /work/i });
     
     expect(aboutLinks.length).toBeGreaterThan(0);
-    expect(portfolioLinks.length).toBeGreaterThan(0);
+    expect(workLinks.length).toBeGreaterThan(0);
   });
 
-  test('renders main heading with photographer name', () => {
+  test('retains an accessible heading without the introductory section', () => {
     render(<About />);
     
-    const heading = screen.getByRole('heading', { name: /^jonathan mallett$/i, level: 1 });
-    expect(heading).toBeInTheDocument();
+    const heading = screen.getByRole('heading', { name: /^about jonathan mallett$/i, level: 1 });
+    expect(heading).toHaveClass('sr-only');
+    expect(screen.queryByText(/Photography is a creative outlet and a way of slowing down and noticing/i)).not.toBeInTheDocument();
   });
 
   test('renders profile image', () => {
@@ -58,7 +59,7 @@ describe('About Page', () => {
   test('renders bio text', () => {
     render(<About />);
     
-    const bioText = screen.getByText(/Photography started as simple curiosity/i);
+    const bioText = screen.getByText(/My interest in photography developed later in life/i);
     expect(bioText).toBeInTheDocument();
   });
 
