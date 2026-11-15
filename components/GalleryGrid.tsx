@@ -38,7 +38,7 @@ export default function GalleryGrid({ photos, masonry = false }: { photos: Photo
     if (!masonry) return;
 
     const updateColumnCount = () => {
-      setColumnCount(window.innerWidth >= 1280 ? 4 : window.innerWidth >= 768 ? 3 : 2);
+      setColumnCount(window.innerWidth >= 1280 ? 4 : window.innerWidth >= 768 ? 3 : 1);
     };
 
     updateColumnCount();

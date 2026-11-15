@@ -36,7 +36,7 @@ Example entry (choose an unused ID and actual dimensions):
 
 ## Layout and Delivery
 
-The homepage uses two columns on mobile, three on desktop, and four on wide screens. Each image flows into the shortest column, with a consistent 10px gap regardless of its aspect ratio, except photos marked `pinToFirstColumn`, which stay at the left. Images keep their original proportions without cropping, and the lightbox provides a larger view. Optional stories use editorial gallery placements.
+The homepage uses one column on mobile, three on desktop, and four on wide screens. Each image flows into the shortest column, with a consistent 10px gap regardless of its aspect ratio, except photos marked `pinToFirstColumn`, which stay at the left. Images keep their original proportions without cropping, and the lightbox provides a larger view. Optional stories use editorial gallery placements.
 
 `next/image` supplies responsive images with WebP output configured in `next.config.ts`. Gallery photos lazy-load by default; the lightbox image loads eagerly after opening. JPG/JPEG is preferred for photographs; aim for good visual quality and efficient file sizes without changing artistic intent.
 

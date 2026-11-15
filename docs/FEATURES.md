@@ -44,7 +44,7 @@ The site is a minimal, photography-first portfolio with:
 ### 4) Gallery Layout and Rendering
 
 - `GalleryGrid` reusable component
-- Homepage uses two columns on mobile, three on desktop, and four on wide screens
+- Homepage uses one column on mobile, three on desktop, and four on wide screens
 - Each image is assigned to the shortest column to reduce blank space between mixed image sizes
 - Consistent 10px horizontal and vertical spacing
 - Intrinsic dimensions from the photo catalogue reserve space before loading

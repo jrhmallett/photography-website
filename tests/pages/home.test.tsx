@@ -104,9 +104,9 @@ describe('Home Page', () => {
       expect(figure).toHaveClass('min-w-0');
       expect(figure).not.toHaveClass('max-w-[calc(min(75vh,450px)*var(--photo-ratio))]');
     });
-    window.innerWidth = 700;
+    window.innerWidth = 375;
     fireEvent(window, new Event('resize'));
-    expect(gallery).toHaveStyle({ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' });
+    expect(gallery).toHaveStyle({ gridTemplateColumns: 'repeat(1, minmax(0, 1fr))' });
     window.innerWidth = 1400;
     fireEvent(window, new Event('resize'));
     expect(gallery).toHaveStyle({ gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' });

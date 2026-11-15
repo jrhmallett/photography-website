@@ -55,7 +55,7 @@ Core architectural priorities:
 
 `components/GalleryGrid.tsx` responsibilities:
 
-- render the full homepage photo selection in two, three or four masonry columns, based on viewport width
+- render the full homepage photo selection in one, three or four masonry columns, based on viewport width
 - balance each next photo into the currently shortest column to keep spacing tight across mixed aspect ratios, unless `pinToFirstColumn` places it on the left
 - use catalogue width and height to reserve space and preserve aspect ratios without cropping
 - keep the configured sequence for lightbox navigation
