@@ -60,6 +60,35 @@ describe('Home Page', () => {
     });
   });
 
+  test('orders the New York photos as requested', () => {
+    expect(homePhotos.slice(0, 5).map((photo) => path.basename(photo.src))).toEqual([
+      'Places_New_York3.jpg',
+      'Places_New_York4.jpg',
+      'Places_New_York2.jpg',
+      'Places_New_York1.jpg',
+      'Places_New_York5.jpg',
+    ]);
+  });
+
+  test('places Doug in the left column before the motorsport photos', () => {
+    const originalWidth = window.innerWidth;
+    window.innerWidth = 1024;
+    render(<Home />);
+
+    const figures = screen.getAllByRole('figure');
+    const gallery = figures[0].parentElement?.parentElement;
+    const leftColumn = gallery?.children[0];
+    const imageAlts = [...leftColumn!.querySelectorAll('img')].map((image) => image.alt);
+    const dougIndex = imageAlts.indexOf('Nature photograph of Doug');
+    const motorsportIndex = imageAlts.indexOf('Motorsport photograph');
+
+    expect(dougIndex).toBeGreaterThanOrEqual(0);
+    expect(motorsportIndex).toBeGreaterThan(dougIndex);
+
+    window.innerWidth = originalWidth;
+    fireEvent(window, new Event('resize'));
+  });
+
   test('balances images into compact columns with consistent spacing', () => {
     const originalWidth = window.innerWidth;
     window.innerWidth = 1024;

@@ -5,6 +5,7 @@ export interface Photo {
   width: number;
   height: number;
   caption?: string;
+  pinToFirstColumn?: boolean;
 }
 
 // Change this revision when replacing image files without changing filenames.
@@ -50,7 +51,7 @@ export const photoCatalog: Photo[] = [
   { id: 33, src: '/photos/nature/nature-birds-31.jpg', alt: 'Birds wildlife photography', width: 6910, height: 4605 },
   { id: 34, src: '/photos/nature/Nature_Landscape4.jpg', alt: 'Nature landscape photograph', width: 2400, height: 1600 },
   { id: 35, src: '/photos/nature/Nature_Landscape3.jpg', alt: 'Nature landscape photograph', width: 2400, height: 1350 },
-  { id: 36, src: '/photos/nature/Nature_Doug1.jpg', alt: 'Nature photograph of Doug', width: 1600, height: 2400 },
+  { id: 36, src: '/photos/nature/Nature_Doug1.jpg', alt: 'Nature photograph of Doug', width: 1600, height: 2400, pinToFirstColumn: true },
   { id: 37, src: '/photos/nature/Nature_Birds9.jpg', alt: 'Bird wildlife photograph', width: 2400, height: 2400 },
   { id: 38, src: '/photos/nature/Nature_Birds15.jpg', alt: 'Bird wildlife photograph', width: 2400, height: 1600 },
   { id: 39, src: '/photos/places/Places_New_York4.jpg', alt: 'New York photograph', width: 2401, height: 1600 },
@@ -125,7 +126,7 @@ export const photoCatalog: Photo[] = [
 
 // The homepage is grouped by subject, with each subject ordered by image number.
 export const homePhotoIds = [
-  41, 66, 40, 39, 67,
+  40, 39, 66, 41, 67,
   58, 59, 61, 62, 63, 42,
   72, 73, 74, 75, 76, 77, 78, 79, 37, 80, 81, 82, 83, 84,
   36,

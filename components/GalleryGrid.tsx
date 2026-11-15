@@ -26,7 +26,9 @@ export default function GalleryGrid({ photos, masonry = false }: { photos: Photo
   if (masonry) {
     const columnHeights = Array(columnCount).fill(0);
     photos.forEach((photo, index) => {
-      const columnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+      const columnIndex = photo.pinToFirstColumn
+        ? 0
+        : columnHeights.indexOf(Math.min(...columnHeights));
       masonryColumns[columnIndex].push({ photo, index });
       columnHeights[columnIndex] += photo.height / photo.width;
     });
