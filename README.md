@@ -24,7 +24,7 @@ Primary goals:
 ## Current Features
 
 - Next.js 16 App Router project with an editorial, image-first homepage
-- One homepage gallery containing all 62 available portfolio photographs
+- One homepage gallery containing all 60 available portfolio photographs
 - Responsive two-, three-, and four-column masonry layout with consistent spacing
 - Lightbox modal with keyboard navigation (`Escape`, `ArrowLeft`, `ArrowRight`) and touch swipes
 - Shared light monochrome header with About navigation
@@ -105,7 +105,9 @@ docs/
 
 ## Homepage Gallery
 
-The homepage balances images into the shortest available column to create a compact masonry layout. It uses two columns on narrow screens, three on desktop, and four on wide screens. Images keep their natural proportions and are not cropped; the lightbox follows the configured `homePhotoIds` sequence.
+The homepage balances images into the shortest available column to create a compact masonry layout. Photos marked `pinToFirstColumn` stay in the leftmost column. It uses two columns on narrow screens, three on desktop, and four on wide screens. Images keep their natural proportions and are not cropped.
+
+`homePhotoIds` groups images by subject in this order: New York, Marrakech, Birds, Doug, Motorsport, Landscape, UK, Portugal and Italy. Numbered sequences are ascending except New York, which is ordered 3, 4, 2, 1, 5. Nature_Doug is pinned to the leftmost column before the Motorsport images. The lightbox follows the configured sequence.
 
 ## Optional Stories
 

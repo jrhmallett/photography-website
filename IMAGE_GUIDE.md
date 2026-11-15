@@ -32,11 +32,11 @@ Example entry (choose an unused ID and actual dimensions):
 
 ## Homepage Image Sequence
 
-`homePhotoIds` begins with the existing featured photographs and includes all 62 currently available portfolio images. The lightbox follows this configured sequence. Renaming or renumbering photos can change which image a selected path identifies; update affected paths and alt text.
+`homePhotoIds` contains all 60 currently available portfolio images, grouped by subject in this order: New York, Marrakech, Birds, Doug, Motorsport, Landscape, UK, Portugal and Italy. Numbered sequences are ascending except New York, which is ordered 3, 4, 2, 1, 5. Nature_Doug is pinned to the leftmost masonry column before the Motorsport images. The lightbox follows the configured sequence. Renaming or renumbering photos can change which image a selected path identifies; update affected paths and alt text.
 
 ## Layout and Delivery
 
-The homepage uses two columns on mobile, three on desktop, and four on wide screens. Each image flows into the shortest column, with a consistent 10px gap regardless of its aspect ratio. Images keep their original proportions without cropping, and the lightbox provides a larger view. Optional stories use editorial gallery placements.
+The homepage uses two columns on mobile, three on desktop, and four on wide screens. Each image flows into the shortest column, with a consistent 10px gap regardless of its aspect ratio, except photos marked `pinToFirstColumn`, which stay at the left. Images keep their original proportions without cropping, and the lightbox provides a larger view. Optional stories use editorial gallery placements.
 
 `next/image` supplies responsive images with WebP output configured in `next.config.ts`. Gallery photos lazy-load by default; the lightbox image loads eagerly after opening. JPG/JPEG is preferred for photographs; aim for good visual quality and efficient file sizes without changing artistic intent.
 

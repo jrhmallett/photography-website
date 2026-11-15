@@ -10,9 +10,10 @@ This document tracks what is currently implemented in the photography portfolio 
 
 The site is a minimal, photography-first portfolio with:
 
-- One homepage gallery containing all 62 available portfolio photographs
+- One homepage gallery containing all 60 available portfolio photographs, grouped by subject
 - About page and optional, currently empty Stories section
 - Responsive masonry layout with natural image proportions and tight spacing
+- New York sequence ordered 3, 4, 2, 1, 5; Nature_Doug pinned on the left before Motorsport
 - Lightbox with keyboard and touch navigation
 
 ---

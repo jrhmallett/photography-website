@@ -56,7 +56,7 @@ Core architectural priorities:
 `components/GalleryGrid.tsx` responsibilities:
 
 - render the full homepage photo selection in two, three or four masonry columns, based on viewport width
-- balance each next photo into the currently shortest column to keep spacing tight across mixed aspect ratios
+- balance each next photo into the currently shortest column to keep spacing tight across mixed aspect ratios, unless `pinToFirstColumn` places it on the left
 - use catalogue width and height to reserve space and preserve aspect ratios without cropping
 - keep the configured sequence for lightbox navigation
 - open/close lightbox and handle next/previous state
@@ -79,7 +79,7 @@ The lightbox requests the same image source path in a larger view; it does not s
 
 ## Content Model
 
-`content/photos.ts` holds the photo catalogue with numeric IDs, exact source paths, alt text and intrinsic pixel dimensions. `homePhotoIds` contains the complete 62-photo homepage sequence, beginning with the existing featured images. `content/stories.ts` contains optional stories and is currently empty.
+`content/photos.ts` holds the photo catalogue with numeric IDs, exact source paths, alt text and intrinsic pixel dimensions. `homePhotoIds` contains all 60 available homepage photos, grouped by subject. New York uses the curated order 3, 4, 2, 1, 5; other numbered groups are ascending. The Nature_Doug photo is pinned to the first masonry column before Motorsport. `content/stories.ts` contains optional stories and is currently empty.
 
 The portfolio is maintained in code rather than through a CMS or automatic filesystem discovery. Adding, removing, renaming or reordering files requires corresponding catalogue and selection updates. See [IMAGE_GUIDE.md](../IMAGE_GUIDE.md) for the workflow and current ordering exceptions.
 
