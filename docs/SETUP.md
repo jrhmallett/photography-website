@@ -1,7 +1,7 @@
 
 # Photography Website - Setup Guide
 
-**Last Updated:** November 14, 2026
+**Last Updated:** November 15, 2026
 
 This guide explains how to run and validate the Jonathan Mallett Photography portfolio locally.
 
@@ -102,8 +102,6 @@ app/
   loading.tsx
   not-found.tsx
   about/page.tsx
-  work/page.tsx
-  work/[slug]/page.tsx
   stories/page.tsx
   stories/[slug]/page.tsx
 components/
@@ -113,7 +111,6 @@ components/
   Footer.tsx
 content/
   photos.ts
-  collections.ts
   stories.ts
 public/
   photos/
@@ -129,7 +126,7 @@ package.json
 
 1. Add the image file to the appropriate `public/photos/<category>/` folder.
 2. Add a photo object to `photoCatalog` in `content/photos.ts` with a unique `id`, exact `src`, descriptive `alt`, and intrinsic pixel `width` and `height`.
-3. Add the ID in the desired position in `homePhotoIds`, the appropriate collection's `photoIds`, and/or `previewPhotoIds` in `content/collections.ts`. These selections are independent; folder contents do not automatically update the site.
+3. Add the ID to `homePhotoIds` in `content/photos.ts` to include it in the homepage gallery and set its position. The list is explicit; folder contents do not automatically update the site.
 4. If replacing an image under the same filename, update its dimensions as needed and change `photoRevision` in `content/photos.ts` to refresh optimizer and browser caches.
 5. Remove or update affected paths and selections when photos are removed or renamed, and run tests and build.
 
@@ -139,7 +136,7 @@ Example photo object:
 { id: 107, src: "/photos/places/new-image.jpg", alt: "Description", width: 2400, height: 1600 }
 ```
 
-See [IMAGE_GUIDE.md](../IMAGE_GUIDE.md) for collection ordering and full image handling guidance.
+See [IMAGE_GUIDE.md](../IMAGE_GUIDE.md) for homepage ordering and full image handling guidance.
 
 ---
 
@@ -189,7 +186,7 @@ Typical flow:
 Local changes → Push to GitHub → Vercel preview/production build
 ```
 
-Verify `/`, `/work`, the Places, Nature and Motorsport collection routes under `/work`, and `/about`. The removed `/portfolio` route is expected to return 404. Stories navigation is hidden and `/stories` returns 404 while its content list is empty. A local build or preview does not mean changes have been deployed; check Vercel for deployment status.
+Verify `/` and `/about`. `/work`, `/work/[slug]`, and `/portfolio` return 404. Stories navigation is hidden and `/stories` returns 404 while its content list is empty. A local build or preview does not mean changes have been deployed; check Vercel for deployment status.
 
 ---
 

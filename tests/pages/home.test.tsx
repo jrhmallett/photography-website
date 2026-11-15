@@ -4,7 +4,9 @@
  * Tests for the image-first homepage gallery.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import fs from 'fs';
+import path from 'path';
 import Home from '@/app/page';
 import { homePhotos, photoImageSrc } from '@/content/photos';
 
@@ -39,38 +41,48 @@ describe('Home Page', () => {
     expect(aboutLinks[0]).toHaveAttribute('href', '/about');
   });
 
-  test('renders the curated gallery images', () => {
+  test('renders every available portfolio photograph', () => {
     render(<Home />);
 
     const galleryImages = screen.getAllByRole('img');
-    expect(galleryImages).toHaveLength(13);
-    expect(galleryImages.map((image) => image.getAttribute('src'))).toEqual(homePhotos.map((photo) => photoImageSrc(photo.src)));
+    const sources = galleryImages.map((image) => image.getAttribute('src'));
+    expect(sources).toHaveLength(homePhotos.length);
+    expect(new Set(sources)).toEqual(new Set(homePhotos.map((photo) => photoImageSrc(photo.src))));
+    const availablePhotoPaths = ['places', 'nature', 'sport'].flatMap((folder) =>
+      fs.readdirSync(path.join(process.cwd(), 'public', 'photos', folder))
+        .filter((name) => /\.(jpe?g|png|webp)$/i.test(name))
+        .map((name) => `/photos/${folder}/${name}`),
+    );
+    expect(homePhotos).toHaveLength(availablePhotoPaths.length);
+    expect(new Set(homePhotos.map((photo) => photo.src))).toEqual(new Set(availablePhotoPaths));
+    homePhotos.forEach((photo) => {
+      expect(fs.existsSync(path.join(process.cwd(), 'public', photo.src.replace(/^\//, '')))).toBe(true);
+    });
   });
 
-  test('shows the selected Motorsport photographs in order', () => {
-    render(<Home />);
-    const sources = screen.getAllByRole('img').map((image) => image.getAttribute('src'));
-    expect(sources.filter((src) => src?.startsWith('/photos/sport/'))).toEqual([
-      '/photos/sport/Motorsport2.jpg',
-      '/photos/sport/Motorsport3.jpg',
-      '/photos/sport/Motorsport4.jpg',
-      '/photos/sport/Motorsport8.jpg',
-    ].map(photoImageSrc));
-  });
-
-  test('uses the balanced layout for all homepage photos', () => {
+  test('balances images into compact columns with consistent spacing', () => {
+    const originalWidth = window.innerWidth;
+    window.innerWidth = 1024;
     render(<Home />);
     const figures = screen.getAllByRole('figure');
-    expect(figures[0].parentElement).toHaveClass('md:grid-cols-2', 'gap-x-4', 'gap-y-4', 'md:gap-x-5', 'lg:gap-x-6', 'lg:gap-y-5');
-    homePhotos.forEach((photo, index) => {
-      expect(figures[index]).not.toHaveClass('md:col-span-10');
-      if (photo.height >= photo.width) {
-        expect(figures[index]).toHaveClass('max-w-[calc(min(75vh,500px)*var(--photo-ratio))]');
-        expect(figures[index].style.getPropertyValue('--photo-ratio')).toBe(String(photo.width / photo.height));
-      } else {
-        expect(figures[index]).not.toHaveClass('justify-self-center');
-      }
+    const gallery = figures[0].parentElement?.parentElement;
+    expect(gallery).toHaveClass('gap-x-2.5');
+    expect(gallery).toHaveStyle({ gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' });
+    const columns = [...gallery!.children];
+    expect(columns).toHaveLength(3);
+    columns.forEach((column) => expect(column).toHaveClass('flex-col', 'gap-y-2.5'));
+    figures.forEach((figure) => {
+      expect(figure).toHaveClass('min-w-0');
+      expect(figure).not.toHaveClass('max-w-[calc(min(75vh,450px)*var(--photo-ratio))]');
     });
+    window.innerWidth = 700;
+    fireEvent(window, new Event('resize'));
+    expect(gallery).toHaveStyle({ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' });
+    window.innerWidth = 1400;
+    fireEvent(window, new Event('resize'));
+    expect(gallery).toHaveStyle({ gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' });
+    window.innerWidth = originalWidth;
+    fireEvent(window, new Event('resize'));
   });
 
   test('opens with selected photography without introductory or approach sections', () => {
@@ -114,12 +126,10 @@ describe('Home Page Accessibility', () => {
     });
   });
 
-  test('links Portfolio to the work page without an extra gallery link', () => {
+  test('does not show a separate Portfolio link', () => {
     render(<Home />);
 
-    const workLink = screen.getByRole('link', { name: /^portfolio$/i });
-    expect(workLink).toHaveAttribute('href', '/work');
-    expect(screen.queryByRole('link', { name: /view all work/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^portfolio$/i })).not.toBeInTheDocument();
   });
 
   test('navigation links are keyboard accessible', () => {

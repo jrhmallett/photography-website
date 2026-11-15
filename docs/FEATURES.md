@@ -1,6 +1,6 @@
 # Photography Website - Features
 
-**Last Updated:** November 14, 2026
+**Last Updated:** November 15, 2026
 
 This document tracks what is currently implemented in the photography portfolio and what remains optional future work.
 
@@ -10,10 +10,9 @@ This document tracks what is currently implemented in the photography portfolio 
 
 The site is a minimal, photography-first portfolio with:
 
-- Curated homepage gallery with 13 photographs
-- Portfolio overview and Places, Nature and Motorsport collection galleries
+- One homepage gallery containing all 62 available portfolio photographs
 - About page and optional, currently empty Stories section
-- Responsive balanced grids with natural image proportions
+- Responsive masonry layout with natural image proportions and tight spacing
 - Lightbox with keyboard and touch navigation
 
 ---
@@ -31,25 +30,25 @@ The site is a minimal, photography-first portfolio with:
 ### 2) Routing and Pages
 
 - `/` unified portfolio gallery
-- `/work` collection overview and `/work/[slug]` collection galleries
 - `/about` profile and biography page
 - `/stories` and `/stories/[slug]` support optional stories; the empty index returns 404 and navigation is hidden
-- `/portfolio` and its former category routes are removed and return 404
+- `/work`, `/work/[slug]`, `/portfolio`, and their former category routes return 404
 
 ### 3) Portfolio Gallery
 
-- Curated homepage and collection photo lists with explicit, independent display orders
+- Homepage sequence includes every available gallery photograph
 - Category folders retained for asset organization
-- Portfolio navigation links to `/work`; overview previews are selected separately
+- About is the only secondary navigation link
 
 ### 4) Gallery Layout and Rendering
 
 - `GalleryGrid` reusable component
-- Homepage and collection galleries use one column below `md`, two equal columns at `md` and above
+- Homepage uses two columns on mobile, three on desktop, and four on wide screens
+- Each image is assigned to the shortest column to reduce blank space between mixed image sizes
+- Consistent 10px horizontal and vertical spacing
 - Intrinsic dimensions from the photo catalogue reserve space before loading
-- Homepage portraits and squares are capped at `min(75vh, 500px)`; collection portraits are capped at `min(75vh, 600px)` and collection squares and landscapes use the available column width
 - Natural image proportions without cropping
-- Consistent responsive spacing, with a compact homepage variant
+- Optional story galleries retain their editorial placements
 
 ### 5) Lightbox Interaction
 
@@ -100,7 +99,7 @@ Current tests in `tests/` cover:
 - Setup and documentation checks
 - Header component behavior
 - Gallery layout and lightbox interactions
-- Homepage, About and collection pages, including image ordering and previews
+- Homepage, About and gallery/lightbox behavior, including the complete active image set
 
 Use:
 

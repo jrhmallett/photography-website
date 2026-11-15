@@ -9,7 +9,6 @@ export default function Header() {
           Jonathan Mallett <span className="font-normal text-neutral-500">Photography</span>
         </Link>
         <div className="flex items-center gap-5 text-xs sm:gap-9 sm:text-sm">
-          <Link href="/work" className="transition-colors hover:text-neutral-500">Portfolio</Link>
           {stories.length > 0 && <Link href="/stories" className="transition-colors hover:text-neutral-500">Stories</Link>}
           <Link href="/about" className="transition-colors hover:text-neutral-500">About</Link>
         </div>

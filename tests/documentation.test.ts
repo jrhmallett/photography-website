@@ -171,7 +171,7 @@ describe('Documentation Quality', () => {
     const content = fs.readFileSync(path.join(process.cwd(), 'IMAGE_GUIDE.md'), 'utf-8');
     expect(content).toContain('does not automatically discover or order files');
     expect(content).toContain('photoCatalog');
-    expect(content).toContain('previewPhotoIds');
+    expect(content).toContain('homePhotoIds');
     expect(content).toContain('photoRevision');
     expect(content).not.toContain('No manual image list updates are required');
   });

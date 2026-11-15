@@ -17,18 +17,12 @@ export default function NotFound() {
         <p className="text-gray-400 font-light mb-8 max-w-md">
           The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get you back on track.
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex justify-center">
           <Link
             href="/"
             className="px-6 py-3 border border-white/20 text-sm font-light tracking-wider uppercase hover:bg-white hover:text-black transition-colors"
           >
             Go Home
-          </Link>
-          <Link
-            href="/work"
-            className="px-6 py-3 border border-white/20 text-sm font-light tracking-wider uppercase hover:bg-white hover:text-black transition-colors"
-          >
-            View Portfolio
           </Link>
         </div>
       </div>

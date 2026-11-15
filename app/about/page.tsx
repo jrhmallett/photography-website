@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -25,7 +24,6 @@ export default function About() {
             <div className="pt-6">
               <h2 className="text-xs uppercase tracking-[0.16em] text-neutral-500">Get in touch</h2>
               <a href="mailto:contact@jonathanmallett.com" className="mt-3 inline-block text-sm underline decoration-neutral-300 underline-offset-4 hover:text-neutral-500">contact@jonathanmallett.com</a>
-              <Link href="/work" className="ml-6 inline-block text-sm underline decoration-neutral-300 underline-offset-4 hover:text-neutral-500">View the work <span aria-hidden="true">↗</span></Link>
             </div>
           </div>
         </div>

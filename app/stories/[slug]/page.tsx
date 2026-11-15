@@ -29,7 +29,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           {story.introduction && <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">{story.introduction}</p>}
         </div>
         <GalleryGrid photos={story.photos} />
-        <Link href="/work" className="mt-20 inline-block text-sm underline decoration-neutral-300 underline-offset-4 hover:text-neutral-500">Portfolio</Link>
+        <Link href="/" className="mt-20 inline-block text-sm underline decoration-neutral-300 underline-offset-4 hover:text-neutral-500">Home</Link>
       </main>
       <Footer />
     </>

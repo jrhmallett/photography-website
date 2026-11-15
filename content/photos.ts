@@ -13,8 +13,7 @@ export function photoImageSrc(src: string): string {
   return `${src}?v=${photoRevision}`;
 }
 
-// The existing portfolio is retained here; edit the order or the selections below
-// to curate the site. Dimensions reserve the correct space before images load.
+// Dimensions reserve the correct space before images load.
 export const photoCatalog: Photo[] = [
   { id: 1, src: '/photos/places/places-marrakech-7.jpg', alt: 'Marrakech travel photography', width: 2048, height: 1365 },
   { id: 2, src: '/photos/places/places-marrakech-8.jpg', alt: 'Marrakech travel photography', width: 2048, height: 1365 },
@@ -124,13 +123,17 @@ export const photoCatalog: Photo[] = [
   { id: 106, src: '/photos/sport/Motorsport16.jpg', alt: 'Motorsport photograph', width: 2400, height: 1600 },
 ];
 
-// Reorder these IDs to change the homepage sequence.
-export const homePhotoIds = [40, 39, 41, 42, 49, 34, 35, 36, 37, 97, 98, 99, 102];
-// These homepage images use a shared maximum displayed height for balance.
-export const homeBalancedPhotoIds = [49, 36, 37];
-export const workPhotoIds = [
-  1, 8, 22, 5, 15, 11, 25, 2, 20, 9, 29, 6, 14, 23, 17, 7, 30, 13,
-  3, 10, 24, 16, 12, 26, 4, 21, 27, 19, 28, 18, 31, 32, 33,
+// The homepage is grouped by subject, with each subject ordered by image number.
+export const homePhotoIds = [
+  41, 66, 40, 39, 67,
+  58, 59, 61, 62, 63, 42,
+  72, 73, 74, 75, 76, 77, 78, 79, 37, 80, 81, 82, 83, 84,
+  36,
+  96, 97, 98, 99, 100, 101, 44, 102, 45, 103, 46, 104, 105, 47, 48, 106,
+  85, 86, 35, 34, 87, 88,
+  68, 69, 70, 71,
+  49,
+  43, 51, 52, 53, 54, 55, 56,
 ];
 
 export function selectPhotos(ids: number[]): Photo[] {
@@ -142,4 +145,3 @@ export function selectPhotos(ids: number[]): Photo[] {
 }
 
 export const homePhotos = selectPhotos(homePhotoIds);
-export const workPhotos = selectPhotos(workPhotoIds);

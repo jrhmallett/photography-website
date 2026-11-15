@@ -35,10 +35,12 @@ describe('About Page', () => {
     render(<About />);
     
     const aboutLinks = screen.getAllByRole('link', { name: /about/i });
-    const workLinks = screen.getAllByRole('link', { name: /work/i });
     
     expect(aboutLinks.length).toBeGreaterThan(0);
-    expect(workLinks.length).toBeGreaterThan(0);
+    screen.getAllByRole('link', { name: 'contact@jonathanmallett.com' }).forEach((link) => {
+      expect(link).toHaveAttribute('href', 'mailto:contact@jonathanmallett.com');
+    });
+    expect(screen.queryByRole('link', { name: /view the work/i })).not.toBeInTheDocument();
   });
 
   test('retains an accessible heading without the introductory section', () => {

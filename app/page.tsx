@@ -10,9 +10,9 @@ export default function Home() {
     <>
       <Header />
       <main className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-14">
-        <section aria-labelledby="selected-work" className="pb-24 pt-10 sm:pb-36 sm:pt-14">
+        <section aria-labelledby="selected-work" className="pb-24 pt-6 sm:pb-36 sm:pt-8">
           <h1 id="selected-work" className="sr-only">Selected photography</h1>
-          <GalleryGrid photos={homePhotos} compact balancedLayout />
+          <GalleryGrid photos={homePhotos} masonry />
         </section>
 
         {stories.length > 0 && (

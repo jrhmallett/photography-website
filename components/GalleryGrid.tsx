@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { photoImageSrc, type Photo } from '@/content/photos';
 import Lightbox from './Lightbox';
 
-// Paired and offset images retain their source order at every viewport size.
+// Optional story galleries use editorial placements rather than the homepage masonry layout.
 const placements = [
   'md:col-span-7', 'md:col-span-5',
   'md:col-span-6', 'md:col-span-6',
@@ -15,24 +15,57 @@ const placements = [
   'md:col-span-10 md:col-start-2',
 ];
 
-export default function GalleryGrid({ photos, compact = false, balancedPhotoIds = [], balancedLayout = false }: { photos: Photo[]; compact?: boolean; balancedPhotoIds?: number[]; balancedLayout?: boolean }) {
+export default function GalleryGrid({ photos, masonry = false }: { photos: Photo[]; masonry?: boolean }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [columnCount, setColumnCount] = useState(2);
+  const masonryColumns: Array<Array<{ photo: Photo; index: number }>> = Array.from(
+    { length: columnCount },
+    () => [],
+  );
+
+  if (masonry) {
+    const columnHeights = Array(columnCount).fill(0);
+    photos.forEach((photo, index) => {
+      const columnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+      masonryColumns[columnIndex].push({ photo, index });
+      columnHeights[columnIndex] += photo.height / photo.width;
+    });
+  }
+
+  useEffect(() => {
+    if (!masonry) return;
+
+    const updateColumnCount = () => {
+      setColumnCount(window.innerWidth >= 1280 ? 4 : window.innerWidth >= 768 ? 3 : 2);
+    };
+
+    updateColumnCount();
+    window.addEventListener('resize', updateColumnCount);
+    return () => window.removeEventListener('resize', updateColumnCount);
+  }, [masonry]);
+
+  const renderPhoto = (photo: Photo, index: number) => (
+    <figure
+      key={photo.id}
+      className={masonry ? 'min-w-0' : placements[index % placements.length]}
+    >
+      <button type="button" aria-label={`Open photograph: ${photo.alt}`} className="group block w-full cursor-zoom-in overflow-hidden bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-4" onClick={() => setLightboxIndex(index)}>
+        <Image src={photoImageSrc(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} sizes={masonry ? `(max-width: 1600px) ${100 / columnCount}vw, ${1600 / columnCount}px` : '(max-width: 767px) 100vw, (max-width: 1200px) 75vw, 1100px'} className="h-auto w-full transition-opacity duration-300 group-hover:opacity-90" />
+      </button>
+      {photo.caption && <figcaption className="mt-3 text-xs leading-relaxed text-neutral-500">{photo.caption}</figcaption>}
+    </figure>
+  );
 
   return (
     <>
-      <div className={`grid grid-cols-1 items-center ${balancedLayout ? 'md:grid-cols-2' : 'md:grid-cols-12'} ${compact ? 'gap-x-4 gap-y-4 md:gap-x-5 lg:gap-x-6 lg:gap-y-5' : 'gap-x-6 gap-y-8 sm:gap-y-12 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12'}`}>
-        {photos.map((photo, index) => (
-          <figure
-            key={photo.id}
-            className={`${balancedLayout ? '' : placements[index % placements.length]} ${balancedLayout && compact && photo.height >= photo.width ? 'w-full max-w-[calc(min(75vh,500px)*var(--photo-ratio))] justify-self-center' : balancedLayout && photo.height > photo.width ? 'w-full max-w-[calc(min(75vh,600px)*var(--photo-ratio))] justify-self-center' : balancedPhotoIds.includes(photo.id) ? 'w-full max-w-[calc(min(70vw,440px)*var(--photo-ratio))] justify-self-center' : ''}`}
-            style={(balancedLayout && (photo.height > photo.width || (compact && photo.height === photo.width))) || balancedPhotoIds.includes(photo.id) ? { '--photo-ratio': photo.width / photo.height } as React.CSSProperties : undefined}
-          >
-            <button type="button" aria-label={`Open photograph: ${photo.alt}`} className="group block w-full cursor-zoom-in overflow-hidden bg-neutral-100 text-left focus-visible:outline-2 focus-visible:outline-offset-4" onClick={() => setLightboxIndex(index)}>
-              <Image src={photoImageSrc(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 767px) 100vw, (max-width: 1200px) 75vw, 1100px" className="h-auto w-full transition-opacity duration-300 group-hover:opacity-90" />
-            </button>
-            {photo.caption && <figcaption className="mt-3 text-xs leading-relaxed text-neutral-500">{photo.caption}</figcaption>}
-          </figure>
-        ))}
+      <div className={masonry ? 'grid gap-x-2.5' : 'grid grid-cols-1 items-center gap-x-6 gap-y-8 sm:gap-y-12 md:grid-cols-12 md:gap-x-8 md:gap-y-10 lg:gap-x-10 lg:gap-y-12'} style={masonry ? { gridTemplateColumns: `repeat(${columnCount}, minmax(0, 1fr))` } : undefined}>
+        {masonry
+          ? masonryColumns.map((column, index) => (
+            <div key={index} className="flex min-w-0 flex-col gap-y-2.5">
+              {column.map(({ photo, index: photoIndex }) => renderPhoto(photo, photoIndex))}
+            </div>
+          ))
+          : photos.map(renderPhoto)}
       </div>
       {lightboxIndex !== null && (
         <Lightbox

@@ -24,10 +24,10 @@ Primary goals:
 ## Current Features
 
 - Next.js 16 App Router project with an editorial, image-first homepage
-- A 13-photo homepage selection and a collection-based Portfolio overview
-- Responsive one- or two-column galleries with consistent column widths and a portrait-height limit
+- One homepage gallery containing all 62 available portfolio photographs
+- Responsive two-, three-, and four-column masonry layout with consistent spacing
 - Lightbox modal with keyboard navigation (`Escape`, `ArrowLeft`, `ArrowRight`) and touch swipes
-- Shared light monochrome header with Portfolio and About links
+- Shared light monochrome header with About navigation
 - About page with photographer bio and contact email
 - `@vercel/analytics` and `@vercel/speed-insights` enabled in root layout
 - Jest + React Testing Library test suite
@@ -75,8 +75,6 @@ app/
       layout.tsx
       page.tsx
       about/page.tsx
-      work/page.tsx
-      work/[slug]/page.tsx
       stories/page.tsx
       stories/[slug]/page.tsx
 components/
@@ -86,7 +84,6 @@ components/
       Footer.tsx
 content/
       photos.ts
-      collections.ts
       stories.ts
 public/
       photos/
@@ -102,23 +99,19 @@ docs/
 - WebP output is configured in `next.config.ts`
 - Gallery images lazy-load by default
 - Lightbox image loads eagerly only after user interaction
-- Photo details and the homepage sequence are maintained in `content/photos.ts`. Edit `homePhotoIds` to select and reorder homepage photographs. Supply the original pixel dimensions and meaningful alt text when adding a photo. The previous `workPhotoIds` sequence is retained for reference.
+- Photo details and the homepage sequence are maintained in `content/photos.ts`. `homePhotoIds` contains every available portfolio photograph and controls its sequence. When adding a photograph, supply its catalogue entry and add its ID to this list. Include the original pixel dimensions and meaningful alt text.
 - When replacing images without changing their filenames, update their dimensions if necessary and change `photoRevision` in `content/photos.ts` so browsers and the image optimizer fetch the new files.
-- The existing `/portfolio` route and its former category routes remain removed and return 404; the portfolio collections are at `/work`.
+- `/work`, `/work/[slug]`, and `/portfolio` are not used; the full photo gallery is on `/`.
 
-## Work Collections
+## Homepage Gallery
 
-Edit `content/collections.ts` to change collection IDs, URL slugs, titles and optional descriptions. `previewPhotoIds` controls the Work overview; `photoIds` controls each collection gallery. Both arrays refer to IDs in `content/photos.ts` and can be reordered independently. Add an entry with a unique ID and URL-safe slug to create another collection; its gallery route and metadata are generated automatically.
-
-Collection galleries and previews are explicitly curated; filesystem changes do not update them automatically. Places is grouped New York, Marrakech, UK, Italy, Portugal, Netherlands; New York 1 follows New York 4 and Marrakech 2 follows Marrakech 9. Nature is grouped Birds, Landscape, Doug, and Motorsport follows its current numbers. Previews and the homepage have independent selections and ordering. The current galleries contain 25 Places, 21 Nature and 16 Motorsport photos.
-
-Homepage and collection galleries use one column below the `md` breakpoint and two equal columns at `md` and above. Homepage portraits and squares are centered and limited to `min(75vh, 500px)` in height to balance mixed-orientation rows. Collection portraits are limited to `min(75vh, 600px)`; collection squares and landscapes use the available column width. Images retain their proportions and are not cropped. The homepage uses tighter spacing than the collection pages.
+The homepage balances images into the shortest available column to create a compact masonry layout. It uses two columns on narrow screens, three on desktop, and four on wide screens. Images keep their natural proportions and are not cropped; the lightbox follows the configured `homePhotoIds` sequence.
 
 ## Optional Stories
 
 Add real projects to the `stories` array in `content/stories.ts` with a unique URL-safe `slug`, a `title`, an optional `introduction`, and a sequenced `photos` array. Use the same photo fields as the portfolio; an optional `caption` is shown beneath an image. Story links and the homepage section appear automatically when the array is nonempty. With no stories, the navigation and section are hidden and `/stories` shows the not-found page.
 
-The homepage sequence can be reordered in `homePhotoIds`. The existing generic image descriptions should also be refined with specific details supplied by the photographer.
+The generic image descriptions should be refined with specific details supplied by the photographer.
 
 ---
 
